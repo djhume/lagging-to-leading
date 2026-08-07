@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: >-
+  From Lagging to Leading: The Measured Emergence of Standing Capacitance
+  Behind Consumer Connections, 1997-2025 (extended version and
+  reproducibility package)
+authors:
+  - family-names: Hume
+    given-names: David
+    orcid: "https://orcid.org/0009-0006-6920-0598"
+version: 0.9.0
+date-released: "2026-08-08"
+repository-code: "https://github.com/djhume/lagging-to-leading"
+abstract: >-
+  Twenty-nine years of regulatory half-hourly metering at New Zealand grid
+  exit points measure a national power system's reactive character crossing
+  from lagging to leading overnight, attribute the drift dominantly to the
+  demand side, and identify a standing distributed-capacitance term
+  accumulating behind consumer connections at about 250 VAr per connection
+  over 2013-2025, from a coefficient indistinguishable from zero until about
+  2012. Includes the extended version of the paper and the full replication
+  notebook suite computing every number from public data.
+keywords:
+  - reactive power
+  - power factor
+  - shunt capacitance
+  - overvoltage
+  - load modelling
+  - power systems
+notes: >-
+  A condensed journal version is prepared for submission to the IEEE Open
+  Access Journal of Power and Energy. DOI to be minted via Zenodo at public
+  release.

@@ -1,0 +1,157 @@
+{
+ "n_clean_joined": 83,
+ "n_all_joined": 113,
+ "M0_null": {
+  "aic": 222.1
+ },
+ "M1": {
+  "slope_var_per_icp": 252.8,
+  "ci95_var_per_icp": [
+   191.8,
+   291.4
+  ],
+  "intercept_mvar": -0.05,
+  "r2": 0.769,
+  "aic": 102.5
+ },
+ "M1_theilsen_var_per_icp": 263.5,
+ "M1_through_origin_var_per_icp": 251.0,
+ "M2": {
+  "a_var_per_icp": 245.7,
+  "b_var_per_new_icp": 37.8,
+  "r2": 0.769,
+  "aic": 104.3,
+  "corr_Nbar_dN": 0.72
+ },
+ "loo_slope_range_var_per_icp": [
+  239.1,
+  269.6
+ ],
+ "prediction_band_var_per_icp": [
+  50,
+  400
+ ],
+ "verdict": "SUPPORTED (pre-specified rule): slope in band, CI excludes 0, R2 >> 0.15",
+ "beta_t_history": {
+  "n": 81,
+  "years": [
+   2009,
+   2025
+  ],
+  "beta_var_per_icp": {
+   "2009": -24.6,
+   "2010": -30.6,
+   "2011": -15.1,
+   "2012": 13.9,
+   "2013": 27.3,
+   "2014": 33.4,
+   "2015": 46.4,
+   "2016": 67.6,
+   "2017": 95.5,
+   "2018": 114.0,
+   "2019": 131.1,
+   "2020": 177.2,
+   "2021": 209.9,
+   "2022": 223.2,
+   "2023": 230.5,
+   "2024": 250.5,
+   "2025": 273.8
+  },
+  "endpoint_diff_var_per_icp": 246.4,
+  "accum_rate_var_per_icp_yr": {
+   "2009-13": 13.0,
+   "2013-19": 17.3,
+   "2019-25": 23.8
+  },
+  "notes": "cross-sectional level slope per year, same 81 buses; CI excludes 0 from 2018 at the latest; monotone rise from 2012; level slope = whole connection-scaling class"
+ },
+ "national_sums_clean90": {
+  "n": 90,
+  "night_med_2013_mvar": -65.7,
+  "night_med_2025_mvar": 226.2,
+  "swing_mvar": 291.8,
+  "risers_mvar": 322.7,
+  "fallers_mvar": -30.9,
+  "swing_p99_mvar": 226.9,
+  "per_household_var": [
+   113.4,
+   161.3
+  ],
+  "households_m": 2.0,
+  "note": "fault-level-constrained screen-table subset; regression panel derives from this; the PAPER quotes the 114-site archive-native sums below (D1, 7 Aug)"
+ },
+ "national_sums_clean114": {
+  "n": 114,
+  "night_med_2013_mvar": -187.5,
+  "night_med_2025_mvar": 181.5,
+  "swing_mvar": 369.0,
+  "risers_mvar": 427.4,
+  "fallers_mvar": -58.4,
+  "swing_p99_mvar": 313.7,
+  "per_household_var": [
+   156.8,
+   213.7
+  ],
+  "households_m": 2.0,
+  "parallel_shift_native": {
+   "night_rise_med_mvar": 2.25,
+   "peak_rise_med_mvar": 2.42,
+   "ratio_med": 1.06,
+   "peak_load_chg_pct": 3.4
+  }
+ },
+ "device_estimate": {
+  "xcap_var_at_230v": {
+   "0.1": 1.66,
+   "0.47": 7.81,
+   "1.0": 16.62
+  },
+  "residential_mvar": [
+   80.0,
+   320.0
+  ],
+  "commercial_mvar": [
+   50.0,
+   300.0
+  ],
+  "national_envelope_mvar": [
+   130.0,
+   620.0
+  ],
+  "quoted_band_mvar": [
+   150.0,
+   600.0
+  ],
+  "per_household_central_var": [
+   100.0,
+   200.0
+  ]
+ },
+ "heatpump_slice_tier1": {
+  "census_penetration": {
+   "2018": 0.473,
+   "2023": 0.668
+  },
+  "residential_units_m": [
+   1.6,
+   2.14
+  ],
+  "per_unit_var": [
+   5.0,
+   36.6
+  ],
+  "per_unit_uF": [
+   0.3,
+   2.2
+  ],
+  "slice_mvar": [
+   8.0,
+   78.2
+  ],
+  "central_mvar": 28.0,
+  "per_household_var_max": 39.1,
+  "verdict": "material but minority: upper bound ~ residential envelope floor; cannot carry the measured per-household rise (113-161 on the 90-panel; 157-214 on the 114-panel) - the small-supply swarm does"
+ },
+ "consistency": "measured 2013-25 deepening (114-site panel: +314 to +369 MVAr; 157-214 VAr/hh) inside the bottom-up 150-600 MVAr band, per-household at the upper edge of the 100-200 central band",
+ "paper_figure": "replication/figures/06_connection_scaling.png (2 panels: scatter + beta_t)"
+}
