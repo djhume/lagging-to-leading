@@ -23,7 +23,7 @@ already holds, so the measurement is portable to any system.
 | Version | File | What it is |
 |---|---|---|
 | **Extended version** (16 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), and the supporting cohort/method exhibits |
-| **Journal version** (14 pp) | *added at submission* | Condensed for the IEEE Open Access Journal of Power and Energy; identical section numbering (I–IX); every claim, headline number, and hedge |
+| **Journal version — draft** (14 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Condensed for journal submission; identical section numbering (I–IX); every claim, headline number, and hedge. **Draft of 8 Aug 2026, not yet submitted** — the connection-scaling panel is being enlarged (see the replication notes), so §V-C numbers may still move |
 
 ## What's in this repository
 
