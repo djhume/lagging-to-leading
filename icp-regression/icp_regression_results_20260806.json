@@ -1,69 +1,162 @@
 {
- "n_clean_joined": 83,
- "n_all_joined": 113,
+ "panel_rebase_20260808": {
+  "cohort_n": 114,
+  "panel_units": 96,
+  "members_represented": 103,
+  "excluded_industrial": [
+   "BDE0111",
+   "GLN0331",
+   "KIN0111",
+   "KIN0113",
+   "LFD1101",
+   "LFD1102",
+   "TWI2201",
+   "WHI0111"
+  ],
+  "excluded_no_endpoint": [
+   "ASY0111",
+   "MNG1101"
+  ],
+  "excluded_unresolvable": [
+   "LTN0331"
+  ],
+  "aggregation_units": {
+   "KBY0661+2": [
+    "KBY0661",
+    "KBY0662"
+   ],
+   "HTI0331+1101": [
+    "HTI0331",
+    "HTI1101"
+   ],
+   "ALB+WRD": [
+    "ALB0331",
+    "ALB1101",
+    "WRD0331"
+   ],
+   "HEN+HEP": [
+    "HEN0331",
+    "HEP0331"
+   ],
+   "PEN0221+0331": [
+    "PEN0221",
+    "PEN0331"
+   ],
+   "CPK0111+0331": [
+    "CPK0111",
+    "CPK0331"
+   ],
+   "HWB+SDN": [
+    "HWB0331",
+    "SDN0331"
+   ]
+  },
+  "note": "correspondence audit 8 Aug 2026: registry root-NSP attribution vs metering GXP boundaries; churn groups evidence-classed by the migration screen (P-step matched)"
+ },
  "M0_null": {
-  "aic": 222.1
+  "aic": 367.8
  },
  "M1": {
-  "slope_var_per_icp": 252.8,
+  "slope_var_per_icp": 315.9,
   "ci95_var_per_icp": [
-   191.8,
-   291.4
+   236.6,
+   417.4
   ],
-  "intercept_mvar": -0.05,
-  "r2": 0.769,
-  "aic": 102.5
+  "intercept_mvar": -0.55,
+  "intercept_ci95_mvar": [
+   -1.73,
+   0.29
+  ],
+  "r2": 0.779,
+  "aic": 224.9
  },
- "M1_theilsen_var_per_icp": 263.5,
- "M1_through_origin_var_per_icp": 251.0,
+ "M1_theilsen_var_per_icp": 272.4,
+ "M1_through_origin_var_per_icp": 301.5,
  "M2": {
-  "a_var_per_icp": 245.7,
-  "b_var_per_new_icp": 37.8,
-  "r2": 0.769,
-  "aic": 104.3,
-  "corr_Nbar_dN": 0.72
+  "a_var_per_icp": 307.0,
+  "b_var_per_new_icp": 47.1,
+  "b_ci95": [
+   -589.2,
+   658.0
+  ],
+  "r2": 0.779,
+  "aic": 226.8,
+  "corr_Nbar_dN": 0.78,
+  "note": "split unidentified: b's CI spans zero at collinearity 0.78; M2 adds no AIC"
  },
  "loo_slope_range_var_per_icp": [
-  239.1,
-  269.6
+  270.6,
+  340.9
  ],
  "prediction_band_var_per_icp": [
   50,
   400
  ],
- "verdict": "SUPPORTED (pre-specified rule): slope in band, CI excludes 0, R2 >> 0.15",
+ "verdict": "SUPPORTED (pre-specified 6-Aug rule, applied unchanged to the rebased panel): slope in band, CI excludes 0, R2 >> 0.15",
  "beta_t_history": {
-  "n": 81,
+  "n": 92,
   "years": [
    2009,
    2025
   ],
   "beta_var_per_icp": {
-   "2009": -24.6,
-   "2010": -30.6,
-   "2011": -15.1,
-   "2012": 13.9,
-   "2013": 27.3,
-   "2014": 33.4,
-   "2015": 46.4,
-   "2016": 67.6,
-   "2017": 95.5,
-   "2018": 114.0,
-   "2019": 131.1,
-   "2020": 177.2,
-   "2021": 209.9,
-   "2022": 223.2,
-   "2023": 230.5,
-   "2024": 250.5,
-   "2025": 273.8
+   "2009": -50.9,
+   "2010": -74.5,
+   "2011": -10.7,
+   "2012": 31.2,
+   "2013": 54.0,
+   "2014": 55.7,
+   "2015": 70.6,
+   "2016": 99.4,
+   "2017": 126.4,
+   "2018": 155.0,
+   "2019": 166.2,
+   "2020": 211.3,
+   "2021": 268.4,
+   "2022": 286.1,
+   "2023": 287.1,
+   "2024": 311.4,
+   "2025": 345.3
   },
-  "endpoint_diff_var_per_icp": 246.4,
-  "accum_rate_var_per_icp_yr": {
-   "2009-13": 13.0,
-   "2013-19": 17.3,
-   "2019-25": 23.8
+  "endpoint_diff_var_per_icp": 291.3,
+  "movement_var_per_icp_yr": {
+   "2009-13_zero_crossing": 26.2,
+   "2013-19": 18.7,
+   "2019-25": 29.8
   },
-  "notes": "cross-sectional level slope per year, same 81 buses; CI excludes 0 from 2018 at the latest; monotone rise from 2012; level slope = whole connection-scaling class"
+  "notes": "cross-sectional level slope per year, same 92 units; NEGATIVE 2009-2011 (inductive fleet), crosses zero 2012, monotone rise from 2012, CI excludes 0 from 2017; endpoint diff 291 agrees with the two-endpoint slope 316 within 10%"
+ },
+ "legacy_panel_20260806": {
+  "note": "original pre-registered run on the fault-level-constrained screen-table panel; kept verbatim as the labelled consistency result - report both, never blend",
+  "n_clean_joined": 83,
+  "n_all_joined": 113,
+  "M1": {
+   "slope_var_per_icp": 252.8,
+   "ci95_var_per_icp": [
+    191.8,
+    291.4
+   ],
+   "intercept_mvar": -0.05,
+   "r2": 0.769
+  },
+  "M1_theilsen_var_per_icp": 263.5,
+  "M1_through_origin_var_per_icp": 251.0,
+  "M2": {
+   "a_var_per_icp": 245.7,
+   "b_var_per_new_icp": 37.8,
+   "r2": 0.769,
+   "corr_Nbar_dN": 0.72
+  },
+  "loo_slope_range_var_per_icp": [
+   239.1,
+   269.6
+  ],
+  "beta_t_2013_2019_2025": [
+   27.3,
+   131.1,
+   273.8
+  ],
+  "verdict": "SUPPORTED (original run of the same rule, 6 Aug 2026)"
  },
  "national_sums_clean90": {
   "n": 90,
@@ -78,7 +171,7 @@
    161.3
   ],
   "households_m": 2.0,
-  "note": "fault-level-constrained screen-table subset; regression panel derives from this; the PAPER quotes the 114-site archive-native sums below (D1, 7 Aug)"
+  "note": "fault-level-constrained screen-table subset; the legacy regression panel derives from this; the PAPER quotes the 114-site archive-native sums below"
  },
  "national_sums_clean114": {
   "n": 114,
@@ -153,5 +246,5 @@
   "verdict": "material but minority: upper bound ~ residential envelope floor; cannot carry the measured per-household rise (113-161 on the 90-panel; 157-214 on the 114-panel) - the small-supply swarm does"
  },
  "consistency": "measured 2013-25 deepening (114-site panel: +314 to +369 MVAr; 157-214 VAr/hh) inside the bottom-up 150-600 MVAr band, per-household at the upper edge of the 100-200 central band",
- "paper_figure": "replication/figures/06_connection_scaling.png (2 panels: scatter + beta_t)"
+ "paper_figure": "replication/figures/06_connection_scaling.png (2 panels: scatter + beta_t, rebased n=96)"
 }

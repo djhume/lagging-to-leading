@@ -9,9 +9,10 @@ crossing from lagging to leading overnight (2016), attributes the drift
 dominantly to the demand side (about 80%, physical band 75–88%, by a
 first-principles charging calculation with no fitted cable coefficient), and
 identifies what the demand side is physically doing: accumulating **standing
-distributed capacitance** — about 250 VAr per connection added over 2013–2025,
-with nothing left at zero connections, from a per-connection term that was
-indistinguishable from zero until about 2012 and is accelerating. The mandated
+distributed capacitance** — about 300 VAr per connection added over 2013–2025,
+with nothing left at zero connections, from a per-connection term that sat on
+the inductive side of zero until 2011, crossed in 2012, and is still
+accelerating. The mandated
 electromagnetic-compatibility filter in every switched-mode device is advanced
 as the candidate device layer (a labelled hypothesis), with the decisive
 low-voltage measurement identified. Both inputs to the scaling test —
@@ -22,8 +23,8 @@ already holds, so the measurement is portable to any system.
 
 | Version | File | What it is |
 |---|---|---|
-| **Extended version** (16 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), and the supporting cohort/method exhibits |
-| **Journal version — draft** (14 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Condensed for journal submission; identical section numbering (I–IX); every claim, headline number, and hedge. **Draft of 8 Aug 2026, not yet submitted** — the connection-scaling panel is being enlarged (see the replication notes), so §V-C numbers may still move |
+| **Extended version** (17 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), and the supporting cohort/method exhibits |
+| **Journal version — draft** (14 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Condensed for journal submission; identical section numbering (I–IX); every claim, headline number, and hedge. **Draft of 8 Aug 2026, not yet submitted.** The connection-scaling test now runs on the full correspondence-audited 96-unit panel (8 Aug rebase), with the original pre-registered 83-site run retained as a labelled consistency result |
 
 ## What's in this repository
 
@@ -32,9 +33,10 @@ already holds, so the measurement is portable to any system.
   audience. Start at [`replication/README.md`](replication/README.md), which
   carries the notebook→section map, the panel taxonomy, the sign-convention
   rules, and the figure map.
-- [`icp-regression/`](icp-regression/) — the connection-scaling test and
-  coefficient history (paper §V), executed in place with a 47/47 assertion
-  battery, shipping with its raw public-data extract.
+- [`icp-regression/`](icp-regression/) — the connection-scaling test, the
+  registry↔metering correspondence audit, and the coefficient history (paper
+  §V), executed in place with an 84/84 assertion battery, shipping with its
+  raw public-data extract.
 - [`paper/`](paper/) — the paper itself.
 
 ## Data
