@@ -7,14 +7,14 @@ Companion notebooks that reproduce, from public data, every headline number in
 
 The paper ships in **two tiers with identical section numbering (I–IX)**:
 
-- **Journal version** (`../ieee-pf-trajectory-paper/main.tex`, 14 pp) — condensed
-  for the IEEE Open Access Journal of Power and Energy; carries every claim,
+- **Journal version** (`../ieee-pf-trajectory-paper/main.tex`, 18 pp, build of
+  13 Aug 2026) — condensed for journal submission; carries every claim,
   headline number, and hedge.
 - **Extended version** (`../ieee-pf-trajectory-paper/main_extended_20260808.pdf`,
-  16 pp, frozen 8 Aug 2026) — adds Appendix A (the complete measurement-error
+  22 pp, build of 13 Aug 2026) — adds Appendix A (the complete measurement-error
   analysis and the system-wide re-base/"splice" exhibit), Appendix B (the mains
-  input filter at 50 Hz), and the supporting cohort/method exhibits (its
-  Figs. 2, 3, and 6).
+  input filter at 50 Hz), the two-loop cascade taxonomy figure, and the
+  supporting cohort/method exhibits (its Figs. 2, 3, and 7).
 
 The notebooks are written for a mixed audience — power engineers,
 lawyers, regulators, and overseas researchers — and **every statistical step is explained in
@@ -46,17 +46,19 @@ indexed here so the paper's full claim set stays notebook-backed:
 
 | Notebook (battery) | Backs |
 |---|---|
-| `../ieee-pf-trajectory-paper/icp-regression/icp_regression.ipynb` (84/84) | The **connection-scaling test** (§V-C, rebased 8 Aug 2026 onto the 96-unit correspondence-audited panel): −316 VAr per ICP, bootstrap 95% CI [−417, −237], intercept −0.55 MVAr (CI spans 0), R² = 0.78, leave-one-out [−341, −271], ΔAIC ≈ 143 vs the mean-only null; the **original pre-registered 83-site run kept verbatim** as the labelled consistency result (−253, CI [−291, −192], R² = 0.77); the **correspondence audit** itself (8 industrial identities, 2 registry re-registrations, 1 unresolvable, 7 aggregation groups incl. the registry-churn clusters, all evidence-asserted); the **coefficient history** (§V-C, cell a3, 92 units: +51 VAr/connection *inductive* in 2009, crossing zero 2012, −345 by 2025, in-window rates ≈19/30 VAr/connection/yr, endpoint diff −291 agreeing with the two-endpoint slope within 10%); **and** the §V-B national sums + bottom-up device estimate (native 114-site cohort: +188 → −182 MVAr night-median in the paper's Q-signed convention, deepening 369, p99 variant 314, 157–214 VAr per household — unchanged by the rebase; the n = 90 screen-table sums remain as the legacy-panel derivation; device estimate ~150–600 MVAr / 100–200 VAr per household central). Reads this suite's `cache/contamination_flag.csv`, the pf half-hourly archive, the harmonics resonance-screen panel (legacy run + cross-check), the POC→network mappings, and public EMI market-structure ICP counts (raw extract archived alongside it). Saves `figures/06_connection_scaling.png` (journal Fig. 4 / extended Fig. 5, paper sign convention). |
-| `../../harmonics/consultation-2026/analysis/resonance-screen/resonance_screen_workings.ipynb` (58/58) | Cross-validation reference for the **parallel-shift / load-independence test** (§V-A): median per-site 2013–25 change −2.25 MVAr overnight (TP 1–12) vs −2.42 MVAr at evening peak (TP 35–39), median per-site ratio 1.06, median peak-load change +3.4%, on 114 clean GXPs with both endpoints (its `results.json`, `unmasking` block; that notebook works leading-positive — signs flipped here to this suite's convention). |
+| `../ieee-pf-trajectory-paper/icp-regression/icp_regression.ipynb` (91/91) | The **connection-scaling test** (§V-C, rebased 8 Aug 2026 onto the 96-unit correspondence-audited panel; re-run 13 Aug 2026 on the corrected `data/analysis` archive after the duplicate dual-network rows in the 13-Mar vintage were found double-counting group-member Q): −230 VAr per ICP, bootstrap 95% CI [−272, −199], intercept −0.29 MVAr (**spans zero under every inference scheme**, wild-cluster p = 0.29 — the device story's zero-intercept prediction met on both limbs), R² = 0.80, leave-one-out [−242, −220], ΔAIC ≈ 155 vs the mean-only null, Theil–Sen −259 / through-origin −237 bracketing the OLS; the **original pre-registered 83-site run kept verbatim** as the labelled consistency result (−253, CI [−291, −192], R² = 0.77 — its screen-table inputs were never exposed to the duplicate-row defect, and the two panels now agree within ~10%); the **correspondence audit** itself (8 industrial identities, 2 registry re-registrations, 1 unresolvable, 7 aggregation groups incl. the registry-churn clusters, all evidence-asserted); the **coefficient history** (§V-C, cell a3, 92 units: +41 VAr/connection *inductive* in 2009, crossing zero 2012, −262 by 2025, CI clear of zero from 2016, in-window rates ≈15/20 VAr/connection/yr, endpoint diff −212 agreeing with the two-endpoint slope within 10%); **and** the §V-B national sums + bottom-up device estimate (native 114-site cohort: +188 → −182 MVAr night-median in the paper's Q-signed convention, deepening 369, p99 variant 314, 157–214 VAr per household — unchanged by the rebase and vintage-stable under the rebuild; the n = 90 screen-table sums remain as the legacy-panel derivation; device estimate ~150–600 MVAr / 100–200 VAr per household central). Reads this suite's `cache/contamination_flag.csv`, the pf half-hourly archive, the harmonics resonance-screen panel (legacy run + cross-check), the POC→network mappings, and public EMI market-structure ICP counts (raw extract archived alongside it). Saves `figures/06_connection_scaling.png` (journal Fig. 4 / extended Fig. 5, paper sign convention). |
+| `../../harmonics/consultation-2026/analysis/resonance-screen/resonance_screen_workings.ipynb` (58/58) | Cross-validation reference for the **parallel-shift / load-independence test** (§V-A): median per-site 2013–25 change −2.25 MVAr overnight (TP 1–12) vs −2.42 MVAr at evening peak (TP 35–39), median per-site ratio 1.06, on 114 clean GXPs with both endpoints (its `results.json`, `unmasking` block; that notebook works leading-positive — signs flipped here to this suite's convention). Its median peak-load change reads +3.4% because its screen table is frozen on the pre-14-Mar-2026 processed vintage; the ICP notebook's native run on the corrected archive reads **+2.9%**, which is the paper's print — the Q-side per-site medians agree between vintages to < 0.01 MVAr (they are median-immune to the duplicate rows). |
 
 **Release-blocker resolved 7 Aug 2026 eve:** the parallel-shift test and the paper's
 §V-B national sums are now computed **natively in the ICP notebook** (cell a2, archive
 direct: n = 114; −188 → +182 MVAr night-median, deepening +369; p99 variant +314;
-157–214 VAr/household; parallel-shift +2.25/+2.42/1.06/+3.4% reproduced exactly). The
-harmonics workings notebook remains indexed as an independent cross-validation only —
-no longer required for release. The ICP notebook is release-clean and ships with its
-raw EMI extract; it now reads the pf half-hourly archive (`data/analysis/`), the same
-source the suite's notebook 00 documents.
+157–214 VAr/household; parallel-shift +2.25/+2.42/1.06 with peak-load change +2.9% on
+the corrected 13-Aug-2026 archive — the harmonics cross-check's +3.4% is the same
+quantity on the superseded vintage). The harmonics workings notebook remains indexed
+as an independent cross-validation only — no longer required for release. The ICP
+notebook is release-clean and ships with its raw EMI extract; it now reads the pf
+half-hourly archive (`data/analysis/`, rebuilt 13 Aug 2026 by the corrected
+`calculate_power_factors.py`), the same source the suite's notebook 00 documents.
 
 ## The numbers spine (do not blend these)
 
@@ -93,39 +95,51 @@ Glowworm evidence tags: `[V]` verified vs primary source · `[I]` inferred · `[
 
 ## Figure map (filename ↔ paper figure number)
 
-| File | Journal (14 pp) | Extended (16 pp) |
+| File | Journal (18 pp) | Extended (22 pp) |
 |---|---|---|
 | `01_trajectory.png` | Fig. 1 | Fig. 1 |
 | `01_clean_cohort.png` | — (results in §III-B text) | Fig. 2 |
 | `02_methods.png` | — (results in §IV text + Table I) | Fig. 3 |
 | `03_physical_charging.png` | Fig. 2 | Fig. 4 |
 | `06_connection_scaling.png` | Fig. 4 | Fig. 5 |
-| `01_splice_test.png` | — (results in §III-B text) | Fig. 6 |
-| (in-TeX TikZ mains-filter schematic) | Fig. 3 | Fig. 7 |
+| (in-TeX TikZ two-loop cascade taxonomy) | — (results in §VII text) | Fig. 6 |
+| `01_splice_test.png` | — (results in §III-B text) | Fig. 7 |
+| (in-TeX TikZ mains-filter schematic) | Fig. 3 | Fig. 8 |
 
 Other files in `figures/` (`02_clean_cohort`, `02_dose_response`, `04_archetypes`,
 `05_capacitors_out`) are notebook exhibits not placed in either paper version.
 
 ## Citing
 
-- **Journal version** (under submission, 2026): D. Hume, ``From Lagging to Leading:
-  The Measured Emergence of Standing Capacitance Behind Consumer Connections,
-  1997--2025,'' IEEE Open Access Journal of Power and Energy.
+- **Journal version** (in preparation for submission, 2026): D. Hume, ``From
+  Lagging to Leading: The Measured Emergence of Standing Capacitance Behind
+  Consumer Connections, 1997--2025.''
 - **Extended version + this package:** D. Hume, extended version and
   reproducibility package, GitHub repository with Zenodo snapshot, 2026.
   *(DOI minted at repository publication; insert here and in the journal
-  version's reference [33] before submission.)*
+  version's reference `hume_extended` — numbered [24] in the current build —
+  before submission.)*
 
 ## How to run
 
 ```bash
-source ~/gridlytics/.venv/bin/activate        # pandas, numpy, scipy, scikit-learn,
-                                              # statsmodels, ruptures, matplotlib, nbformat
+# environment: Python 3.12.3 + the pinned package set in requirements-pass7.txt
+# (the versions that produced every shipped execution, figure, and results JSON)
+pip install -r requirements-pass7.txt
+
 cd replication
 python build_notebooks.py                     # src/*.py  ->  notebooks/*.ipynb
 cd notebooks
 # run 00 first (it builds the cache the others read), then the rest in any order:
 for nb in 0*.ipynb; do jupyter nbconvert --to notebook --execute --inplace "$nb"; done
+
+# then the connection-scaling notebook (§V) — reads the pf half-hourly archive
+# plus this suite's contamination flag, and carries its own 91-assertion battery:
+cd ../../icp-regression 2>/dev/null || cd ../../ieee-pf-trajectory-paper/icp-regression
+jupyter nbconvert --to notebook --execute --inplace icp_regression.ipynb
+
+# guard scripts (pure arithmetic checks of the paper's §V-B dose figures):
+python ../replication/src/mains_dose_check.py
 ```
 
 ### Data access (hybrid design)
@@ -133,11 +147,17 @@ for nb in 0*.ipynb; do jupyter nbconvert --to notebook --execute --inplace "$nb"
 - **Default (offline, recommended):** the notebooks read the cleaned per-year EMI parquet
   files and the Commerce Commission disclosure parquet that ship with the project, and
   `00_data_acquisition` builds the two analysis-ready caches (`cache/`). Everything else runs
-  from those plus public physics constants.
+  from those plus public physics constants. One judgment table is a hard input:
+  `data/metadata/edb_mapping.py` (the EMI-code → lines-company lookup, imported by
+  `repro.py` at load) — it ships with the data set alongside the ComCom parquet.
 - **Rebuild from source:** the path from raw public records is fully scripted —
   `scripts/download_emi_data.py` + `scripts/process_to_parquet.py` (EMI half-hourly grid
-  metering, emi.ea.govt.nz) and the Commerce Commission information-disclosure data
-  (comcom.govt.nz). Run those, then re-run notebook 00.
+  metering, emi.ea.govt.nz) build the per-year processed parquets, and
+  `scripts/calculate_power_factors.py` (corrected 13 Aug 2026 for the 3-level schema)
+  builds the per-year `pf_by_gxp` / `pf_by_group` archive the connection-scaling notebook
+  reads; the Commerce Commission information-disclosure parquet has its own downloader
+  (comcom.govt.nz). All of these ship in the data archive's `code/builders/`. Run those,
+  then re-run notebook 00.
 - The production data lives on a network mount that is slow for batch reads. If a local stage
   exists at `/tmp/pf_stage` (set `PF_STAGE` to override) the notebooks use it automatically;
   otherwise they fall back to the bundled project data. `PF_PROCESSED_DIR` and
@@ -147,14 +167,16 @@ for nb in 0*.ipynb; do jupyter nbconvert --to notebook --execute --inplace "$nb"
 
 ```
 replication/
-├── README.md              this file
-├── FRESH_EYES_REVIEW.md   what reproduced, what didn't, and the precision findings
-├── repro.py               shared plumbing ONLY (paths, plot style, name maps) — no analysis
-├── build_notebooks.py     percent-.py  ->  .ipynb converter (a tiny jupytext stand-in)
-├── src/                   the readable percent-format notebook sources (edit these)
-├── notebooks/             the executed .ipynb (build artifacts; regenerated from src/)
-├── cache/                 analysis-ready tables built by notebook 00
-└── figures/              publication figures saved by the notebooks
+├── README.md                  this file
+├── FRESH_EYES_REVIEW.md       what reproduced, what didn't, and the precision findings
+├── requirements-pass7.txt     the pinned environment (Python 3.12.3)
+├── repro.py                   shared plumbing ONLY (paths, plot style, name maps) — no analysis
+├── build_notebooks.py         percent-.py  ->  .ipynb converter (a tiny jupytext stand-in)
+├── src/                       the readable percent-format notebook sources (edit these;
+│                              includes mains_dose_check.py, the §V-B dose guard)
+├── notebooks/                 the executed .ipynb (build artifacts; regenerated from src/)
+├── cache/                     analysis-ready tables built by notebook 00
+└── figures/                   publication figures saved by the notebooks
 ```
 
 Edit the `src/*.py` files (clean diffs, easy review), then `python build_notebooks.py` to

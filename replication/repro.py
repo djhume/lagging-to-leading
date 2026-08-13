@@ -105,7 +105,7 @@ def set_style():
     import matplotlib as mpl
     mpl.rcParams.update({
         "figure.dpi": 110,
-        "savefig.dpi": 130,
+        "savefig.dpi": 400,
         "font.size": 11,
         "axes.titlesize": 12,
         "axes.titlecolor": EA_BLUE,

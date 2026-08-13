@@ -87,9 +87,12 @@ y0, y1 = nat_on.index.min(), nat_on.index.max()
 slope_on = np.polyfit(nat_on.index, nat_on.values, 1)[0]
 print(f"\nDemand networks only ({bal.gxp.nunique()} balanced GXPs) — used from here on.")
 
-# zero-crossing year (first year the overnight national total goes leading)
+# zero-crossing years (first year each national total goes leading).
+# Derived from the data, not hard-coded, so the title cannot go stale as the record extends.
 crossed = nat_on[nat_on < 0]
 cross_yr = int(crossed.index.min()) if len(crossed) else None
+crossed_pk = nat_pk[nat_pk < 0]
+cross_yr_pk = int(crossed_pk.index.min()) if len(crossed_pk) else None
 
 fig, ax = plt.subplots(figsize=(11, 6))
 ax.axhline(0, color="grey", lw=1)
@@ -98,15 +101,25 @@ ax.plot(nat_on.index, nat_on.values, "-o", color=repro.EA_BLUE, lw=2.4, ms=5,
 ax.plot(nat_pk.index, nat_pk.values, "-s", color=repro.ORANGE, lw=1.8, ms=4,
         label="Evening peak (TP 36-38)")
 if cross_yr:
-    ax.axvline(cross_yr, color=repro.RED, ls="--", lw=1.2, alpha=0.7)
+    ax.axvline(cross_yr, color=repro.EA_BLUE, ls="--", lw=1.2, alpha=0.7)
     ax.annotate(f"overnight goes net\nleading ≈ {cross_yr}", xy=(cross_yr, 0),
-                xytext=(cross_yr - 11, -180), fontsize=9, color=repro.RED,
-                arrowprops=dict(arrowstyle="->", color=repro.RED, lw=1))
+                xytext=(cross_yr - 11, -180), fontsize=9, color=repro.EA_BLUE,
+                arrowprops=dict(arrowstyle="->", color=repro.EA_BLUE, lw=1))
+if cross_yr_pk:
+    ax.axvline(cross_yr_pk, color=repro.ORANGE, ls="--", lw=1.2, alpha=0.7)
+    ax.annotate(f"evening peak follows\n≈ {cross_yr_pk}", xy=(cross_yr_pk, 0),
+                xytext=(cross_yr_pk + 0.4, 300), fontsize=9, color=repro.ORANGE,
+                arrowprops=dict(arrowstyle="->", color=repro.ORANGE, lw=1))
 ax.text(1998, 560, "LAGGING\n(voltage-lowering)", fontsize=9, color="grey")
 ax.text(1998, -260, "LEADING\n(voltage-raising → overvoltage risk)", fontsize=9, color=repro.RED)
 ax.set_xlabel("Year")
 ax.set_ylabel(f"National reactive power across {bal.gxp.nunique()} demand GXPs (MVAr)\nQ<0 = leading")
-ax.set_title("The 29-year reactive trajectory: overnight goes leading; the peak does not")
+if cross_yr and cross_yr_pk:
+    _title = (f"The 29-year reactive trajectory: the overnight trough crossed to leading in "
+              f"{cross_yr}, the evening peak in {cross_yr_pk}")
+else:
+    _title = "The 29-year reactive trajectory"
+ax.set_title(_title)
 ax.legend(loc="upper right")
 fig.tight_layout()
 fig.savefig(repro.FIGURES / "01_trajectory.png")
@@ -478,6 +491,16 @@ print(f"    median overnight Q per MW: balanced panel ({snap.balanced.sum()} GXP
 print(f"    per-MW drift of non-balanced demand GXPs (≥10 yrs of data): {permw_nonbal:+.4f} vs balanced {permw_full:+.4f}")
 print("    -> if the excluded sites are the more-leading set, the balanced panel UNDERSTATES the national")
 print("       drift, i.e. residual churn bias is conservative. (Read the sign from the numbers above.)")
+
+# These four numbers are quoted in the paper's Section II-B churn-bias sentence; this cell
+# is their canonical recipe (2025 snapshot at >=1 MW overnight load for the medians; the
+# >=10-year per-MW drift rule for the slopes; demand networks throughout).
+assert nb_med < b_med and permw_nonbal < permw_full, \
+    "churn-bias direction: excluded demand GXPs must be MORE leading and faster-drifting than the panel"
+assert abs(nb_med + 0.28) < 0.005 and abs(b_med + 0.18) < 0.005, \
+    f"II-B churn medians drifted from print (excluded {nb_med:+.3f} vs panel {b_med:+.3f}; paper -0.28/-0.18)"
+assert abs(permw_nonbal + 0.020) < 0.0005 and abs(permw_full + 0.018) < 0.0005, \
+    f"II-B churn drifts drifted from print ({permw_nonbal:+.4f} vs {permw_full:+.4f}; paper -0.020/-0.018)"
 
 # %% [markdown]
 # ### (2) The seasonal split — winter vs summer, from the raw half-hourly record

@@ -53,40 +53,142 @@
   },
   "note": "correspondence audit 8 Aug 2026: registry root-NSP attribution vs metering GXP boundaries; churn groups evidence-classed by the migration screen (P-step matched)"
  },
+ "cluster_inference_20260810": {
+  "note": "peer-review response (9 Aug panel): company as the resampling unit. Company = 2025 canonical POC->nwk mapping where it names an EDB, else the registry root NSP (PEN0331 maps to SHPK, absent from the registry; TKU0331 to a generator code).",
+  "n_companies": 25,
+  "units_per_company_mean": 3.8,
+  "largest_by_units": [
+   "POCO",
+   23
+  ],
+  "largest_by_connections": [
+   "VECT",
+   0.369
+  ],
+  "slope_var_per_icp": {
+   "point": 229.6,
+   "iid_pairs_boot": [
+    198.6,
+    272.2
+   ],
+   "company_cluster_boot": [
+    209.1,
+    313.3
+   ],
+   "classical_ols": [
+    206.4,
+    252.8
+   ],
+   "hc1": [
+    195.7,
+    263.6
+   ],
+   "cr1_cluster_t": [
+    203.6,
+    255.6
+   ],
+   "wild_cluster_boot_p": 0.0
+  },
+  "intercept_mvar_per_unit": {
+   "point": 0.29,
+   "aggregate_mvar": 28.0,
+   "share_of_369mvar_deepening": 0.076,
+   "iid_pairs_boot": [
+    -0.21,
+    0.74
+   ],
+   "company_cluster_boot": [
+    -0.52,
+    0.65
+   ],
+   "classical_ols": [
+    -0.28,
+    0.86
+   ],
+   "hc1": [
+    -0.18,
+    0.77
+   ],
+   "cr1_cluster_t": [
+    -0.16,
+    0.74
+   ],
+   "wild_cluster_boot_p": 0.291,
+   "reading": "ALL SCHEMES SPAN ZERO: i.i.d., classical, HC1 and both company-clustered schemes agree; wild cluster bootstrap-t p = 0.291. No connection-independent term is detectable - the device story's zero-intercept prediction is met."
+  },
+  "cr1_caveat": "CR1 SEs fall BELOW HC1 SEs (slope 12.6 vs 17.1) at G=25 with one 23-unit cluster; CR estimators are least reliable in this regime and must not be used to tighten a claim. The wild cluster bootstrap is the reported test.",
+  "leave_one_company_out_var_per_icp": [
+   223.8,
+   258.3
+  ],
+  "leave_one_company_out_detail": {
+   "ALPE": 230.0,
+   "BUEL": 229.1,
+   "CHBP": 229.5,
+   "CKHK": 228.6,
+   "COUP": 227.0,
+   "DUNE": 236.4,
+   "ELEC": 229.3,
+   "ELIN": 230.6,
+   "HAWK": 229.6,
+   "HEDL": 229.3,
+   "LINE": 229.0,
+   "MARL": 229.4,
+   "MPOW": 228.6,
+   "NELS": 229.8,
+   "ORON": 230.0,
+   "OTPO": 228.7,
+   "POCO": 229.8,
+   "SCAN": 229.4,
+   "TASM": 229.5,
+   "TPCO": 228.2,
+   "VECT": 258.3,
+   "WAIK": 223.8,
+   "WAIP": 229.6,
+   "WATA": 229.5,
+   "WPOW": 228.8
+  },
+  "scale_free": {
+   "per_connection_mean": 261.0,
+   "per_connection_median": 240.0,
+   "rate_on_size_r2": 0.001,
+   "note": "per-connection rate is size-invariant (R2 ~ 0), so the extensive R2=0.78 is not merely a size artefact; unweighted site mean 261 vs size-weighted OLS 230"
+  }
+ },
  "M0_null": {
-  "aic": 367.8
+  "aic": 303.5
  },
  "M1": {
-  "slope_var_per_icp": 315.9,
+  "slope_var_per_icp": 229.6,
   "ci95_var_per_icp": [
-   236.6,
-   417.4
+   198.6,
+   272.2
   ],
-  "intercept_mvar": -0.55,
+  "intercept_mvar": 0.29,
   "intercept_ci95_mvar": [
-   -1.73,
-   0.29
+   -0.21,
+   0.74
   ],
-  "r2": 0.779,
-  "aic": 224.9
+  "r2": 0.804,
+  "aic": 149.0
  },
- "M1_theilsen_var_per_icp": 272.4,
- "M1_through_origin_var_per_icp": 301.5,
+ "M1_theilsen_var_per_icp": 258.5,
+ "M1_through_origin_var_per_icp": 237.3,
  "M2": {
-  "a_var_per_icp": 307.0,
-  "b_var_per_new_icp": 47.1,
+  "a_var_per_icp": 208.7,
+  "b_var_per_new_icp": 111.4,
   "b_ci95": [
-   -589.2,
-   658.0
+   -232.7,
+   405.8
   ],
-  "r2": 0.779,
-  "aic": 226.8,
+  "r2": 0.808,
+  "aic": 148.9,
   "corr_Nbar_dN": 0.78,
   "note": "split unidentified: b's CI spans zero at collinearity 0.78; M2 adds no AIC"
  },
  "loo_slope_range_var_per_icp": [
-  270.6,
-  340.9
+  220.3,
+  242.4
  ],
  "prediction_band_var_per_icp": [
   50,
@@ -100,31 +202,31 @@
    2025
   ],
   "beta_var_per_icp": {
-   "2009": -50.9,
-   "2010": -74.5,
-   "2011": -10.7,
-   "2012": 31.2,
-   "2013": 54.0,
-   "2014": 55.7,
-   "2015": 70.6,
-   "2016": 99.4,
-   "2017": 126.4,
-   "2018": 155.0,
-   "2019": 166.2,
-   "2020": 211.3,
-   "2021": 268.4,
-   "2022": 286.1,
-   "2023": 287.1,
-   "2024": 311.4,
-   "2025": 345.3
+   "2009": -40.7,
+   "2010": -53.1,
+   "2011": -0.4,
+   "2012": 31.7,
+   "2013": 50.1,
+   "2014": 58.3,
+   "2015": 69.2,
+   "2016": 85.3,
+   "2017": 106.3,
+   "2018": 125.5,
+   "2019": 141.4,
+   "2020": 178.4,
+   "2021": 203.7,
+   "2022": 219.6,
+   "2023": 222.3,
+   "2024": 241.4,
+   "2025": 262.4
   },
-  "endpoint_diff_var_per_icp": 291.3,
+  "endpoint_diff_var_per_icp": 212.3,
   "movement_var_per_icp_yr": {
-   "2009-13_zero_crossing": 26.2,
-   "2013-19": 18.7,
-   "2019-25": 29.8
+   "2009-13_zero_crossing": 22.7,
+   "2013-19": 15.2,
+   "2019-25": 20.2
   },
-  "notes": "cross-sectional level slope per year, same 92 units; NEGATIVE 2009-2011 (inductive fleet), crosses zero 2012, monotone rise from 2012, CI excludes 0 from 2017; endpoint diff 291 agrees with the two-endpoint slope 316 within 10%"
+  "notes": "cross-sectional level slope per year, same 92 units; negative 2009-2011 (inductive fleet; 2009 upper CI grazes zero), crosses zero 2012, monotone rise from 2012, CI excludes 0 from 2016; endpoint diff 212 agrees with the two-endpoint slope 230 within 10%"
  },
  "legacy_panel_20260806": {
   "note": "original pre-registered run on the fault-level-constrained screen-table panel; kept verbatim as the labelled consistency result - report both, never blend",
@@ -175,22 +277,22 @@
  },
  "national_sums_clean114": {
   "n": 114,
-  "night_med_2013_mvar": -187.5,
+  "night_med_2013_mvar": -187.6,
   "night_med_2025_mvar": 181.5,
-  "swing_mvar": 369.0,
-  "risers_mvar": 427.4,
+  "swing_mvar": 369.2,
+  "risers_mvar": 427.5,
   "fallers_mvar": -58.4,
-  "swing_p99_mvar": 313.7,
+  "swing_p99_mvar": 313.5,
   "per_household_var": [
    156.8,
-   213.7
+   213.8
   ],
   "households_m": 2.0,
   "parallel_shift_native": {
    "night_rise_med_mvar": 2.25,
    "peak_rise_med_mvar": 2.42,
    "ratio_med": 1.06,
-   "peak_load_chg_pct": 3.4
+   "peak_load_chg_pct": 2.9
   }
  },
  "device_estimate": {
