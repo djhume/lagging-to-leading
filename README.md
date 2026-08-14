@@ -63,8 +63,9 @@ Attribution 4.0 licences. Small extracts and analysis-ready caches ship in
 this repository; the full inputs — the raw EMI monthly extracts as consumed,
 the derived per-year parquet archives, the judgment tables with provenance
 notes, and the builder scripts — ship together in the accompanying **data
-archive** (Zenodo record; DOI to be minted at public release), whose SHA-256
-manifest is OpenTimestamps-anchored.
+archive** (Zenodo record,
+DOI [10.5281/zenodo.21927098](https://doi.org/10.5281/zenodo.21927098)),
+whose SHA-256 manifest is OpenTimestamps-anchored.
 
 ## Reproducing
 
@@ -92,7 +93,7 @@ repository:
 > D. Hume, *From Lagging to Leading: The Measured Emergence of Standing
 > Capacitance Behind Consumer Connections, 1997–2025* (extended version and
 > reproducibility package), 2026. GitHub: djhume/lagging-to-leading.
-> DOI: *to be minted via Zenodo at public release.*
+> DOI: [10.5281/zenodo.21927098](https://doi.org/10.5281/zenodo.21927098).
 
 A `CITATION.cff` is included (GitHub's "Cite this repository" button uses it).
 

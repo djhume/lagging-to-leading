@@ -8,8 +8,9 @@ authors:
   - family-names: Hume
     given-names: David
     orcid: "https://orcid.org/0009-0006-6920-0598"
-version: 0.10.0
-date-released: "2026-08-13"
+version: 0.11.0
+date-released: "2026-08-14"
+doi: 10.5281/zenodo.21927098
 repository-code: "https://github.com/djhume/lagging-to-leading"
 abstract: >-
   Twenty-nine years of regulatory half-hourly metering at New Zealand grid
@@ -29,5 +30,6 @@ keywords:
   - load modelling
   - power systems
 notes: >-
-  A condensed journal version is being prepared for submission. DOI to be
-  minted via Zenodo at public release.
+  A condensed journal version is being prepared for submission. The extended
+  version and reproducibility archive are deposited at
+  DOI 10.5281/zenodo.21927098.
