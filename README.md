@@ -23,10 +23,16 @@ already holds, so the measurement is portable to any system.
 
 | Version | File | What it is |
 |---|---|---|
-| **Extended version** (22 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, and the supporting cohort/method exhibits |
-| **Journal version — draft** (18 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Condensed for journal submission; identical section numbering (I–IX); every claim, headline number, and hedge. **Draft of 13 Aug 2026, not yet submitted.** |
+| **Extended version** (23 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, a Future Work section, and the supporting cohort/method exhibits |
+| **Journal version — draft** (15 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Reduced for journal submission (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. **Draft of 15 Aug 2026, not yet submitted.** |
 
-Both are builds of 13 Aug 2026. The connection-scaling test runs on the
+Both are builds of 15 Aug 2026. The journal tier is now the reduced form: it
+was cut from 18 pp to 15 pp on 14–15 Aug 2026 by moving depth to
+extended-version pointers, with no claim, printed number, or hedge changed (a
+numeric-token diff against the 18-pp build verifies every surviving number
+byte-identical and every removed number present in the extended version).
+
+The connection-scaling test runs on the
 96-unit correspondence-audited panel (8 Aug rebase), with the original
 pre-registered 83-site run retained as a labelled consistency result; on
 13 Aug 2026 the underlying per-year archive was rebuilt after duplicate
