@@ -8,8 +8,8 @@ authors:
   - family-names: Hume
     given-names: David
     orcid: "https://orcid.org/0009-0006-6920-0598"
-version: 0.13.0
-date-released: "2026-08-16"
+version: 0.14.0
+date-released: "2026-08-17"
 doi: 10.5281/zenodo.21927098
 repository-code: "https://github.com/djhume/lagging-to-leading"
 abstract: >-
