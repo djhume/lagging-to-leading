@@ -24,13 +24,24 @@ already holds, so the measurement is portable to any system.
 | Version | File | What it is |
 |---|---|---|
 | **Extended version** (23 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, a Future Work section, and the supporting cohort/method exhibits |
-| **Journal version — draft** (15 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Reduced for journal submission (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. **Draft of 15 Aug 2026, not yet submitted.** |
+| **Journal version — draft** (15 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Reduced for journal submission (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. **Draft of 16 Aug 2026, not yet submitted.** |
 
-Both are builds of 15 Aug 2026. The journal tier is now the reduced form: it
+Both are builds of 16 Aug 2026. The journal tier is the reduced form: it
 was cut from 18 pp to 15 pp on 14–15 Aug 2026 by moving depth to
 extended-version pointers, with no claim, printed number, or hedge changed (a
 numeric-token diff against the 18-pp build verifies every surviving number
 byte-identical and every removed number present in the extended version).
+On 16 Aug 2026 a bounded wording correction was applied to both versions
+(the confound-screen passage no longer asserts that Transpower
+voltage-regulating plant registers inside the revenue-metering boundary —
+the screen itself and every number are unchanged), and a one-sentence note
+of a companion circuit-model study in preparation was added; the
+numeric-token diff was re-run and remains clean.
+
+The LaTeX sources are alongside the PDFs: `paper/main.tex` builds
+`journal-version-draft.pdf` and `paper/main_extended_20260808.tex` builds
+`extended-version.pdf`, sharing `paper/refs.bib` (IEEEtran class files
+included, so `pdflatex` + `bibtex` reproduce both from a clone).
 
 The connection-scaling test runs on the
 96-unit correspondence-audited panel (8 Aug rebase), with the original

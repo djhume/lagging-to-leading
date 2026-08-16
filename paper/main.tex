@@ -1,0 +1,1419 @@
+%% main.tex -- "From Lagging to Leading: The Measured Emergence of Standing
+%% Capacitance Behind Consumer Connections, 1997--2025"
+%% (v5 identity per V5_RESTRUCTURE_SPEC_20260807.md: the measured identification
+%%  of a new term -- trajectory -> decomposition -> load-independence ->
+%%  connection scaling -> labelled EMC-filter hypothesis -> implications.)
+%%
+%% D. Hume, Electricity Authority (EA hat; descriptive, not policy advocacy).
+%% Target venue: IEEE Open Access Journal of Power and Energy (OAJPE).
+%%
+%% Single source of truth for every number and figure: ../replication/ .
+%% If a figure or number changes, change it in the replication notebooks first,
+%% re-run, and it flows here (figures are pulled from ../replication/figures/).
+%%
+%% Build:  pdflatex main && bibtex main && pdflatex main && pdflatex main
+%% (IEEEtran.cls and IEEEtran.bst are bundled in this directory.)
+
+\documentclass[journal]{IEEEtran}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{url}
+\usepackage[hyphens]{xurl}
+\usepackage{orcidlink} % renders the ORCID iD icon; pulls in hyperref + tikz
+
+% Figures live in the replication package (the single source of truth) and,
+% as a fallback, in a local figures/ copy.
+\graphicspath{{../replication/figures/}{figures/}}
+
+\begin{document}
+
+\title{From Lagging to Leading: The Measured\\
+Emergence of Standing Capacitance Behind\\ Consumer Connections, 1997--2025}
+
+\author{D.~Hume~\orcidlink{0009-0006-6920-0598}%
+\thanks{D. Hume is with the Electricity Authority, Wellington, New Zealand
+(e-mail: corresponding author details on submission).
+ORCID iD: \url{https://orcid.org/0009-0006-6920-0598}.}%
+\thanks{This is descriptive analysis of public regulatory metering and
+information-disclosure data. The views expressed are the author's. No external
+funding was received. The analysis informs, but does not advocate, a live
+reactive-power pricing policy question (Section~VI-D).}%
+\thanks{A reproducibility package (the analysis notebooks that compute every
+number and figure in this paper from public data) accompanies the work.}}
+
+\markboth{Draft to be submitted to the IEEE Open Access Journal of Power and Energy}%
+{Hume: The Measured Emergence of Standing Capacitance Behind Consumer Connections}
+
+\maketitle
+
+\begin{abstract}
+Power systems are transitioning from net-absorbing (lagging) to net-generating
+(leading) reactive power at light load; the ENTSO-E Final Reports on the 2025
+Iberian and North Macedonian blackouts identify excess capacitive reactive
+power among the causal factors. Using regulatory half-hourly metering at New
+Zealand grid exit points, we measure the transition end to end over 29 years.
+On a balanced panel of 123 distribution grid exit points (the same sites in
+every year), mean overnight reactive power fell from about $+466$~MVAr
+(lagging) in 1997 to about
+$-451$~MVAr (leading) in 2025 (about $-31$~MVAr/yr), crossing net-leading
+overnight in 2016---measured, not a metering artefact, with its intensity and
+reach unchanged when every contaminated grid exit point is removed. A first-principles charging calculation
+with no fitted cable coefficient puts the demand-side share of the drift at
+about 80\% (physical band 75--88\%) over 2013--2025; two statistical methods
+corroborate the direction. The deepening is as large at the flat evening peak
+as overnight---the signature of standing shunt capacitance, not changed
+operating draw---and it is proportional to connections served: about 220~VAr
+per connection added over 2013--2025,
+crossing zero about 2012 and accumulating faster over the second half of that
+window than the first. The
+connected load fleet is adding
+standing distributed capacitance---consistent with the mandate-driven
+electromagnetic-compatibility filter capacitance in practically every
+switched-mode device
+(a labelled hypothesis); both of the scaling test's inputs are records any operator
+holds. The reversal relocates the binding voltage-security question to the
+overvoltage direction, where the defences, margins, and load models of
+practice are thinner or addressed to the opposite direction. We set out what this implies for
+the load models, security margins, and emergency schemes of power-system
+practice.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Reactive power, power factor, overvoltage, leading power factor, shunt
+capacitance, distribution cabling, measurement, grid exit point, load
+composition, load modelling, power-system analysis.
+\end{IEEEkeywords}
+
+% ======================================================================
+\section{Introduction}
+% ======================================================================
+\IEEEPARstart{P}{ower} systems internationally are shifting from net-absorbing
+(lagging) toward net-generating (leading) reactive power at light load, as the
+connected load fleet modernises toward power-electronic devices and networks add
+underground cabling. The direction of the transition is not in dispute, and
+this paper does not claim to be the first to observe it. What has been missing is,
+first, a long \emph{measured} record of the transition observed end to end at
+supply-point resolution, and second, a measured separation of how much of the
+drift is the load fleet and how much is the network. This paper supplies both for
+a single national system, connects the result to a failure mode that has
+recently moved from theory to realised blackouts, and closes with what the
+reversal implies for the analysis and defences that were built for the opposite
+regime. The trail ends somewhere unexpected: at the electromagnetic-compatibility
+filter inside practically every mains-connected device---capacitance that one
+part of the regulatory apparatus drives in and no other part counts---advanced here as a
+labelled hypothesis with its decisive test identified.
+
+\subsection{A global reactive transition, already observed}
+The phenomenon is well attested across jurisdictions: a steep decline in
+reactive demand at minimum load in Great Britain, with distribution networks
+beginning to export reactive power to the transmission
+system~\cite{kaloudas2014,kaloudas2017}; off-peak overvoltage episodes
+attributed by the French transmission operator to distributed generation,
+underground cabling, and evolving final consumption~\cite{rte_bilan}; a rising
+likelihood of overvoltage events linked partly to more energy-efficient
+appliances in Queensland~\cite{powerlink_seq}; rising capacitive export to the
+extra-high-voltage network in continental Europe~\cite{tazky2021}; and, at
+device level, a majority of modern household appliances presenting a leading
+power factor~\cite{hannagan2023}, with expert reviews documenting the error
+constant-power-factor load modelling
+introduces~\cite{cigre_tb719,epri_loadmodel}. No consumer-device standard
+requires a unity fundamental-frequency (displacement) power factor:
+IEC~61000-3-2 limits harmonic current only~\cite{iec61000_3_2}, and the one
+device-level power-factor family in force anywhere (the European lighting
+floors~\cite{eu_lighting2020}) is a full-load, direction-blind metric that
+never sees a device's standing draw; the extended
+version~\cite{hume_extended} carries the fuller instrument survey. The
+overvoltage-instability literature itself now records the observable: the 2026
+review of overvoltage instability mechanisms notes, among its causes of voltage
+rise, that cable substitution has ``change[d] the power factor to leading in
+several urban substations''~\cite{vournas2026review}---an observation offered
+without citation, and attributed wholly to the network's cables rather than to
+any change in what the connected demand draws. Every system in this literature
+runs 230-volt mains; Section~V-B returns to that regularity.
+
+The closest measured system-level series is that British one: roughly eight
+years (about 2005--2013) of reactive demand at grid supply points, projected
+forward from load-composition modelling and scenario projection---neither a
+multi-decade measured record nor a quantified demand-versus-network share of
+the realised drift; boundary studies in the
+Netherlands~\cite{javed2024}, Denmark~\cite{baghbannovin2020}, and
+Slovakia~\cite{tazky2021} likewise characterise or simulate the export
+without either. The study closest to the present decomposition is Bosisio
+\emph{et al.}~\cite{bosisio2022} on the Milan distribution network: measured
+15-minute boundary data at 37 high-voltage/medium-voltage transformers,
+naming the same three-term balance used here and, in the indexed
+English-language literature to our knowledge, the only prior study to
+articulate this split explicitly on measured boundary data. It compares two
+years across a COVID-19 demand shock, assigns no numerical share, and reads
+the dominant term as the cables, opposite to ours; we treat it as
+complementary (it confirms the framework on measured data for one heavily
+cabled city, and its cable-dominant reading is consistent with cable
+intensity shaping where net-leading territory is reached first,
+Section~IV-A), and it leaves open the national, multi-decade, quantified
+attribution (the fuller positioning is in the extended
+version~\cite{hume_extended}).
+
+\subsection{The realised risk}
+In 2025 two power systems suffered major blackouts whose official investigations
+found a leading-reactive/overvoltage mechanism at their core: the Final Reports
+of the European Network of Transmission System Operators for Electricity
+(ENTSO-E), both published 2026, on the Iberian Peninsula event of 28 April
+2025~\cite{entsoe_iberia} and on the North Macedonia event of 18 May
+2025~\cite{entsoe_nm}, detailed in Section~VI-C. What matters here is what those
+investigations could not do. Both reports treat the capacitive surplus as a
+network-side quantity and low demand as a magnitude rather than
+as a fleet whose reactive character has itself changed; neither distinguishes nor
+quantifies a demand-side composition shift from network charging; and neither
+report states the aggregate reactive character of demand anywhere (the
+extended version~\cite{hume_extended} carries the reports' load-model
+detail). These are not criticisms of
+investigations that reasoned from the data available to them; they identify the
+space a long measured record can fill. The field's current synthesis has the
+same shape: the 2026 mechanisms review~\cite{vournas2026review} gives as its
+causes of voltage rise corridors below surge-impedance loading, cable
+substitution, synchronous-generator decommissioning, and fixed-power-factor
+converter operation---network and generation throughout---representing load as
+lagging or unity power factor in every model, citing no measurement of demand
+reactive character, and calling for none.
+
+\subsection{Contribution}
+This paper makes a layered contribution.
+
+\emph{Contribution~1 (measured trajectory).} Using regulatory half-hourly active
+and reactive power at New Zealand grid exit points, we measure the system's
+reactive character at supply-point resolution over 29 years (1997--2025) on a
+balanced panel---the same grid exit points in every year, so sites entering or
+leaving the record cannot manufacture the trend---characterise its rate and
+crossing, and show the trajectory is a measured phenomenon and not a metering
+artefact. The computation
+reuses settlement metering that any operator holds, so the same measurement is
+available to any system.
+
+\emph{Contribution~2 (decomposition of the drift).} We decompose the drift into
+a demand-side load-composition component and a network cable-charging
+component. The magnitude is carried by a first-principles charging calculation
+that computes each network's cable charging directly from its disclosed
+circuit kilometres (Section~II-D) and so fits no cable coefficient; evaluated
+over the 2013--2025 disclosure window, it puts the demand-side (\emph{organic})
+share of the drift at about 80\% (physical band 75--88\%), with two statistical
+methods corroborating the direction over the full 29-year record but not
+themselves pinning the share. We report a measured direction and dominance and
+do not claim a point-identified split.
+
+\emph{Contribution~3 (the term identified).} We then identify what the
+demand-side driver is physically doing. The deepening is load-independent---as
+large at the flat evening peak as overnight---so it behaves as standing shunt
+capacitance, permanently energised, not as a change in how the load draws
+reactive power while operating. And it lives behind the connections: across
+grid exit points the 2013--2025 deepening is proportional to the number of
+connections served, with no detectable connection-independent
+residual; refitted year by
+year, each connection's standing contribution sits slightly on the inductive
+side of zero at the start of the record, crosses zero in 2012, and grows every
+year thereafter---about 220~VAr per connection added over 2013--2025, the same
+figure whether fitted to the endpoint change or read off the level
+history---and it accumulated faster over the second half of that window than
+the first
+(Section~V). The load fleet is accumulating standing distributed capacitance,
+not merely drawing fewer lagging vars. We advance the mandated
+electromagnetic-compatibility filter capacitance as its candidate device layer
+(a labelled hypothesis), identify the decisive low-voltage measurement that
+would settle it, and note that both of the scaling test's inputs---settlement metering
+and connection counts---are records any operator holds.
+
+The significance is what the reversal does to analysis: the direction of the
+binding voltage-security question reverses; the automatic last-resort defences
+and the margin tooling of the undervoltage era do not transfer; and the
+constant-lagging-power-factor load archetypes of planning and protection
+studies no longer describe the light-load fleet (Section~VII)---a qualitative
+synthesis, not a defence-scheme or load-model redesign, which remain outside
+the paper's scope. Section~III measures the trajectory; Section~IV attributes
+it between fleet and network; Section~V identifies the term and tests its
+scaling; Sections~VI and VII set out the overvoltage consequences and the
+analysis implications; Section~VIII concludes with the outlook.
+
+This work extends the author's EEA~2025 conference paper~\cite{hume2025}, which
+described the 2009--2024 aggregate trend qualitatively. The present paper adds
+twelve further years of baseline back to 1997; grid-exit-point resolution; the
+quantified rate, crossing, and artefact test; the decomposition; the
+connection-scaling identification; and the two post-EEA ENTSO-E Final Reports
+as an independent evidentiary anchor. Consistent with its descriptive scope,
+the paper reports the measured trajectory and the decomposition without making
+any policy recommendation.
+
+% ======================================================================
+\section{Data and Method}
+% ======================================================================
+\subsection{Sign convention and primary variable}
+Reactive power carries a direction that is the entire point of this study. We use
+the convention $Q<0$ for \emph{leading} (capacitive, voltage-raising) and $Q>0$
+for \emph{lagging} (inductive, voltage-lowering). We lead throughout with the
+signed reactive power in MVAr, which is additive across supply points and has no
+discontinuity at unity, and present power factor only as a familiar comparator.
+Power factor is non-additive, so where a system power factor is quoted we sum $P$
+and $Q$ across the panel first and derive
+$\mathrm{PF}=\Sigma P/\sqrt{(\Sigma P)^2+(\Sigma Q)^2}$ rather than averaging
+power factors.
+
+\subsection{The grid-metering record and the balanced panel}
+The primary data is half-hourly real and reactive power at every grid exit point
+(GXP), the substations where the national transmission grid hands electricity to
+the local distribution networks, from 1997 to 2025, published by the New Zealand
+Electricity Authority on its Electricity Market Information (EMI) platform. Each per-year
+file is half-hourly for the whole year (48 trading periods per day), with a
+real-power and a reactive-power column for each GXP. Over the record, 238
+distinct GXPs appear; a balanced core of 132 is present in all 29 years.
+
+We reduce each GXP's year to a small set of features, of which the headline
+quantities are the average overnight and evening-peak reactive and real power.
+Following the prior EEA analysis, the overnight window is trading periods 6--10
+(approximately 02:30--05:00, the lowest demand) and the evening peak is trading
+periods 36--38 (approximately 17:30--19:00). We
+also record, for each GXP-year, the fraction of overnight half-hours that were
+leading. The full feature table is 5{,}261 GXP-year rows, one per GXP per year.
+
+The single largest way a 29-year trend could be spurious is a change in the set of
+measured GXPs over time: new urban, cable-heavy sites appearing and old rural ones
+dropping out would manufacture a leading trend from bookkeeping alone. The primary
+defence is the \emph{balanced panel}: only the 132 GXPs present in every one of the
+29 years, so any change is a change in the same sites rather than a change in which
+sites are measured. We call that turnover \emph{churn}; the balanced panel is
+churn-controlled by construction (``balanced'' in the panel-data sense, not the
+three-phase sense). We follow one rule throughout: \emph{trends on the balanced
+panel, snapshots on the full panel}. The paper's subject is the distribution
+networks; restricting the balanced panel to demand networks (excluding a handful of
+generator, industrial, and rail connection points) leaves 123 GXPs. We report both
+the 132-point and 123-point figures and keep them labelled; they are the same trend
+at the same rate (Section~III). The residual churn bias is signed: the demand grid
+exit points excluded from the balanced panel (post-1997 entrants and exits) are by
+2025 on average \emph{more} leading than the panel and drift faster, so the
+balanced panel, if anything, understates the national drift; the extended
+version~\cite{hume_extended} carries the churn audit.
+
+\subsection{Metering provenance and accuracy}
+The active and reactive power at each grid exit point is settlement-grade
+revenue metering in the highest-accuracy category of the regulatory Metering
+Code~\cite{eipc_part10}: Class~0.2S for active energy under
+IEC~62053-22~\cite{iec62053_22}, with the reactive channel held to the looser
+Class~2--3 of IEC~62053-23~\cite{iec62053_23}---least accurate exactly at
+light load and near-unity power factor---and the metered quantity is the
+fundamental-frequency (\emph{displacement}) reactive power of IEEE
+Std~1459~\cite{ieee1459}, the component that drives the voltage rise of
+Section~VI, with harmonic distortion out of scope. The full measurement-error
+analysis---the meter fleet and its one staggered 2010--2013 replacement, the
+error classes, the bounds, and the test procedures---is carried in the
+extended version~\cite{hume_extended}; what the paper rests on is three
+results. Random error averages down under aggregation and cannot manufacture
+a near-monotonic 900-MVAr swing through zero. The one systematic error that
+does not average down---a phase displacement $\beta$ in the
+instrument-transformer chain, injecting a spurious term of about $P\sin\beta$
+concentrated in exactly the light-load window this paper measures---is
+bounded, under a generous common-mode half-degree assumption, at some fifty
+times smaller than the swing (about 0.1~MVAr/yr of apparent drift); a static
+displacement of any size falls short of the swing, and a $\beta$ moving
+coherently across sites is what the re-base test of Section~III-B rejects.
+And the fleet replacement's possible bias runs in the conservative direction
+(under-recorded leading reactive power on the older fleet would delay, not
+advance, the measured crossing): the crossing post-dates the rollout, so the
+leading regime is observed wholly on the modern fleet, and the per-MW drift
+within the modern-fleet era alone (2014--2025) is $-0.019$~MVAr/MW/yr against
+$-0.018$ over the full record. We therefore treat the multi-decade
+\emph{drift} as robust while regarding the standing reactive \emph{level} on
+any single night as carrying a bounded measurement uncertainty---tens of MVAr
+at most, a few per cent of the 2025 total---distinct from the composition
+question of Section~IV.
+
+\subsection{The asset (parameter) record}
+To describe each network's physical make-up we assemble a per-company, per-year
+table from the Commerce Commission's regulated information disclosures: circuit
+length split into overhead and underground kilometres at each operating voltage
+(Schedule~9c, disclosed consistently from 2013), capacitor-bank counts
+(Schedule~9a), demand and connection counts
+and embedded generation (Schedule~9e), and the regulated asset base (Schedule~4).
+The disclosures are mapped to the EMI network codes through a 29-year validated
+correspondence, time-aware because ownership itself changed under the
+record; the metering panel is attributed per
+year from the metering files themselves, so the trajectory follows every
+change, and the cable-dose analyses of Section~IV are run under both a
+per-year and a physical-continuity (successor-network) attribution, with the
+sensitivity reported there; the extended version~\cite{hume_extended} carries
+the correspondence audit. Two data-quality choices are made explicitly: we retain only the
+``All''-network roll-up rows (multi-network companies are not double counted)
+and we flag a 2014--2015 definitional break in the capacitor counts (a
+widening of reporting scope, not new plant). The capacitor series is counts
+only, from 2013; we use it as a direction-only proxy.
+
+\subsection{Confounds in the metered reactive power}
+A grid exit point meter records the \emph{net} reactive power at the boundary, which
+is not in general a clean distribution offtake:
+\begin{equation*}
+Q_{\text{metered}} = \underbrace{Q_{\text{load}} + Q_{\text{cable}}}_{\text{the subject of this paper}}
+\;-\; Q_{\text{embedded gen}} \;\pm\; Q_{\text{TP plant}},
+\end{equation*}
+where the last two terms are \emph{confounds}: signals mixed into the same
+metered reading that are not the subject of this paper. An embedded \emph{synchronous} generator
+(hydro, geothermal, cogeneration) regulates voltage and sets its reactive
+output by the voltage it sees rather than by local load; and at some
+substations Transpower voltage-regulating plant---a static var compensator,
+static synchronous compensator (STATCOM), synchronous condenser, or switched
+capacitor or reactor bank---shares the substation with the offtake, with the
+revenue-metering boundary determining whether it registers in the metered flow. One
+behavioural diagnostic catches all of these,
+whichever party owns the plant---a network's own large regulating compensation
+would be flagged identically: a clean distribution offtake's reactive power tracks
+its load, so a straight-line fit predicting $Q$ from $P$ explains an appreciable
+share of its variation ($R^2 \approx 0.3$--$0.5$), whereas voltage-regulated
+reactive is decoupled from load ($R^2 \to 0$, with a large residual the load
+does not explain). Computed on three
+spread-out years (2016, 2019, 2022) so that a flag reflects a stable trait, the
+screen isolates six decoupled grid exit points, at Christchurch (Islington,
+Bromley), Auckland (Penrose, Hobson Street), Bunnythorpe, and Tuai; the
+extended version~\cite{hume_extended} carries the site-level screen and each
+site's plant.
+
+This matters overnight specifically: restricting to the overnight minimum
+removes the \emph{solar} confound---photovoltaics are dark at 03:00---but not
+the \emph{synchronous}-generation one, since hydro, geothermal, and
+cogeneration regulate voltage around the clock; the extended
+version~\cite{hume_extended} carries a worked public case. We flag these sites
+rather than discard them silently, and we show in Sections~III-B and IV that
+the trajectory and the decomposition are robust to their removal: the
+contamination affects the absolute \emph{level}, not the direction, intensity,
+or attribution of the drift.
+
+\subsection{Analysis methods}
+The trajectory is summarised by ordinary linear slopes for headline rates and, for
+robustness, by Theil--Sen slopes~\cite{sen1968}: the median of the slopes through
+every pair of years (406 pairs for a 29-year series), an estimator that a few
+anomalous years cannot move, used here on both the national and per-GXP
+series; where the two
+estimators agree---as they do throughout---a trend rests on no small set of
+years. The test that the trend is not a metering artefact
+(Section~III-B; workings in the extended version~\cite{hume_extended}) removes each GXP's own Theil--Sen trend and looks in what remains for a step
+shared across sites in the same year, using a change-point detector and a
+coherence statistic. The three decomposition methods are described with their
+logic and results in Section~IV. All analysis is
+reproduced from public data in the accompanying notebooks.
+
+% ======================================================================
+\section{The 29-Year Reactive Trajectory}
+% ======================================================================
+\subsection{Lagging to leading, overnight}
+Fig.~\ref{fig:traj} shows the central empirical result. Summed across the balanced
+demand panel, mean overnight reactive power fell from $+466$~MVAr (lagging) in 1997
+to $-451$~MVAr (leading) in 2025, a near-monotonic linear drift of $-31.1$~MVAr/yr
+(robust Theil--Sen slope $-31.3$~MVAr/yr, 95\% confidence interval (CI)
+$[-34.0,-28.1]$~\cite{sen1968}, a rank-based interval indicating spread rather
+than calibrated coverage; construction in the extended
+version~\cite{hume_extended}), crossing into
+net-leading overnight in 2016. On the wider 132-point balanced panel
+that also includes non-distribution connection points, the same drift is
+$+673\rightarrow-296$~MVAr at $-30.3$~MVAr/yr, crossing in 2020---the same
+trend, labelled distinctly and never blended into one figure. Expressed per
+megawatt of overnight load, the drift is about $-0.018$~MVAr/MW/yr; we lead with
+this intensity and with the share of networks gone leading because, unlike the
+absolute MVAr total, they are insensitive to a few large contaminated nodes
+(Section~III-B). The denominator is not doing the work: overnight load on the
+panel grew from about 1{,}680~MW in 1997 to about 1{,}960~MW in 2025. In the
+familiar comparator of Section~II-A, the overnight aggregate power factor moved
+from 0.964 lagging to 0.975 leading---a numerically small excursion either side of
+unity concealing a 900-MVAr reversal, which is why the signed reactive power is
+the working variable throughout.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{01_trajectory.png}
+\caption{The 29-year reactive trajectory on the balanced demand panel (123 grid
+exit points present in all years). Overnight (trading periods 6--10) drifts from
+strongly lagging ($Q>0$, voltage-lowering) to clearly leading ($Q<0$,
+voltage-raising), crossing net-leading in 2016; the evening peak (trading periods
+36--38) follows much later. The diurnal split (the problem lives overnight at low
+load, not at the busy evening peak) is the signature of a standing capacitive
+term dominating when load is least able to mask it; Section~IV attributes that
+term mainly to the demand fleet rather than to network charging. Sign
+convention: $Q<0$ is leading.}
+\label{fig:traj}
+\end{figure}
+
+The diurnal contrast is itself a result. The evening peak crossed net-leading only
+in 2022 and remains far less leading than overnight, which locates the net-leading
+regime firmly at low load. Expressed as a
+fraction rather than a sum, the mean share of overnight half-hours that are leading
+rose from about 1\% in 1997 to about 74\% in 2025: overnight leading became routine
+rather than exceptional.
+
+\subsection{Measured, not an artefact; robust to contaminated sites}
+A reviewer's first question of any long series is whether the trend reflects the system
+changing or the measurement changing. Two features of the record answer that directly,
+and a further test closes the one gap they leave.
+
+First, the drift does not rest on the older, less homogeneous early data. The metering
+and data pipeline modernised across the record (notably the move to the present
+Electricity Market Information system), and the one visibly suspect feature is an early
+step in the overnight leading fraction between 2000 and 2001, consistent with a change
+in metering vintage. Restricting to the post-2001 era of the present data pipeline removes any such
+concern, and the drift is if anything slightly steeper: $-33.0$~MVAr/yr over
+2002--2025 against $-31.1$~MVAr/yr over the full record (the metering-fleet
+test proper---the 2014--2025 modern-fleet drift---is in Section~II-C). A trend
+manufactured by early-era inhomogeneity would fade on the later data, not
+strengthen.
+
+Second, a measurement artefact cannot reproduce the trend's physical structure. The
+net-leading crossing is specific to the overnight window---the evening peak stays
+lagging for years longer (Fig.~\ref{fig:traj})---while the deepening beneath the
+crossings is near-equal in the two windows over 2013--2025, with evening-peak load
+essentially flat (Section~V-A): the signature of a standing capacitive term netted
+against different amounts of lagging load. The one systematic metering bias that does
+not average down scales with the metered load ($P\sin\beta$, bounded in Section~II-C)
+and would deepen the heavily loaded evening window far more than the lightly loaded
+overnight one, which is not observed. Nor is the shift seasonal: winter
+(June--August) and summer (December--February) months drift at $-31.1$ and
+$-30.8$~MVAr/yr respectively, so the trend
+is not an artefact of heating-season load composition. The drift also tracks each network's
+underground-cable intensity (Section~IV); a metering error has no reason to
+correlate with cable kilometres. Nor does a metering artefact at the grid
+exit point have a mechanism that scales with the customers behind it: the 2013--2025 deepening grows
+linearly with each grid exit point's connection count, and that
+connection-scaling term carries the large majority of it (Section~V-C). This
+combination of a diurnally structured, cable-correlated, connection-scaling
+shift is one that a change in measurement convention cannot counterfeit. The
+charging calculation of Section~IV is not a further witness here: it
+\emph{partitions} the measured drift rather than reproducing it, so an
+instrument error would sit inside the residual it assigns to the fleet.
+
+These two arguments address a gradual or staggered change, such as piecemeal
+meter replacement across sites. A single system-wide re-base is different: a
+one-date change of sign convention or central processing would step every
+supply point at once. We test for exactly that, detrending each site by its
+own robust line and asking whether sites step together in a single year, and
+find no such event: the change-point candidate years reach coherence of only
+67\% and 69\% against a typical-year 62\%, where a genuine re-base would
+drive coherence toward 100\% (procedure and exhibit in the extended
+version~\cite{hume_extended}). The lagging-to-leading drift is therefore a
+measured property of the system, not an artefact of how it was metered.
+
+A second objection, distinct from a metering artefact, is that the trend could be
+carried by a few grid exit points whose meters do not see a clean distribution offtake
+(Section~II-E). We test it directly by removing them. Dropping the six \emph{decoupled}
+grid exit points whose reactive power is set by plant or embedded generation (the
+\emph{clean} cohort), and more strictly also the steady-generation and net-export
+points (the \emph{clean-strict} cohort), we re-measure the trajectory on the balanced
+demand panel (the cohort exhibit is in the extended version~\cite{hume_extended}).
+
+Two quantities behave very differently, and the difference is the point. The absolute
+total and the MVAr/yr slope \emph{shrink} when the contaminated sites are removed---the
+2025 total from $-451$ to about $-300$~MVAr and the slope from $-31.1$ to
+$-23.4$~MVAr/yr---because two of the removed nodes (Islington and Bromley) carry large,
+load-decoupled leading values, so the absolute \emph{level} is partly inflated by
+contamination. The per-MW drift intensity, by contrast, is essentially unchanged
+($-0.0175$, $-0.0178$, and $-0.0180$~MVAr/MW/yr across the full, clean, and clean-strict
+cohorts), and the share of networks net-leading overnight by 2025 is likewise stable
+(75\%, 74\%, 80\%). The quantities that describe the phenomenon---its intensity per unit
+load and its near-universal reach---do not depend on the contaminated nodes; only the
+headline \emph{size} does. This is why we lead with the per-MW drift and the
+share-leading migration and treat the absolute spine as a contamination-sensitive
+companion.
+
+% ======================================================================
+\section{Decomposition: Demand vs Network}
+% ======================================================================
+The policy-relevant question is how much of the drift is the network's own cables,
+which inject leading reactive power as a distributed capacitance, and how much is
+the changing make-up of electricity demand itself: the retreat of inductive plant
+(simple motors) and the accumulation of power-electronic equipment (LED lighting,
+switch-mode supplies, heat pumps and other variable-speed drives). We call the
+second part \emph{organic}: it is in the load fleet, not the wires. If the drift
+were mostly cables it would be a familiar network-planning problem; if it is mostly
+the demand fleet it is structural, nationwide, and outside any single network's
+control. We approach the question three ways; the two statistical methods share a
+common underground-cable proxy, while the physics-based method fits no cable
+coefficient and is independent of both. What the demand-side component physically
+\emph{is}---the question the decomposition leaves open---is taken up in
+Section~V.
+
+\subsection{Method 1: a clean-cohort contrast}
+History handed us networks at opposite ends of the cable spectrum. Some
+distribution businesses are almost entirely overhead line and have almost no
+underground cable; overhead line injects little leading reactive power, so these
+networks have almost no cable contribution. If their overnight reactive power still
+drifts leading, that drift can only be the demand fleet. We compare reactive power
+per MW of load (so network size cancels), load-weighted within each cohort
+(larger sites count proportionally more), for
+networks at or below 12\% underground (\emph{clean} in this method's sense:
+almost cable-free, distinct from the decontaminated cohorts of Section~III-B)
+against networks at or above 40\% underground (cable-rich); the method
+exhibits are collected in the extended version~\cite{hume_extended}.
+
+The clean cohort drifts from $+0.373$ to $+0.065$~MVAr/MW (slope $-0.0101$/yr),
+ending near balanced; the cable-rich cohort drifts from $+0.205$ to $-0.306$~MVAr/MW
+(slope $-0.0134$/yr), crossing well into leading. The ratio of slopes
+($0.0101/0.0134 \approx 0.75$) puts the
+demand-side share of the cable-rich cohort's drift at about 75\%, cable the
+remaining 25\%. The reading rests on two assumptions the split depends on, stated plainly:
+that the organic per-MW drift is common across the cohorts (to the extent urban
+load fleets modernise faster than rural ones, the cable share is overstated), and
+that the at-most-12\%-underground cohort carries no material cable term (to the
+extent it does, the demand share is overstated); the two possible violations pull
+the split in opposite directions.
+
+The exact ratio also moves with measurement choices---which of Schedule~9c's
+two circuit-length tables is used (they differ by a few points of percentage
+underground), the panel definition, and how the grid exit points that changed
+network (Section~II-D) are attributed---spanning the 64--90\% collected in
+Table~\ref{tab:triangulation}, with the clean cohort identical under every
+choice; each variant, and the effect of removing the two decoupled
+Christchurch nodes (Section~II-E), is worked in the extended
+version~\cite{hume_extended}.
+
+The \emph{direction} is therefore robust while the \emph{exact ratio} is not,
+which is why we treat Method~1's ratio as a hypothesis and bring two further
+methods. And although cable is the minority of the drift, it is the marginal factor
+that tips a network from balanced into net-leading: the clean cohort ends near
+balanced while the cable-rich crosses into leading, so cable intensity shapes
+\emph{where} overvoltage appears first even though demand composition drives the
+trend.
+
+\subsection{Method 2: a validated dose-response}
+The second method gives every GXP a single number---the Theil--Sen slope of its
+overnight reactive power, scaled by its own typical size---and regresses those
+per-site drifts on the site's cable dose (its network's percentage
+underground) in a mixed model with a random intercept per company, with
+uncertainty from a cluster bootstrap that resamples whole companies, because
+sites under one company share a dose and are not independent. The fitted
+drift \emph{at zero cable} ($b_0$) is the organic drift; the slope ($b_1$) is the
+extra drift per unit of cable. Validated on synthetic panels with known
+planted answers before any use on the real data (the protocol is in the
+accompanying notebooks), the estimator recovers the sign and magnitude of the
+organic drift reliably, but it point-identifies the organic \emph{share} only
+when the cable effect is itself identified---and on the real data it is not,
+so we rest no magnitude on this method; the magnitude falls to Method~3.
+
+On the real data, the organic drift is $b_0=-0.016$/yr
+(95\% CI $[-0.021,-0.010]$), leading in 100\% of bootstrap resamples: unambiguous
+and dominant. The cable slope is $b_1=-0.00005$/yr (95\% CI
+$[-0.00037,+0.00012]$), which crosses zero---weakly identified, because cable dose
+is a company-level trait with only about 23 distinct values---so we deliberately
+publish no tight interval on the share (at the point estimate it is at least
+78\%, consistent with 100\%; Table~\ref{tab:triangulation}). Three robustness
+checks hold, each worked in the extended version~\cite{hume_extended}: adding
+capacitor intensity to the fit as a control moves $b_0$ by only about 10\% and
+leaves it strongly leading; the low correlation between cable dose and
+distributed-generation intensity ($-0.22$) indicates the organic signal is not
+an artefact of where embedded generation sits; and restoring the four sites
+dropped in the Section~II-D mapping moves $b_0$ by under 1\%.
+
+A fourth check replaces the dose measure altogether: refitting with each
+network's computed charging intensity as the dose---Method~3's physical
+$\omega C V^2 \ell$ (Section~IV-C) summed and taken per MW of maximum
+demand---moves $b_0$ only from $-0.0164$ to $-0.0178$/yr, with the cable term
+still crossing zero. The two dose measures are in fact \emph{negatively}
+correlated across networks ($r=-0.23$), percentage underground being in part
+an urban-density measure rather than a charging-intensity one, so two nearly
+opposite dose definitions returning the same organic conclusion is a stronger
+robustness statement than either alone (the charging-intensity dose shares its
+per-MW denominator with the per-site drifts, which can bias the cable slope
+but not the zero-cable intercept; no reading here rests on the slope under
+either dose).
+
+Method~1's urbanisation confound applies here too, and in the same
+direction: the cable dose is a company-level trait, so if urban fleets modernise
+faster than rural ones some of that difference loads onto $b_1$ rather than
+$b_0$, overstating cable and understating the organic term. The bias is
+conservative for the reading we take.
+
+\subsection{Method 3: first-principles charging physics}
+The third method computes the network contribution directly from physics, with no
+fitted coefficient, so it sidesteps the weak-identification problem entirely. Any
+energised length of cable or line behaves as a distributed capacitance and injects
+a fixed leading reactive power $Q=\omega C V^2 \ell$, where $\omega=2\pi\cdot
+50$~rad/s, $C$ is capacitance per km, $V$ the operating voltage, and $\ell$ the
+length. Underground cable has far more capacitance per km than overhead line. Using
+the published overhead and underground kilometres at each voltage from
+Schedule~9c, textbook per-km capacitances with an explicit $\pm 35\%$ band, and a
+band-by-band sum (charging scales with $V^2$, so high-voltage lines dominate), we
+compute the physical charging per network per year and subtract it from the
+measured overnight reactive power; the remainder is organic (the decomposition
+figure is in the extended version~\cite{hume_extended}). The band is set to
+span published per-km capacitance values across common distribution cable
+constructions and is carried through to the result rather than quoted and
+dropped. The organic remainder
+is a residual, and we name what else it absorbs: transformer magnetising reactive
+power (lagging and essentially static), series-reactance absorption (minimal at
+light load), and the distribution capacitor fleet (static-to-shrinking,
+Section~VI-B)---terms that are second-order overnight or bias the residual toward
+lagging, so reading the residual as the demand-side drift is conservative.
+
+Over 2013--2025 the measured overnight reactive power drifts at $-49.9$~MVAr/yr
+across all demand networks, of which the physical charging contributes only
+$-9.2$~MVAr/yr (cable length grows slowly) and the organic residual $-40.7$~MVAr/yr.
+The organic share of the \emph{drift} is therefore about 80\% (physical band
+75--88\%). Because this method fits no cable coefficient, it is independent of
+the two statistical methods; the division of labour is collected in
+Section~IV-D. The
+window is set by the data: the disclosed circuit kilometres it runs on
+(Section~II-D) are recorded consistently only from 2013, so the
+physics decomposes the 2013--2025 drift, about 45\% of the record; extending the
+$\sim$80\% share to the full 29 years is an inference, supported by the
+direction-consistent statistical methods (which do span the full record) and by the
+slow growth of cable length, not a second measurement. We
+stress that this all-network footprint rate ($-49.9$~MVAr/yr, 2013--2025) is a
+different dataset from the balanced panels of Section~III ($-31.1$~MVAr/yr on
+the 123-GXP demand panel; $-30.3$ on the 132-GXP panel, 1997--2025); these
+measure different things over different samples and are not interchangeable
+(a third, separate cable-correlation series of the same public records,
+reported in the accompanying notebooks~\cite{hume_extended}, differs again).
+
+A separate and more uncertain question is the composition of the leading reactive
+power \emph{standing on the network today} (the level, as opposed to the drift). On
+the level the physics points the other way: a large, near-static cable and line
+charging baseline has always been present, and what changed is that the organic
+demand shifted from lagging---which used to mask the charging---toward leading,
+which no longer does: today's net leading reactive power is then mostly
+long-standing charging \emph{revealed} rather than newly created. The exact level
+split has a wide physical band and we do not quote a precise share for it; the level
+is a distinct, weaker claim and must not be confused with the drift result. We carry
+this only as the qualitative ``uncovered charging'' reading that informs
+Sections~VI and VII.
+
+\subsection{Triangulation}
+Table~\ref{tab:triangulation} collects the three methods, which play different roles
+and are not all independent: Methods~1 and 2 both rest on the same underground-cable
+proxy, whereas Method~3 fits no cable coefficient at
+all. All three, though, consume the same Schedule~9c circuit-length
+disclosures---cohort definition and dose in Methods~1 and 2, the length $\ell$
+in Method~3---so agreement among them cannot diagnose a systematic kilometre
+error, which would move all three coherently; under-counted cable would push
+every method toward the demand side.
+
+The reading follows that division of labour. The \emph{direction} is
+robust and identified: the organic drift is leading in 100\% of bootstrap resamples
+while the cable contribution to the drift is not statistically distinguishable from
+zero, and together these imply the drift is dominantly demand-side. The
+\emph{magnitude} is carried by the physics: the first-principles charging calculation,
+which fits no cable coefficient, puts the organic share at about 80\% (physical band
+75--88\%). The two statistical methods are directionally consistent but, because the
+marginal cable effect (the extra drift per unit of cable) is not identified at
+the few company-level cable values
+available, do not themselves pin the share. We report the drift as dominantly organic
+and do not claim a point-identified split. Cable is the minority of the drift but the
+marginal factor in where net-leading territory is reached first.
+
+A cross-sectional check agrees: the most-leading demand grid exit points are
+not the most-cabled---they sit at roughly half the cable intensity of the
+most-cabled group---so cable cannot be what drives the deepest-leading
+behaviour, independently confirming the demand-side reading (the full
+cross-sectional typology is in the reproducibility
+notebooks~\cite{hume_extended}).
+
+\begin{table}[!t]
+\caption{Three Decompositions of the Drift}
+\label{tab:triangulation}
+\centering
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}p{0.27\columnwidth}p{0.24\columnwidth}p{0.37\columnwidth}@{}}
+\toprule
+\textbf{Method} & \textbf{Establishes} & \textbf{Organic share of drift} \\
+\midrule
+1: clean-cohort contrast (cable proxy) & direction (shares the cable proxy with 2) & $\sim$75\% (78\% with contaminated nodes removed; 64--90\% across attribution, cable-intensity, and panel definitions) \\
+2: dose-response (cable proxy) & direction; dominance at typical doses & $\geq$78\% at the point estimate, consistent with 100\% (cable term not pinned by the data) \\
+3: charging physics (no fitted cable term) & \textbf{magnitude} & $\sim$80\% (physical band 75--88\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ======================================================================
+\section{The Demand-Side Term Identified: Standing Capacitance Behind
+Connections}
+% ======================================================================
+The decomposition attributes the drift to the demand fleet; it does not say what
+in the fleet is doing it. Two measured properties narrow the answer, a specific
+physical candidate follows from them, and a scaling test probes the candidate's
+sharpest prediction.
+
+\subsection{Load-independent, around the clock}
+First, the drift is load-independent. Over the 2013--2025 window we summarise
+each grid exit point passing the full contamination screen (the clean-strict
+criteria of Section~III-B, applied here to all sites metered in the window
+rather than to the 29-year balanced panel) by robust annual medians on wider
+windows than the Section~II features (trading periods 1--12, midnight--06:00,
+and 35--39, 17:00--19:30). On the 114 such grid exit points with both endpoints
+metered, the median per-site change in reactive power is $-2.25$~MVAr overnight
+and $-2.42$~MVAr at the evening peak (median per-site ratio 1.06), while
+evening-peak load was essentially flat (median change $+2.9\%$). A change in how
+the connected load draws reactive power while operating would scale with the
+load operating---far larger at the peak than at 03:00---and so would the
+load-proportional metering bias bounded in Section~II-C, whose spurious term goes
+as $P\sin\beta$. A near-equal deepening around the clock is instead the
+signature of \emph{standing shunt capacitance}: always energised, indifferent to
+what the load is doing. It also reconciles the diurnal structure of
+Fig.~\ref{fig:traj}: the two windows drift in parallel, and net-leading surfaces
+overnight first because the standing component is netted against more lagging
+load at the peak.
+
+\subsection{A physical candidate: the mandated EMC filter}
+Second, the capacitance must live behind essentially every connection, because
+the drift's reach is near-universal across grid exit points (Section~III-B). We
+therefore advance a specific physical candidate, labelled plainly as a
+hypothesis: the electromagnetic-compatibility (EMC) filter that practically
+every mains-connected electronic product is required to carry. A switched-mode
+device chops current at tens to hundreds of kilohertz, and conducted-emission
+limits (the international CISPR limits~\cite{cispr32}, a condition of sale in
+most jurisdictions, New Zealand included, the same obligation reaching
+household appliances and variable-speed drives through companion standards)
+oblige its manufacturer to stop that noise at the appliance's own terminals;
+the universal compliance solution is a passive filter directly across the
+mains input (Fig.~\ref{fig:emifilter}).
+
+Its elements carry safety-class names~\cite{iec60384_14} from where they
+connect: \emph{X-capacitors} bridge line and neutral---the one position where
+a capacitor is permitted to be large (typically 0.1--2.2~$\mu$F), because a
+short circuit there is an overcurrent event the appliance's fuse clears rather
+than a shock hazard---while \emph{Y-capacitors} run from the conductors to
+earth, where a short would electrify the chassis, and are held to nanofarads
+by touch-current limits; a common-mode choke completes the filter.
+
+At 50~Hz the filter's only material injection is the X-capacitance, which
+sits across 230~V drawing pure leading current whenever the plug is
+live---the filter sits ahead of the rectifier and of any standby logic, since
+the noise it suppresses would otherwise leak even in standby. The arithmetic
+is $Q=\omega C V^2$, and the fleet is one worldwide design, so the
+capacitance is chosen once and the mains it lands on sets the draw: the same
+microfarad that injects 16.6~VAr at 230~V injects 5.4~VAr on North America's
+120~V, 60~Hz mains and 3.1--3.8~VAr at Japan's 100~V---roughly three times
+the standing draw per device here as in North America, and four to five
+times Japan's. The Y-capacitors are not quite silent where the appliance is
+earthed, but at nanofarad scale they inject under a per cent of the
+X-capacitor beside them, so counting X alone biases the estimate very
+slightly low.
+
+Commercial equipment carries larger input filters: a variable-speed
+drive holds tens of VAr and upward, energised wherever the installation is
+left connected. The regulatory structure makes the accumulation one-way: one
+instrument drives the capacitance into practically every product---the filter is
+the universal compliance solution, not a named requirement---while, as
+Section~I-A noted, no instrument bounds its fundamental-frequency injection,
+and a larger X-capacitor is generally the cheaper route to compliance. The
+X-capacitance's fundamental-frequency current aggregates---tens of devices
+behind a connection, whole fleets behind a grid exit point---but each device
+is certified alone, against a standardised artificial mains network, and the
+sum is, as far as we are aware, bounded at no scale by any instrument; the
+extended version~\cite{hume_extended} carries the contrast with the regime's
+own treatment of accumulating earth leakage, which it bounds at both scales.
+
+Nor is the mandate the newcomer: the conducted-emission requirement has been
+the sole route to the European market since the start of
+1996~\cite{eu_emc1989} and a condition of sale in New Zealand since at least
+2001, so the term's youth is the fleet's, not the rule's---what scaled
+through the 2000s and 2010s is the switched-mode population the rule reaches,
+while the wire-wound fleet those classes displaced carried no filter at all;
+the extended version~\cite{hume_extended} carries the dated regulatory arc,
+including the conformity levels that single out switched-mode supplies.
+
+The hypothesis is disciplined by what it excludes: the large DC-link capacitor
+behind the rectifier makes no standing injection (Fig.~\ref{fig:emifilter});
+motor-run capacitors sit in series with the motor's auxiliary winding and are
+disconnected with it; and rooftop solar inverters contribute almost none
+overnight (the isolation relay strands the converter-side filter capacitors,
+leaving only a small grid-side element).
+
+A bottom-up order-of-magnitude estimate---roughly two million households, each
+with 20--40 permanently connected filter-carrying devices at 2--4~VAr (the
+population above roughly 25~W, the threshold below which published reference
+designs make the X-capacitor design-dependent and then absent
+entirely~\cite{hume_extended}; roughly 80--320~MVAr in aggregate), plus a
+commercial and industrial fleet of the same order---puts the national standing
+total at roughly 150--600~MVAr, or 100--200~VAr per household as the central
+band.
+
+Sizing its most recognisable member bounds the composition: heat pumps---an
+adoption jump inside the study window---work out at roughly 37--69~MVAr from
+census counts and reference-design filter values for the outdoor
+units~\cite{ehinz_heating,hume_extended}. Against the 80--320~MVAr residential
+envelope that is of order a quarter at central values: a material slice, but a
+minority, so the bulk of the standing term belongs to the far more numerous
+small supplies. Because the filter, unlike the heating duty, is energised
+year-round, the slice is also consistent with the drift's winter--summer
+invariance (Section~III-B); a heating-season mechanism would not be.
+
+The per-device values are physics and datasheet-grade figures, not New Zealand
+bench measurements---reference designs rather than teardowns of shipped New
+Zealand product---and the device counts are estimate arithmetic anchored by
+the intrusive standby surveys~\cite{ross_meier2000,edlington2006} rather than
+a New Zealand census; we grade the attribution accordingly (component-level
+basis in the extended version~\cite{hume_extended}). The estimate's value is
+that it makes two testable predictions: the national scale of the drift,
+and---because the fleet lives behind consumer connections---that the drift
+should scale with the number of connections served, with nothing left at zero
+connections.
+
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[x=0.86mm, y=0.86mm, line width=0.5pt, font=\scriptsize]
+% mains terminals and rails
+\draw[fill=white] (2,20) circle (0.8) node[left=1pt] {L};
+\draw[fill=white] (2,0) circle (0.8) node[left=1pt] {N};
+\draw (2.8,20) -- (22,20);
+\draw (2.8,0) -- (22,0);
+% X1 capacitor
+\draw (10,20) -- (10,11.4);
+\draw (7.5,11.4) -- (12.5,11.4);
+\draw (7.5,9.6) -- (12.5,9.6);
+\draw (10,9.6) -- (10,0);
+\filldraw (10,20) circle (0.45); \filldraw (10,0) circle (0.45);
+% common-mode choke
+\draw (22,18) rectangle (32,22);
+\draw (22,-2) rectangle (32,2);
+\draw[dashed] (27,17.6) -- (27,2.4);
+\node[align=center] at (27,26.5) {common-mode\\choke};
+\draw (32,20) -- (58,20);
+\draw (32,0) -- (58,0);
+% X2 capacitor
+\draw (38,20) -- (38,11.4);
+\draw (35.5,11.4) -- (40.5,11.4);
+\draw (35.5,9.6) -- (40.5,9.6);
+\draw (38,9.6) -- (38,0);
+\filldraw (38,20) circle (0.45); \filldraw (38,0) circle (0.45);
+\node[align=center] at (24,-5.2) {class X, $0.1$--$2.2~\mu$F total\quad ($1.7$--$37$~VAr at 230~V)};
+% Y capacitors to earth
+\draw (48,20) -- (48,15.2);
+\draw (46,15.2) -- (50,15.2);
+\draw (46,13.8) -- (50,13.8);
+\draw (48,13.8) -- (48,10);
+\draw (48,0) -- (48,4.8);
+\draw (46,4.8) -- (50,4.8);
+\draw (46,6.2) -- (50,6.2);
+\draw (48,6.2) -- (48,10);
+\filldraw (48,20) circle (0.45); \filldraw (48,0) circle (0.45);
+\draw (48,10) -- (53,10);
+\draw (53,13) -- (53,7);
+\draw (54.6,11.8) -- (54.6,8.2);
+\draw (56.2,10.8) -- (56.2,9.2);
+\node at (44.5,17.5) {class Y (nF)};
+% filter boundary
+\draw[dashed, gray] (5,-8) rectangle (57.5,30);
+\node[gray] at (31,-10.8) {EMC filter --- energised whenever the plug is live};
+% rectifier and DC link
+\draw (58,20) -- (61,20); \draw (58,0) -- (61,0);
+\draw (61,-2) rectangle (71,22);
+\node[align=center] at (66,10) {recti-\\fier};
+\draw (71,20) -- (80,20); \draw (71,0) -- (80,0);
+\draw (76,20) -- (76,11.4);
+\draw (73.5,11.4) -- (78.5,11.4);
+\draw (73.5,9.6) -- (78.5,9.6);
+\draw (76,9.6) -- (76,0);
+\filldraw (76,20) circle (0.45); \filldraw (76,0) circle (0.45);
+\node[align=center] at (76,-5.2) {DC link\\(isolated at 50~Hz)};
+\draw[->] (80,20) -- (83,20);
+\draw[->] (80,0) -- (83,0);
+\end{tikzpicture}
+\caption{The mains input stage of a switched-mode device. The EMC filter's
+X-capacitance sits directly across line and neutral, ahead of the rectifier and
+of any standby switching, and injects $\omega C V^2$ of leading reactive power
+whenever the plug is live; the common-mode choke is transparent at 50~Hz, the
+nanofarad-scale Y-capacitors inject under a per cent of the X-capacitor beside
+them, and the large DC-link capacitor makes no standing injection, recharging
+through rectifier conduction pulses only while the device draws power.
+Component values are datasheet-grade typical ranges, per device rather than per
+capacitor; on North America's 120~V, 60~Hz mains the same 0.1--2.2~$\mu$F range
+injects 0.5--12~VAr.}
+\label{fig:emifilter}
+\end{figure}
+
+The first prediction is met at the order-of-magnitude grade the estimate
+carries. Summed across the same 114 grid exit points, the median overnight
+reactive power moved from $+188$~MVAr (net absorbing) in 2013 to $-182$~MVAr in
+2025: a deepening of 369~MVAr; the extended version~\cite{hume_extended}
+carries the summary-choice variants. Those exit points serve about 1.5~million
+connections, near 70\% of the national total, so the rise normalises to about
+210--280~VAr per connection on the footprint that produced it---above the
+estimate's 100--200~VAr per household centre rather than inside it. The gap is
+expected rather than anomalous, and Section~V-C quantifies it: a connection is
+not a household, since the count includes commercial and industrial connections
+carrying larger filter fleets, and each connection also brings its share of
+medium-voltage cable. This is a bracket an order of magnitude wide by
+construction, not an allocation---the estimate bounds today's standing total,
+of which the twelve-year rise is the recently added part: what it can refute
+is a bottom-up estimate wrong by that much in either direction, and this one
+is not.
+
+The dose arithmetic adds a third, cross-country prediction. If the filter is
+the mechanism, the per-connection drift should order across systems as
+$\omega V^2$---Japan, then North America, then the 230-volt world---an
+ordering that cables, heat pumps, and correction plant have no reason to
+reproduce (Section~VIII). It also reframes the transition literature: every
+system in Section~I-A runs 230-volt mains, and we are not aware of an
+equivalent North American report---on this arithmetic the expected shielded
+case, a third of the per-device dose spread across interconnections orders of
+magnitude larger than an island system. The North American record the field
+does hold confirms the arithmetic rather than contradicting it: the documented
+North American case of overvoltage instability is Hydro-Qu\'ebec's ``highly
+capacitive'' 735-kV network~\cite{vournas2026review}---extra-high-voltage line
+charging behind 120-volt outlets, exposure in the network's voltage class
+rather than the mains-voltage dose. Of the two domestic predictions the
+second is the more discriminating; Section~V-C tests it.
+
+\subsection{A connection-scaling test}
+Connection counts are public: the retail market-structure dataset on the same
+regulatory platform records the number of installation control points
+(ICPs---metered connections) behind each network supply point, monthly, from
+December 2003~\cite{emi_icp}. We sum ICPs across retailers and embedded networks
+to each grid exit point, take calendar-year means for 2013 and 2025, and join
+them to the cohort under a documented correspondence audit, since the
+registry's root-NSP attribution and the metering's exit-point boundaries are
+not the same partition of the network: 103 of the 114 sites enter (the rest
+are direct-connect industrial points or lack a registry endpoint), and sites
+whose registry codes demonstrably swap consumers with no matching movement of
+metered load are aggregated into station or sibling groups, giving $n=96$
+panel units, with the site dispositions in the extended
+version~\cite{hume_extended}. The test
+regresses each unit's 2013--2025 change in median overnight reactive power on
+the mean connection count it serves. The decision rule was fixed before the
+first computation on 6 August 2026, is recorded in the accompanying notebooks,
+and is applied here unchanged: the hypothesis is supported if the bootstrap 95\% confidence
+interval on the slope excludes zero, the slope point estimate lies within
+50--400~VAr per connection, and the fit explains more than 15\% of the
+cross-site variance; a grid-exit-point-level metering artefact, with no
+mechanism to scale with the connections behind the meter, predicts the
+mean-only model instead (the same average change at every site).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.94\columnwidth]{06_connection_scaling.png}
+\caption{The connection-scaling test. (A) Each screened panel unit's
+2013--2025 change in median overnight reactive power against the mean number of
+connections (ICPs) it serves ($n=96$): the change deepens at $-230$~VAr per
+connection (95\% CI $[-272,-199]$ resampling units, $[-313,-209]$ resampling
+whole companies) with an intercept indistinguishable from zero ($-0.29$~MVAr
+per unit, under a tenth of the cohort deepening once aggregated) and
+$R^2=0.80$ (80\% of the cross-unit
+variance explained); deleting
+any single unit moves the slope only within $[-242,-220]$, and any single
+company only within $[-258,-224]$. Nothing about
+a grid-exit-point metering artefact predicts an effect proportional to the
+connections behind the meter. (B) The coefficient's history: the
+per-connection coefficient refitted across units each year on the 92 units present throughout
+2009--2025 (shaded: bootstrap 95\% CI). On the inductive side of zero until
+2011, it crosses in 2012 and deepens every year thereafter at an accelerating
+rate. Sign convention: negative = added leading (capacitive) reactive power.}
+\label{fig:icp}
+\end{figure}
+
+The result is Fig.~\ref{fig:icp}. The deepening scales linearly with connections
+served: the slope is $-230$~VAr per connection, the fit explains 80\% of the
+cross-unit variance, and a through-origin fit agrees ($-237$). The panel's 96
+units serve 1.52~million connections between them and sum to 376~MVAr of
+deepening, which the fitted line reproduces exactly: 348~MVAr from the slope
+plus 28~MVAr from the intercept. Section~V-B's 369~MVAr is the lower
+figure because it nets off the sites that shallowed and spans all 114 exit
+points rather than the 103 that carry a retail registry. The coefficient
+belongs to this footprint and does not scale to the national connection count,
+whose connections sit partly behind excluded and contaminated exit points. Because sites
+under one company share an owner and are not independent, every interval here is
+reported under two resampling schemes, 4000 replicates each: resampling the 96
+units independently gives a 95\% interval of $[-272,-199]$, and resampling whole
+companies---the more demanding test---gives $[-313,-209]$, with a wild cluster
+bootstrap rejecting the no-scaling null at $p<0.001$.
+
+All three criteria are met, and the result is not fragile under single-unit
+or single-company deletion (Fig.~\ref{fig:icp}); the mean-only artefact model
+loses by an Akaike information criterion difference of about 155, a decisive
+margin on the standard model-selection score, with the wild cluster bootstrap
+as its clustered counterpart; and the extended version~\cite{hume_extended}
+carries the full robustness battery (rank-based and per-unit estimators,
+leverage cases, size independence).
+
+The intercept---what is left at zero connections---is $-0.29$~MVAr per unit
+and indistinguishable from zero under every inference scheme (resampling
+units, resampling whole companies, wild cluster bootstrap $p=0.29$).
+Aggregated across the 96 units the point estimate is $-28$~MVAr, under a tenth
+of the cohort's $369$~MVAr deepening. The bottom-up estimate predicted nothing
+at zero connections; the measurement meets that prediction on both limbs (the
+first run of the same pre-specified rule, on the narrower pre-audit 83-site
+panel, reads the same verdict and is reported unblended in the extended
+version~\cite{hume_extended}).
+
+The coefficient also has a history (Fig.~\ref{fig:icp}B). Refitting the
+across-units regression year by year on the 92 panel units present throughout
+2009--2025---each year on the standing level rather than the 2013--2025
+change, so the coefficient carries the whole connection-scaling class---the
+per-connection term starts on the \emph{inductive} side of the axis ($+41$~VAr
+per connection in 2009, the motor-era fleet's residual signature), crosses
+zero in 2012, deepens every year thereafter, and reaches $-262$~VAr per
+connection by 2025. The crossing year is a point estimate: the yearly intervals
+straddle zero on both sides of it, and the interval is clear of zero on the
+capacitive side only from 2016, so the ramp and the post-2016 deepening are
+what the data establish, not the date. The 2013--2025 movement,
+$-212$~VAr per connection, reproduces the two-endpoint slope within
+10\%---a consistency check across two parameterisations of the same metered
+panel, not corroboration by an independent route.
+
+The series is smooth, where a staggered metering-replacement artefact would
+enter as steps, and the in-window accumulation rate rises across the window;
+the extended version~\cite{hume_extended} carries the window means. The
+emergence also overlaps the 2010--2013 meter-fleet replacement
+(Section~II-C), and the coincidence is worth naming: an
+instrumentation change would enter as a step to a new level, not as a ramp
+that crosses zero mid-record and is still deepening a decade after the
+rollout ended, equally in both diurnal windows, and concentrated in the term
+that scales with connections. The connection-scaling structure, in short, is not a fixture of
+the network: the fleet's per-connection signature swept from inductive through
+zero in the early 2010s and is still steepening on the capacitive side. We do
+not attribute the crossing date to any single device class.
+
+The inductive starting point has a domestic witness: the national household
+end-use project metered nine houses over 2002--2004 and found the always-on
+standing load at a power factor of 0.5--0.7 inductive, attributed to motors
+and ``transformer inductive loads''~\cite{heep_sr155}---the iron fleet this
+record watches leave. Its caveats (nine non-random houses; a total rather
+than a displacement power factor) travel with it in the extended
+version~\cite{hume_extended}: it corroborates the starting point; it does not
+measure it.
+
+Read honestly, the slope is the whole connection-scaling capacitance class, not
+the device fleet alone. Each connection also brings its share of medium-voltage
+cable (low-voltage cable is negligible, since charging scales with $V^2$), and
+the registry extract carries no consumer-type field---the counts cannot be split
+residential from commercial---so commercial connections'
+larger filter fleets ride in the same coefficient; that the slope sits somewhat
+above the 100--200~VAr central per-household band is therefore expected rather
+than anomalous. The units that sit off the fitted line do so in a sensible
+pattern: grid exit points serving
+industrial-weighted load (Takanini and Wiri, in south Auckland) deepen less than
+their connection counts predict, while the Penrose group, serving Auckland's
+cable-dense inner isthmus, deepens more.
+
+The scaling is also not site size in disguise. Load and connections rise together across sites, so a load-proportional metering
+error---the $P\sin\beta$ class of Section~II-C---would mimic connection scaling;
+but that class is bounded far below the measured deepening, would concentrate
+the deepening in the loaded window rather than equally in both (Section~V-A),
+and would over-predict precisely the industrial-weighted sites that in fact fall
+short of the fitted deepening. What the test establishes at measurement grade
+is the scaling law itself; the split of the coefficient between device filters
+and per-connection cable remains hypothesis-grade.
+
+One rival survives in principle: a load-independent metering-registration drift phased in with meter
+replacement. It has no mechanism to produce the connection-scaling term that
+carries the deepening, and the connection-independent residual it could sit in
+is indistinguishable from zero under every inference scheme, so it is heavily
+disfavoured as an account of
+the trend while remaining formally excluded only by a measurement that bypasses
+the grid-exit metering chain. That measurement is identified and simple---night-time reactive
+flow at a residential distribution transformer with a known house count, where
+metering on the low-voltage side sees no transformer magnetising and no material
+cable charging, isolating the device fleet and splitting the coefficient---and
+is the stated next step.
+
+% ======================================================================
+\section{From Leading Reactive Power to Overvoltage}
+% ======================================================================
+\subsection{Why leading reactive power raises voltage}
+The voltage change along a line depends mostly on the reactive power and the
+reactance, $\Delta V \approx (RP+XQ)/V$, with the $XQ$ term dominant on the
+grid: lagging reactive power ($Q>0$, the historical norm) drops voltage toward
+the load; leading ($Q<0$, the new overnight reality) pushes it up. Overnight is
+the dangerous window---demand is lowest, so little load absorbs the reactive
+power or pulls voltage back, while the cable charging is always on---and the
+mechanism can run away: charging rises with the square of voltage, and a
+protection trip that disconnects a transformer or load leaves the remaining
+network carrying more charging per unit of load. Two distinct feedback loops
+run through that description, usually described as one. In the first, the \emph{demand-side} loop, disconnected load
+takes with it whatever reactive absorption it was providing, and voltage rises;
+whether shedding load raises voltage or lowers it therefore turns on the power
+factor of what comes off, since lagging load removes absorption while
+sufficiently leading load removes a reactive source instead. In the second, the
+\emph{plant-side} loop, rising voltage disconnects plant and generation that
+were absorbing, and voltage rises further; that loop runs on the response of
+protection to voltage and would run the same way behind a demand of any power
+factor. In isolated and autonomous systems the feedback is well
+documented~\cite{vournas2021,psarros2022}; in neither 2025 blackout below did
+the lost absorption leave with the demand (Section~VI-C).
+
+\subsection{The system is already responding}
+The New Zealand system is visibly responding from both ends. Distribution
+capacitors are coming out: from the Commerce Commission disclosures, the
+national bank count fell from 298 in 2015 to 254 in 2025 (counts, not
+MVAr)---a static-to-shrinking capacitor fleet cannot be causing a rising
+leading trend, and the removals are the signature of the opposite,
+high-voltage problem. Transmission absorption is going in: shunt reactors and
+STATCOMs installed against operator security forecasts that record the
+practice of managing overnight high voltages by switching selected
+transmission circuits out of service~\cite{transpower_ssf2022}, with the
+follow-up study finding no significant overvoltage issues for current and
+future light-load conditions once the reactors and a STATCOM were in
+service~\cite{transpower_ssf2024n1}; the extended
+version~\cite{hume_extended} carries the asset list and ratings. And the
+operator has named the demand-side term: Transpower's 2023 transmission
+planning report expects the high-voltage issue to worsen and lists ``load
+characteristics becoming generally more capacitive'' among the
+factors~\cite{transpower_tpr2023}---the asset owner, in a planning document,
+attributing part of the standing pressure to the electrical character of the
+load, the quantity this paper measures.
+
+\subsection{The realised risk, abroad}
+The regime is not hypothetical. The Iberian event of 28 April 2025 was found
+to be a voltage and reactive collapse---the Final Report identifies
+``non-effectiveness of voltage control'' as a root cause, and the absorption
+the cascade removed left with the generation, tripped on overvoltage
+protection, not with the demand~\cite{entsoe_iberia}. The North Macedonia
+event of 18 May 2025 was a cascade of transformer trips from sustained
+overnight overvoltage, driven by the high capacitive reactive power of
+light-load networks with no compensation plant on the system and no load shed
+at all, so it ran with the demand-side loop never
+operating~\cite{entsoe_nm}. Each event had local specifics; we read them as
+corroboration that the leading-reactive regime is a realised blackout
+mechanism, with New Zealand's distinctive contribution the 29-year measurement
+and decomposition of how a system drifts into that regime in the first place;
+the extended version~\cite{hume_extended} carries the event detail.
+
+\subsection{Coverage of existing reactive-power provisions}
+New Zealand's reactive-power rules were written for the old problem of lagging
+load pulling voltage down at the daytime peak: the connection minimum power
+factor is a term of the default transmission agreement that binds the
+distributor at the connection point---the right party, at the boundary where
+Section~III takes its readings---but it applies during regional peak demand
+periods and at no other time, the periods themselves fixed by reference to a
+transmission pricing methodology replaced in 2023~\cite{eipc_sch126}; the
+reactive-demand measurement provision operates only on weekday hours,
+07:00--21:00~\cite{eipc_part8}; and published power-factor charges run on a
+lagging basis (e.g.,~\cite{powerco_pricing_fy26}). The one window where
+overvoltage now lives is the window the rules do not cover. The rules did not
+\emph{cause} the leading surplus---Sections~IV and~V place the driver in the
+product-standard demand fleet, outside their reach---but neither do they
+cover, price, or limit it; whether that should change is a policy question
+outside this paper's descriptive scope (the provision detail is in the
+extended version~\cite{hume_extended}).
+
+One rule moved as the record closed: on 13 November 2025 the statutory
+low-voltage supply band was widened from $230~\mathrm{V}\pm6\%$ to
+$\pm10\%$~\cite{esr_reg28}, so about seven weeks of the 2025 endpoint sit
+after commencement---small, and running with the reported drift rather than
+against it, but the measurement is not strictly pre-commencement and we do
+not claim it as such. Standing capacitance draws $Q=\omega CV^2$, so the same
+fleet delivers about 2\% more reactive power for each 1\% of sustained
+voltage elevation the wider band accommodates; post-2025 updates of the
+per-connection coefficient should control for measured voltage or name the
+confound (the ceiling arithmetic is in the extended
+version~\cite{hume_extended}).
+
+% ======================================================================
+\section{Implications for Power-System Analysis}
+% ======================================================================
+The measured reversal relocates the binding voltage-security question. For the
+lagging era's failure mode---voltage collapse under heavy load---power-system
+practice holds a mature, layered stack: automatic under-voltage load shedding as
+a last resort, tap-changer blocking, PV- and QV-margin analysis, and decades of
+operational tooling, all built on load models of an inductive fleet. In the
+overnight regime measured here the equivalent layers are thinner: the
+\emph{automatic} last-resort layer is addressed to the opposite direction, and
+the margin tooling has no counterpart of comparable maturity.
+
+The standard emergency lever was built for the falling direction; in this
+regime its effect on voltage is no longer of one sign. In a collapse, shedding
+load is corrective; in the light-load capacitive regime the two loops of
+Section~VI-A separate. What shedding does to voltage in the demand-side loop turns on the
+power factor of what comes off---lagging load takes absorption away with it;
+sufficiently leading load takes a reactive source away instead---and that
+power factor is the quantity Section~III measures moving through zero, so a
+scheme designed on the lagging assumption can no longer assume it. The
+plant-side loop is indifferent to what the demand draws---protection that
+removes absorbing plant raises voltage behind a demand of any power
+factor---and it is the loop the Iberian cascade ran on; in North Macedonia
+the demand-side loop never operated at all (Section~VI-C).
+
+The
+Rhodes cascade of 2016 is the one investigated event in which the demand-side
+loop can be seen operating: under-frequency shedding raised voltage and
+deepened generator reactive absorption---an aggravator in a collapse
+ultimately triggered on loss-of-field, and one a small shunt reactor would
+have prevented~\cite{vournas2021}.
+No investigated event attributes a blackout to the demand-side loop. And on
+the demand character measured here the implication runs further: net-leading
+demand takes a reactive source with it when it trips, so the classic
+load-rejection voltage rise weakens and can reverse in sign, and the
+overvoltage exposure in an event concentrates on the plant side---the
+absorbing plant and generation that protection removes, and the under-excited
+operating points where the autonomous-system record already places the
+failure path and its countermeasures~\cite{vournas2021}. The
+last-resort schemes discussed here were all designed for the other direction:
+none connects load or absorption when voltage runs away, and none reads the
+power factor of what it sheds.
+
+The driver resists dispatch, and the cascade reinforces itself. The \emph{drift}
+into the regime is dominantly the demand fleet, but the standing overnight
+surplus the mechanism feeds on is substantially long-standing network charging
+the fleet's shift has uncovered (Section~IV)---distributed, always energised,
+and not itself dispatchable short of spending N-1 security on voltage margin
+(Section~VI-B). And the cascade
+arithmetic is inverted relative to collapse: each element lost in a voltage
+collapse reduces the demand that is depressing voltage, so the disturbance
+partly self-relieves, whereas each definite-time protection operation in an
+overvoltage cascade removes absorption and strengthens the
+driver---self-reinforcing in quantised, irreversible steps, running in well
+under a minute in Iberia~\cite{entsoe_iberia} and over hours in North
+Macedonia~\cite{entsoe_nm}.
+
+The analysis stack under-represents the regime it is entering. Planning and
+protection studies still commonly represent demand with constant, lagging
+power-factor archetypes calibrated to the motor-dominated
+fleet~\cite{cigre_tb719,epri_loadmodel}; the measured net overnight flow
+now carries the opposite sign. And while
+overvoltage protection and locally automatic shunt switching exist as
+device-level controls, and the QV curve's upper limb, temporary-overvoltage
+studies and self-excitation screening each address part of the question, none
+is reported as a routine margin
+quantity the way PV and QV margins report distance to collapse; the field's
+2026 mechanisms review likewise proposes containment countermeasures but no
+margin quantity for the upper band~\cite{vournas2026review}.
+
+The measurement gives the load-model correction a concrete, portable form. The
+light-load fleet needs a standing shunt-capacitance term that scales with
+connections served---on the New Zealand panel, about 220~VAr per connection
+accumulated over 2013--2025 (Section~V-C; a boundary-level figure that carries
+each connection's share of network cable with it)---alongside
+whatever power-factor archetype represents the operating draw. A
+constant-power-factor archetype cannot represent this term even qualitatively:
+it is present when the load is not, it accumulates behind existing connections
+rather than arriving with demand growth, and it is young and moving
+(Section~V-C)---archetypes calibrated even a decade ago predate it entirely.
+
+None of this makes the regime unmanageable. With fast absorption installed, New
+Zealand's operator reports no significant overvoltage issues under current and
+future light-load conditions (Section~VI-B): the gap is not feasibility but
+architecture---the automatic defences, the security-margin tooling, and the load
+models were built for the direction the system has left. Their redesign is
+development work beyond this paper's descriptive scope. What the measurement
+supplies is the direction and the rate: a national boundary flow that has
+crossed to the capacitive side of the axis around which those tools were built,
+driven dominantly by the load fleet, at about $-0.018$~MVAr per MW of overnight
+load per year, with the crossing already behind it.
+
+% ======================================================================
+\section{Conclusion}
+% ======================================================================
+Using 29 years of regulatory half-hourly metering, we measured a national power
+system's reactive character shifting from lagging to leading at supply-point
+resolution: on the balanced demand panel (the same 123 grid exit points
+throughout), mean overnight
+reactive power fell from about $+466$~MVAr to about $-451$~MVAr (about
+$-31$~MVAr/yr), crossing net-leading overnight in the mid-2010s and at the
+evening peak only later---a measured phenomenon, not a metering artefact,
+holding in winter and summer alike, within the modern metering-fleet era alone,
+and with every contaminated grid exit point removed. The drift is dominantly
+the demand side: a first-principles charging calculation that fits no cable
+coefficient puts the organic share at about 80\% (physical band 75--88\%) over
+the 2013--2025 asset-disclosure window, with the two statistical methods
+corroborating the direction over the full record but not pinning the split.
+And the connection-scaling test identifies what the demand side is physically
+doing: at about 220~VAr per connection added over 2013--2025, with no detectable
+connection-independent residual, from a term that sat on the inductive side of
+zero early in the 2010s and has accumulated faster over the second half of the
+window than the first, the load fleet is not merely drawing fewer lagging vars
+overnight; it is accumulating standing distributed capacitance of its own.
+
+The significance of the reversal is what it does to the analysis. The defences,
+margins, and load models of power-system practice were built for lagging load and
+the undervoltage direction; the measured overnight flow has crossed to the other
+side, where no last-resort scheme is addressed to voltage rising and each
+protection operation reinforces the disturbance (Section~VII); the same regime
+has produced two realised blackouts abroad, and the New Zealand system is
+already responding to it from both ends while its deeper demand-side driver
+remains unnamed in the rules. New Zealand's record---an advanced-state, small,
+isolated, heavily cabled analogue whose net-leading crossing preceded the 2025
+European events by nearly a decade---is, to our knowledge, the longest direct
+measurement of that crossing, and both records the identification rests on are
+ones any operator already holds: if the standing term is carried by the
+globally standardised product fleet, every system connected to the same supply
+chain is accumulating it on a similar schedule, at a dose set by its supply
+voltage (Section~V-B)---on 230-volt systems roughly three times the
+North-American rate per device and four to five times the Japanese, so the
+dose ordering maps the exposure geographically and is itself the decisive
+comparative test. Supply voltage sets the dose; transmission voltage sets its
+visibility. The term is created at the mains, indifferent to the network above
+it, while the boundary flow that would reveal it sits beneath the network's own
+charging, which grows with the square of transmission voltage and with route
+length---so New Zealand's 220-kV maximum is an unusually transparent window,
+and in a 400-kV system the same term sits beneath a network term several times
+larger, where a network-side reading of the surplus is the natural one (the
+reading both 2025 investigations took, Section~I-B). The claim is therefore
+priority of measurement, not of exposure: the failures arrived first where the
+network term is largest, not where the demand-side term is clearest. The
+systems with the most to gain from such a record
+are the ones without one: larger fleets, no measurement of the demand-side
+term, and, in Europe's case, a demonstrated failure mode.
+
+The record also says where this goes. The drift shows no sign of slowing: the
+per-connection coefficient accumulated faster over the second half of the
+window than the first, was running at about 30~VAr per connection per year at
+the 2025 end, and the next device waves---an electric-vehicle charging and
+home-battery fleet expected to carry the largest input filters yet---are
+still arriving; nothing in the record yet marks the turn. Tracking that
+coefficient with a renewal model of device generations, and the decisive
+attribution measurement at a residential distribution transformer
+(Section~V-C), are the nearest work (both detailed in the extended
+version~\cite{hume_extended}).
+
+The stability question has moved
+with the sign: with overnight demand now net leading, defence design points
+at plant-side absorption---ride-through of absorbing plant, coordination of
+under-excitation limits on generators feeding capacitive
+networks~\cite{vournas2021}---and at solved network cases of the light-load
+state, which this boundary record cannot settle; and because the same
+$V^2$ scaling sets a network's own charging per kilometre, systems pairing
+extra-high-voltage networks with 230-volt fleets---Iberia's 400~kV among
+them---carry both terms at once. The prediction also runs the other way:
+unlike the passive filter fleet, the arriving wave of vehicle chargers,
+photovoltaic and battery inverters is controllable, and interconnection
+standards already define the voltage--reactive-power response modes to steer
+it~\cite{ieee1547}, so large inverters operated, or required, to absorb at
+light load---running in the lagging quadrant against the fleet they share a
+board with---are the natural first counter to the leading surplus at the
+grid exit point. Nearer the customer, the distribution
+networks the reverse flow transits hold two margins in records they already
+keep: tap-changer position histories---how much regulation headroom remains
+at light load---and the loss cost of the standing circulating current.
+
+The limitations are stated throughout: the balanced panel controls churn but does
+not eliminate it; the decomposition attributes the drift, not a causal mechanism in
+any single load; the exact organic share and the level composition are not
+point-identified; the device-level attribution of the connection-scaling
+capacitance remains a labelled hypothesis, with its decisive low-voltage
+measurement identified; and a single national system is one observation---offset, not cured, by its
+position as a leading-edge analogue and by the two independent European
+corroborations. The defence-scheme and load-model development this measurement
+motivates is separate work. What this paper offers is the measured trajectory,
+its decomposition, the term it identifies, and the direction power-system
+analysis must now build for.
+
+\section*{Reproducibility}
+Every number and figure in this paper is computed from public data (Electricity
+Authority grid metering and Commerce Commission information disclosures) in an
+accompanying set of analysis notebooks, which also document the path from the
+raw public records. An extended version of this paper, with the complete
+measurement-error analysis and the supporting method exhibits, accompanies
+the notebooks in the reproducibility
+repository~\cite{hume_extended}. A companion study, in preparation, extends
+the record into a fitted circuit model of every grid exit point---a standing
+term with drift and dated operational steps, load-composition and series
+terms, and embedded-plant signatures---each element validated against its own
+natural experiment. Release of any underlying extract is subject
+to the data custodian's terms.
+
+\section*{Acknowledgment}
+The author thanks colleagues at the Electricity Authority and Transpower for
+discussion of the reactive-power and voltage-management context, and the authors of
+the Rhodes autonomous-system studies for sharing corrected source material.
+
+% Final-page column balance (standard IEEEtran practice). The trigger is OFF.
+% Post-L1c state (14 Aug): p15 carries a ~220-word reference tail. Deliberate:
+% the bio insertion (AUTHOR_BIO_DRAFT.md, +~0.15 pp) refights the 14/15-pp
+% boundary at submission mechanics, and \IEEEtriggeratref balancing belongs to
+% that sitting, not before (DRAFT_NOTES 14 Aug L1c addendum).
+%\IEEEtriggeratref{30}
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}
