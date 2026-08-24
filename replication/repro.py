@@ -100,6 +100,25 @@ PURPLE = "#9467bd"    # DER
 BROWN = "#8c2d04"     # deep-leading
 
 
+# The paper is IEEEtran, whose body text is URW Nimbus Roman (a Times clone) --
+# confirmed with `pdffonts main.pdf`: NimbusRomNo9L-Regu. Figure text is set in a
+# Times clone too, so a figure does not read as a foreign object on the page.
+#
+# ⚠ The stack is deliberately TrueType-only, and Nimbus Roman itself is NOT in it.
+# Nimbus Roman, TeX Gyre Termes and P052 ship here as .otf (CFF outlines). Embedding
+# those under `pdf.fonttype: 42` produces a PDF whose font object declares TrueType
+# while carrying CFF, and every such figure raises
+#     "Syntax Warning: Mismatch between font type and embedded font file"
+# in poppler -- the kind of thing IEEE PDF eXpress preflight objects to. Measured
+# on this machine (Pass C, 23 Aug 2026): Nimbus Roman / TeX Gyre Termes / P052 = 1
+# warning each; Liberation Serif / STIXGeneral / DejaVu Serif = 0.
+#
+# STIXGeneral leads because `mathtext.fontset="stix"` below draws from the same
+# family, so figure text and figure maths are one typeface rather than two.
+# Liberation Serif is the Times-New-Roman-metric fallback.
+SERIF_STACK = ["STIXGeneral", "Liberation Serif", "DejaVu Serif"]
+
+
 def set_style():
     """Apply the house matplotlib style. Call once near the top of a notebook."""
     import matplotlib as mpl
@@ -115,6 +134,18 @@ def set_style():
         "axes.spines.right": False,
         "legend.frameon": False,
         "figure.facecolor": "white",
+        # --- serif, to match the IEEEtran body text (Pass C, 23 Aug 2026) ---
+        "font.family": "serif",
+        "font.serif": SERIF_STACK,
+        # STIX is Times-metric, so $b_0$ and $R^2$ sit correctly beside Nimbus Roman.
+        "mathtext.fontset": "stix",
+        # --- vector output that IEEE will accept ---
+        # matplotlib defaults to Type 3 fonts in PDF/PS, which IEEE PROHIBITS.
+        # 42 = TrueType, embedded and subsetted; the standard fix.
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+        # keep vector text as text (searchable, and the annotation audit can read it)
+        "svg.fonttype": "none",
     })
 
 

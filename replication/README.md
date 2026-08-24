@@ -46,7 +46,7 @@ indexed here so the paper's full claim set stays notebook-backed:
 
 | Notebook (battery) | Backs |
 |---|---|
-| `../ieee-pf-trajectory-paper/icp-regression/icp_regression.ipynb` (91/91) | The **connection-scaling test** (§V-C, rebased 8 Aug 2026 onto the 96-unit correspondence-audited panel; re-run 13 Aug 2026 on the corrected `data/analysis` archive after the duplicate dual-network rows in the 13-Mar vintage were found double-counting group-member Q): −230 VAr per ICP, bootstrap 95% CI [−272, −199], intercept −0.29 MVAr (**spans zero under every inference scheme**, wild-cluster p = 0.29 — the device story's zero-intercept prediction met on both limbs), R² = 0.80, leave-one-out [−242, −220], ΔAIC ≈ 155 vs the mean-only null, Theil–Sen −259 / through-origin −237 bracketing the OLS; the **original pre-registered 83-site run kept verbatim** as the labelled consistency result (−253, CI [−291, −192], R² = 0.77 — its screen-table inputs were never exposed to the duplicate-row defect, and the two panels now agree within ~10%); the **correspondence audit** itself (8 industrial identities, 2 registry re-registrations, 1 unresolvable, 7 aggregation groups incl. the registry-churn clusters, all evidence-asserted); the **coefficient history** (§V-C, cell a3, 92 units: +41 VAr/connection *inductive* in 2009, crossing zero 2012, −262 by 2025, CI clear of zero from 2016, in-window rates ≈15/20 VAr/connection/yr, endpoint diff −212 agreeing with the two-endpoint slope within 10%); **and** the §V-B national sums + bottom-up device estimate (native 114-site cohort: +188 → −182 MVAr night-median in the paper's Q-signed convention, deepening 369, p99 variant 314, 157–214 VAr per household — unchanged by the rebase and vintage-stable under the rebuild; the n = 90 screen-table sums remain as the legacy-panel derivation; device estimate ~150–600 MVAr / 100–200 VAr per household central). Reads this suite's `cache/contamination_flag.csv`, the pf half-hourly archive, the harmonics resonance-screen panel (legacy run + cross-check), the POC→network mappings, and public EMI market-structure ICP counts (raw extract archived alongside it). Saves `figures/06_connection_scaling.png` (journal Fig. 4 / extended Fig. 5, paper sign convention). |
+| `../ieee-pf-trajectory-paper/icp-regression/icp_regression.ipynb` (91/91) | The **connection-scaling test** (§V-C, rebased 8 Aug 2026 onto the 96-unit correspondence-audited panel; re-run 13 Aug 2026 on the corrected `data/analysis` archive after the duplicate dual-network rows in the 13-Mar vintage were found double-counting group-member Q): −230 VAr per ICP, bootstrap 95% CI [−272, −199], intercept −0.29 MVAr (**spans zero under every inference scheme**, wild-cluster p = 0.29 — the device story's zero-intercept prediction met on both limbs), R² = 0.80, leave-one-out [−242, −220], ΔAIC ≈ 155 vs the mean-only null, Theil–Sen −259 / through-origin −237 bracketing the OLS; the **original pre-registered 83-site run kept verbatim** as the labelled consistency result (−253, CI [−291, −192], R² = 0.77 — its screen-table inputs were never exposed to the duplicate-row defect, and the two panels now agree within ~10%); the **correspondence audit** itself (8 industrial identities, 2 registry re-registrations, 1 unresolvable, 7 aggregation groups incl. the registry-churn clusters, all evidence-asserted); the **coefficient history** (§V-C, cell a3, 92 units: +41 VAr/connection *inductive* in 2009, crossing zero early in the 2010s, −262 by 2025, CI clear of zero from 2016, in-window rates ≈15/20 VAr/connection/yr, endpoint diff −212 agreeing with the two-endpoint slope within 10%); **and** the §V-B national sums + bottom-up device estimate (native 114-site cohort: +188 → −182 MVAr night-median in the paper's Q-signed convention, deepening 369, p99 variant 314, 157–214 VAr per household — unchanged by the rebase and vintage-stable under the rebuild; the n = 90 screen-table sums remain as the legacy-panel derivation; device estimate ~150–600 MVAr / 100–200 VAr per household central). Reads this suite's `cache/contamination_flag.csv`, the pf half-hourly archive, the harmonics resonance-screen panel (legacy run + cross-check), the POC→network mappings, and public EMI market-structure ICP counts (raw extract archived alongside it). Does **not** save the paper's figure: journal Fig. 5 / extended Fig. 5 is built by `../ieee-pf-trajectory-paper/MAKE_FIG_CONNECTION_SCALING.py`, which re-executes this notebook's analysis cells and draws the exhibit at column width (see *Generated files* below). The notebook's own working copy is `06_connection_scaling_notebook.png`, beside it. |
 | `../../harmonics/consultation-2026/analysis/resonance-screen/resonance_screen_workings.ipynb` (58/58) | Cross-validation reference for the **parallel-shift / load-independence test** (§V-A): median per-site 2013–25 change −2.25 MVAr overnight (TP 1–12) vs −2.42 MVAr at evening peak (TP 35–39), median per-site ratio 1.06, on 114 clean GXPs with both endpoints (its `results.json`, `unmasking` block; that notebook works leading-positive — signs flipped here to this suite's convention). Its median peak-load change reads +3.4% because its screen table is frozen on the pre-14-Mar-2026 processed vintage; the ICP notebook's native run on the corrected archive reads **+2.9%**, which is the paper's print — the Q-side per-site medians agree between vintages to < 0.01 MVAr (they are median-immune to the duplicate rows). |
 
 **Release-blocker resolved 7 Aug 2026 eve:** the parallel-shift test and the paper's
@@ -95,19 +95,43 @@ Glowworm evidence tags: `[V]` verified vs primary source · `[I]` inferred · `[
 
 ## Figure map (filename ↔ paper figure number)
 
-| File | Journal (18 pp) | Extended (22 pp) |
+Both tiers embed **vector PDFs** (23 Aug 2026 conversion: serif, no Type-3 fonts, which
+IEEE does not accept). The journal tier draws Figs. 1–3 from column-width variants that
+live in `../ieee-pf-trajectory-paper/figures/`, because the shared exhibits were being
+scaled down by more than a factor of two on a single-column page.
+
+| File | Journal (10 pp) | Extended (28 pp) |
 |---|---|---|
-| `01_trajectory.png` | Fig. 1 | Fig. 1 |
-| `01_clean_cohort.png` | — (results in §III-B text) | Fig. 2 |
-| `02_methods.png` | — (results in §IV text + Table I) | Fig. 3 |
-| `03_physical_charging.png` | Fig. 2 | Fig. 4 |
-| `06_connection_scaling.png` | Fig. 4 | Fig. 5 |
-| (in-TeX TikZ two-loop cascade taxonomy) | — (results in §VII text) | Fig. 6 |
-| `01_splice_test.png` | — (results in §III-B text) | Fig. 7 |
-| (in-TeX TikZ mains-filter schematic) | Fig. 3 | Fig. 8 |
+| `01_trajectory_journal.pdf` *(paper/figures)* | Fig. 1 | — |
+| `02_dose_response_journal.pdf` *(paper/figures)* | Fig. 2 | — |
+| `03_level_journal.pdf` *(paper/figures)* | Fig. 3 | — |
+| (in-TeX TikZ mains-filter schematic) | Fig. 4 | Fig. 9 |
+| `06_connection_scaling.pdf` | Fig. 5 | Fig. 5 |
+| `07_class_split.tex` (TikZ) / `07_class_split.pdf` | Fig. 6 *(TikZ `\input`)* | Fig. 6 *(PDF)* |
+| `01_trajectory.pdf` | — | Fig. 1 |
+| `01_clean_cohort.pdf` | — | Fig. 2 |
+| `02_methods.pdf` | — | Fig. 3 |
+| `03_physical_charging.pdf` | — | Fig. 4 |
+| (in-TeX TikZ two-loop cascade taxonomy) | — | Fig. 7 |
+| `01_splice_test.pdf` | — | Fig. 8 |
 
 Other files in `figures/` (`02_clean_cohort`, `02_dose_response`, `04_archetypes`,
 `05_capacitors_out`) are notebook exhibits not placed in either paper version.
+
+### Generated files, and which generator owns each
+
+Several artefacts carry a "GENERATED — do not edit by hand" contract. A hand-fix to one of
+them comes back on the next run; this has bitten the project three times, so the ownership
+is written down here.
+
+| Artefact | Its one generator | Note |
+|---|---|---|
+| `figures/07_class_split.tex` and `.png` | `src/07_anzsic_class_split.py` | Reproduces byte-for-byte. |
+| `cache/anzsic_class_split.json` | `src/07_anzsic_class_split.py` | The §V-C canonical values. |
+| `figures/06_connection_scaling.pdf` and `.png` | `../ieee-pf-trajectory-paper/MAKE_FIG_CONNECTION_SCALING.py` | Re-executes the ICP notebook's analysis cells, stops before its figure cell, redraws at column width. |
+| `../ieee-pf-trajectory-paper/icp-regression/icp_regression_results_20260806.json` | `icp_regression.ipynb` — **not** `icp_regression_20260806.py` | The notebook writes all 18 keys; the 6 Aug script is the superseded first run and writes 9 different ones. It now writes only `*_legacy_firstrun` names so it cannot stand in for the notebook. |
+| `../ieee-pf-trajectory-paper/refs_journal.bib` | `../ieee-pf-trajectory-paper/make_journal_bib.py` | Derived from `refs.bib`; regenerates byte-for-byte. |
+| `notebooks/*.ipynb` | `build_notebooks.py` (from `src/*.py`) | Takes selective arguments — `python build_notebooks.py 07` rebuilds only notebook 07. A rebuild **wipes executed outputs**, so re-execute afterwards. |
 
 ## Citing
 
@@ -116,9 +140,9 @@ Other files in `figures/` (`02_clean_cohort`, `02_dose_response`, `04_archetypes
   Consumer Connections, 1997--2025.''
 - **Extended version + this package:** D. Hume, extended version and
   reproducibility package, GitHub repository with Zenodo snapshot, 2026.
-  *(DOI minted at repository publication; insert here and in the journal
-  version's reference `hume_extended` — numbered [24] in the current build —
-  before submission.)*
+  DOI: [10.5281/zenodo.21927098](https://doi.org/10.5281/zenodo.21927098)
+  (reserved 14 Aug 2026; resolves once the record is published). The journal
+  version's reference `hume_extended` carries the same DOI.
 
 ## How to run
 

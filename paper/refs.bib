@@ -134,7 +134,7 @@
 }
 
 @article{bosisio2022,
-  author  = {Bosisio, A. and Soldan, F. and Morotti, A. and Grillo, S. and Bionda, E. and Iannarelli, G.},
+  author  = {Bosisio, A. and Soldan, F. and Morotti, A. and Iannarelli, G. and Bionda, E. and Grillo, S.},
   title   = {Lessons Learned from {Milan} Electric Power Distribution Networks Data Analysis During {COVID-19} Pandemic},
   journal = {Sustainable Energy, Grids and Networks},
   volume  = {31},
@@ -230,7 +230,7 @@
   address     = {Wellington, New Zealand},
   year        = {2025},
   url         = {https://www.ea.govt.nz/documents/7279/Part_10_-_Metering_-_1_April_2025.pdf},
-  note        = {Consolidation as at 1 April 2025; cl~10.37(2)(a) and Schedule~10.1, Tables~1, 5, and 6}
+  note        = {Consolidation as at 1 April 2025; cl~10.37(2)(a) and Schedule~10.1, Tables~1, 5, 6, and 7}
 }
 
 % Verified 16 Jul 2026 (vid-verifier pass; verbatim vs current consolidations and the
@@ -403,7 +403,7 @@
 }
 
 @misc{hume_extended,
-  author       = {D. Hume},
+  author       = {D. J. Hume},
   title        = {From lagging to leading: the measured emergence of standing
                   capacitance behind consumer connections, 1997--2025 (extended
                   version and reproducibility package)},
@@ -572,4 +572,84 @@
   year    = {2027},
   note    = {Available online 26 June 2026},
   doi     = {10.1016/j.epsr.2026.113589}
+}
+
+% Verified 17 Aug 2026 against the PDF text layer: headings "Estimate power factor of
+% non-inverter based operational demand" and "Forecast reactive power" (pp. 29-31), and
+% footnote 23. Still the current published version at the AEMO TCPF landing page as at
+% 17 Aug 2026 (2024/2025 updates are to the Electricity Demand Forecasting Methodology,
+% a different document). Section numbers are not recoverable from the text layer, so the
+% note cites by heading and page rather than by section number.
+@techreport{aemo_tcpf,
+  author      = {{Australian Energy Market Operator}},
+  title       = {Transmission Connection Point Forecasting Methodology},
+  institution = {Australian Energy Market Operator},
+  address     = {Melbourne, Victoria, Australia},
+  year        = {2021},
+  month       = jul,
+  note        = {Pp.~29--31: power factors at transmission connection points computed
+                 from historical active and reactive power over the top 1\% of half-hour
+                 demand periods ranked by active power, with a leading/lagging label
+                 assigned on the sign of reactive power; non-inverter-based operational
+                 demand power factor assumed constant over the forecast horizon;
+                 footnote~23 anticipates power factor change at minimum demand and
+                 attributes it to inverter standards. Accessed 17~August 2026},
+  url         = {https://www.aemo.com.au/-/media/files/electricity/nem/planning_and_forecasting/tcpf/2021-connection-point-forecasting-methodology.pdf}
+}
+
+% Verified 17 Aug 2026 against ec/markdown/PartF-SectionIII-17-Jan-08.md in the /archive
+% corpus (rule 11.1 verbatim). Corroborated by the MEUG/NZEIR submission
+% (ec/markdown/MEUG-NZEIR.md), which quotes the same duty "to support efficient planning
+% processes". Superseded instrument: the Governance Rules preceded the Electricity Industry
+% Participation Code 2010, so the EIPC citation schema does not apply here.
+@techreport{egr_partf_r11,
+  author      = {{Electricity Commission}},
+  title       = {Electricity Governance Rules, Part~F (Transport), Section~III},
+  institution = {Electricity Commission},
+  address     = {Wellington, New Zealand},
+  year        = {2008},
+  month       = jan,
+  note        = {Rule~11.1 (Board to establish and maintain centralised data set):
+                 ``The Board must establish and maintain a centralised data set'';
+                 rule~11.2 (Purpose of centralised data set). Print of 17~January 2008}
+}
+
+% Verified 17 Aug 2026 against ec/markdown/CDS.md in the /archive corpus (source_file
+% CDS.pdf). All quoted phrases in Section II-B are verbatim from the proposed data list.
+% Reactive-power term census over the whole document: "reactive" x4, every instance a
+% generator or plant parameter; "power factor" x3, same context; "MVAr"/"Mvar" x0.
+% Full provenance record: DATA_PROVENANCE_20260817.md.
+@techreport{ec_cds2004,
+  author      = {{Electricity Commission}},
+  title       = {Request for Views on the Centralised Data Set},
+  institution = {Electricity Commission},
+  address     = {Wellington, New Zealand},
+  year        = {2004},
+  month       = dec,
+  note        = {Prepared for the Electricity Commission by Partna Consulting Group.
+                 Proposed data list: ``Half hourly GXP and GIP data dating back to
+                 1~October 1996'', sourced from ``the old ECNZ metering data storage
+                 files, MV90 metering data, and Avalon metering data''; reason for
+                 inclusion ``Base information required for demand forecasting and
+                 assessment of market impacts of proposed investments'', and ``a
+                 fundamental base data set for the Grid Investment Test''}
+}
+
+@techreport{wecc_cmpldw,
+  author      = {{WECC Modeling and Validation Subcommittee}},
+  title       = {{WECC} Composite Load Model Specification},
+  institution = {Western Electricity Coordinating Council},
+  address     = {Salt Lake City, UT, USA},
+  year        = {2021},
+  url         = {https://www.wecc.org/sites/default/files/documents/meeting/2024/WECC%20Comp%20Load%20Model%20Specification_final.pdf},
+  note        = {Feeder reactive compensation Bfdr computed at initialisation
+                 ``to balance the reactive consumption of the load devices and of
+                 the transformer and feeder with the load Q value specified in the
+                 power flow data''; on end-use protection operation the shunt
+                 capacitance is ``tripped in proportion to the MW of each component
+                 tripped''. Substation shunt Bss is held on load shedding. Every
+                 voltage trip parameter is undervoltage; the sole ``high-voltage''
+                 occurrence is Tfixhs, a tap ratio. Text extracted and swept
+                 23 Aug 2026; agrees with the April 2021 edition read for
+                 literature\_review.md \S C11a.}
 }

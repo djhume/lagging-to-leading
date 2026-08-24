@@ -8,8 +8,8 @@ authors:
   - family-names: Hume
     given-names: David
     orcid: "https://orcid.org/0009-0006-6920-0598"
-version: 0.14.0
-date-released: "2026-08-17"
+version: 0.15.0
+date-released: "2026-08-24"
 doi: 10.5281/zenodo.21927098
 repository-code: "https://github.com/djhume/lagging-to-leading"
 abstract: >-
@@ -19,9 +19,9 @@ abstract: >-
   demand side, and identify a standing distributed-capacitance term
   accumulating behind consumer connections at about 220 VAr per connection
   over 2013-2025, with no detectable connection-independent residual, from a
-  coefficient that crossed zero about 2012. Includes the extended version of
-  the paper and the full replication notebook suite computing every number
-  from public data.
+  coefficient that crossed zero early in the 2010s. Includes both tiers of the
+  paper with their LaTeX sources, and the full replication notebook suite
+  computing every number from public data.
 keywords:
   - reactive power
   - power factor
@@ -30,6 +30,6 @@ keywords:
   - load modelling
   - power systems
 notes: >-
-  A condensed journal version is being prepared for submission. The extended
-  version and reproducibility archive are deposited at
-  DOI 10.5281/zenodo.21927098.
+  A condensed journal version (10 pp) is being prepared for submission; the
+  extended version (28 pp) is the complete record. Both, with the
+  reproducibility archive, are deposited at DOI 10.5281/zenodo.21927098.

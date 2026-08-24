@@ -345,8 +345,9 @@
   ],
   "central_mvar": 28.0,
   "per_household_var_max": 39.1,
+  "published_band_note": "SUPERSEDED FOR PUBLICATION -- both paper tiers print the LATER reference-design band: 1.4-2.0 uF, 23-33 VAr per unit, 37-69 MVAr for the class (extended Appendix B, Table IV, heat-pump / AC outdoor-unit row; journal Section V-B). That band resolved the outdoor unit specifically in the device-fleet reference-design review (research/device-fleet/, 9 Aug 2026). The 0.3-2.2 uF here is the wider 7 Aug tier-1 appliance-filter bracket, kept verbatim as the dated first estimate -- do not report it as the paper's band. Both agree on what the slice is for: material but a minority of the 80-320 MVAr residential envelope.",
   "verdict": "material but minority: upper bound ~ residential envelope floor; cannot carry the measured per-household rise (113-161 on the 90-panel; 157-214 on the 114-panel) - the small-supply swarm does"
  },
- "consistency": "measured 2013-25 deepening (114-site panel: +314 to +369 MVAr; 157-214 VAr/hh) inside the bottom-up 150-600 MVAr band, per-household at the upper edge of the 100-200 central band",
- "paper_figure": "replication/figures/06_connection_scaling.png (2 panels: scatter + beta_t, rebased n=96)"
+ "consistency": "measured 2013-25 deepening (114-site panel: +314 to +369 MVAr; 157-214 VAr/hh). WARNING (external review 2, 24 Aug 2026): this is a twelve-year CHANGE; the bottom-up 150-600 MVAr / 100-200 VAr-per-household band is a standing LEVEL. Do NOT report the change as being inside the band -- that comparison was inherited by figures/07_class_split.tex and printed in both tiers before it was caught. The level comparator is the matched-vintage residential level, -310 VAr/connection in 2025, which lands ABOVE the band because it carries each connection's share of MV cable. Paper Section V-C.",
+ "paper_figure": "replication/figures/06_connection_scaling.pdf (2 panels: scatter + beta_t, rebased n=96). BUILT BY ../MAKE_FIG_CONNECTION_SCALING.py, not by this notebook's own figure cell: that script re-derives the state above and draws the exhibit at column width / serif / 400 dpi, emitting the .pdf both tiers include plus a matching .png."
 }

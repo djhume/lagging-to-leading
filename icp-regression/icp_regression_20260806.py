@@ -1,8 +1,27 @@
 #!/usr/bin/env python3
 """ICP-count regression - decisive check #1 of the proxy decomposition (6 Aug 2026).
 
-SUPERSEDED same evening by icp_regression.ipynb (canonical, 20-assertion battery,
-adds leave-one-out + figure). This script kept for provenance of the first run.
+SUPERSEDED same evening by icp_regression.ipynb (canonical, now a 91-assertion battery,
+adds the 8 Aug panel rebase, the 10 Aug cluster inference, leave-one-out and the figure).
+This script is kept only as provenance of the FIRST run.
+
+  *** IT DOES NOT OWN ANY SHIPPED ARTEFACT. ***  (clarified 24 Aug 2026, Pass E)
+
+  icp_regression_results_20260806.json and icp_per_poc_20260806.csv are written by the
+  NOTEBOOK, which is the canonical generator: it emits 18 top-level keys where this script
+  emits 9, and the two sets are not nested either way. The notebook's extra keys include
+  cluster_inference_20260810, which ../../replication/src/07_anzsic_class_split.py reads to
+  draw Fig. 6's pooled row, and the corrected `consistency` string. To avoid any chance of
+  this script standing in for the notebook, its outputs are now written under
+  *_legacy_firstrun names and it no longer writes to either shipped filename.
+
+  Three dead paths were also repaired here (all three made the script un-runnable, which is
+  why the collision had never actually fired): the ICP input defaulted to a /tmp session
+  scratchpad belonging to a different project, ROOT was HERE.parents[5] (= $HOME) where the
+  notebook correctly uses parents[4], and screen_by_gxp_year.csv was read from this directory
+  where it has never lived. Inputs now resolve exactly as the notebook resolves them; the
+  archived data_raw/icp_by_rootnsp_20260806.csv.gz was verified frame-equal to the scratchpad
+  CSV this script originally consumed.
 
 Tests: does the 2013-25 rise in overnight net leading vars scale with the number
 of connections behind each GXP? Device-fleet story predicts a slope of roughly
@@ -20,10 +39,12 @@ Data:
   ICP counts: EMI Retail/Datasets/MarketStructure/20260630_MarketShareTrendsByRootNSP.csv
               (downloaded 6 Aug 2026; monthly ICP count by root NSP x retailer,
               Dec 2003 - Jun 2026; root NSP = POC+network+suffix, ICPs summed per POC).
-  Screen:     screen_by_gxp_year.csv (this directory; night-median net leading MVAr).
+  Screen:     screen_by_gxp_year.csv (clients/ea/harmonics/consultation-2026/analysis/
+              resonance-screen/; night-median net leading MVAr).
   Flags:      power-factor replication cache contamination_flag.csv (clean cohort).
 
-Outputs (this directory): icp_per_poc_20260806.csv, icp_regression_results_20260806.json
+Outputs (this directory, legacy names - NOT the shipped artefacts):
+  icp_per_poc_20260806_legacy_firstrun.csv, icp_regression_results_20260806_legacy_firstrun.json
 """
 import json
 import sys
@@ -33,10 +54,10 @@ import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[5]  # gridlytics repo root
-ICP_SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(
-    "/tmp/claude-1000/-home-dave-gridlytics-clients-ea-harmonics/"
-    "e9186570-b413-443f-b74f-891aeae915a1/scratchpad/icp_by_rootnsp.csv")
+ROOT = HERE.parents[4]  # gridlytics repo root (parents[5] was $HOME - fixed 24 Aug 2026)
+ICP_SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else (
+    HERE / "data_raw" / "icp_by_rootnsp_20260806.csv.gz")   # the archived copy of the
+    # session-scratchpad CSV the 6 Aug run consumed (verified frame-equal, 24 Aug 2026)
 
 rng = np.random.default_rng(20260806)
 
@@ -53,10 +74,11 @@ yr = (per_poc_month[per_poc_month.year.isin([2013, 2025])]
 yr.columns = ["N2013", "N2025"]
 yr["dN"] = yr.N2025 - yr.N2013
 yr["Nbar"] = (yr.N2013 + yr.N2025) / 2
-yr.round(0).to_csv(HERE / "icp_per_poc_20260806.csv")
+yr.round(0).to_csv(HERE / "icp_per_poc_20260806_legacy_firstrun.csv")
 
 # ---- screen panel: clean cohort, balanced 2013 & 2025, night-median rise ----
-scr = pd.read_csv(HERE / "screen_by_gxp_year.csv")
+SCREEN = ROOT / "clients/ea/harmonics/consultation-2026/analysis/resonance-screen"
+scr = pd.read_csv(SCREEN / "screen_by_gxp_year.csv")   # where it actually lives
 fl = pd.read_csv(ROOT / "clients/ea/power-factor/replication/cache/contamination_flag.csv")
 piv = scr.pivot_table(index="gxp_code", columns="year", values="qc_night_med")
 bal = piv.dropna(subset=[2013, 2025]).copy()
@@ -132,7 +154,8 @@ res = {
     "prediction_band_var_per_icp": [50, 400],
     "central_prediction_var_per_household": [100, 200],
 }
-(HERE / "icp_regression_results_20260806.json").write_text(json.dumps(res, indent=1))
+(HERE / "icp_regression_results_20260806_legacy_firstrun.json").write_text(
+    json.dumps(res, indent=1))
 print(json.dumps(res, indent=1))
 print("\nlargest |residuals| (M1):")
 print(worst.round(2).to_string())

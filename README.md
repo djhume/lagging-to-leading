@@ -11,8 +11,8 @@ first-principles charging calculation with no fitted cable coefficient), and
 identifies what the demand side is physically doing: accumulating **standing
 distributed capacitance** — about 220 VAr per connection added over 2013–2025,
 with no detectable connection-independent residual, from a per-connection term
-that sat on the inductive side of zero in 2009, crossed zero about 2012, and
-accumulated faster over the second half of that window than the first. The
+that sat on the inductive side of zero in 2009, crossed zero early in the
+2010s, and accumulated faster over the second half of that window than the first. The
 mandated electromagnetic-compatibility filter in every switched-mode device is
 advanced as the candidate device layer (a labelled hypothesis), with the
 decisive low-voltage measurement identified. Both inputs to the scaling test —
@@ -23,11 +23,12 @@ already holds, so the measurement is portable to any system.
 
 | Version | File | What it is |
 |---|---|---|
-| **Extended version** (23 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, a Future Work section, and the supporting cohort/method exhibits |
-| **Journal version — draft** (15 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Reduced for journal submission (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. **Draft of 17 Aug 2026, not yet submitted.** |
+| **Extended version** (28 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, a Future Work section, and the supporting cohort/method exhibits |
+| **Journal version — draft** (10 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Reduced for journal submission (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. **Draft of 24 Aug 2026, not yet submitted.** |
 
-Both are builds of 17 Aug 2026. The journal tier is the reduced form: it
-was cut from 18 pp to 15 pp on 14–15 Aug 2026 by moving depth to
+Both are builds of 24 Aug 2026. The journal tier is the reduced form: it
+was cut from 18 pp to 15 pp on 14–15 Aug 2026, and to 10 pp on 22 Aug 2026
+(the IEEE Transactions on Power Systems first-submission page cap), by moving depth to
 extended-version pointers, with no claim, printed number, or hedge changed (a
 numeric-token diff against the 18-pp build verifies every surviving number
 byte-identical and every removed number present in the extended version).
@@ -38,12 +39,28 @@ the screen itself and every number are unchanged), and a one-sentence note
 of a companion circuit-model study in preparation was added; the
 numeric-token diff was re-run and remains clean. On 17 Aug 2026 both
 versions gained a disclosure of AI assistance in the Acknowledgment, per IEEE
-policy — no claim, number, or hedge is affected.
+policy — no claim, number, or hedge is affected. Over 22–24 Aug 2026 the set
+was worked through two external cold reviews: every figure was converted to
+vector (serif, no Type-3 fonts) and several were rebuilt at column width after
+rendering showed sub-5-pt text; the coefficient-history exhibit stopped
+asserting a zero-crossing *date*, which the yearly intervals do not establish
+(the ramp and the post-2016 deepening do, and the papers now say so in terms);
+and the connection-scaling class-split figure stopped drawing the bottom-up
+per-household band behind it, because that band is a standing **level** while
+the plotted coefficients are a 2013–2025 **change** — the two are not
+comparable, and the figure now sets the coefficients against each other and
+zero. Four guards run over both tiers on every build (`paper/verify_cut.sh`,
+`TPWRS_CUT_DIFF.py`, `CHECK_XREF_ANCHORS.py`, `AUDIT_FIG_ANNOTATIONS.py`).
 
 The LaTeX sources are alongside the PDFs: `paper/main.tex` builds
 `journal-version-draft.pdf` and `paper/main_extended_20260808.tex` builds
-`extended-version.pdf`, sharing `paper/refs.bib` (IEEEtran class files
-included, so `pdflatex` + `bibtex` reproduce both from a clone).
+`extended-version.pdf`. The extended tier reads `paper/refs.bib`; the journal
+tier reads `paper/refs_journal.bib`, which is **generated** from it by
+`paper/make_journal_bib.py` (do not hand-edit it). IEEEtran class files, the
+journal-only figures (`paper/figures/`) and the figure builders
+(`paper/MAKE_FIG_*.py`) are included, so `pdflatex` + `bibtex` reproduce both
+tiers from a clone — verified 24 Aug 2026 at 10 pp and 28 pp, zero undefined
+references and zero overfull boxes from a clean copy of this repository.
 
 The connection-scaling test runs on the
 96-unit correspondence-audited panel (8 Aug rebase), with the original
@@ -57,13 +74,14 @@ defect, the correction, and the re-verification.
 
 ## What's in this repository
 
-- [`replication/`](replication/) — six companion notebooks that reproduce every
+- [`replication/`](replication/) — seven companion notebooks that reproduce every
   headline number from public data, written in plain English for a mixed
   audience, plus the pinned environment (`requirements-pass7.txt`) and the
   §V-B dose guard (`src/mains_dose_check.py`). Start at
   [`replication/README.md`](replication/README.md), which carries the
   notebook→section map, the panel taxonomy, the sign-convention rules, and the
-  figure map.
+  figure map. Notebook 07 carries the registry consumer-class split behind
+  §V-C.
 - [`icp-regression/`](icp-regression/) — the connection-scaling test, the
   registry↔metering correspondence audit, and the coefficient history (paper
   §V), executed in place with a 91-assertion battery, shipping with its raw
@@ -71,7 +89,9 @@ defect, the correction, and the re-verification.
 - [`data/metadata/`](data/metadata/) — `edb_mapping.py`, the EMI-code →
   lines-company judgment table the suite imports (the remaining data inputs
   are distributed in the accompanying data archive; see below).
-- [`paper/`](paper/) — the paper itself.
+- [`paper/`](paper/) — both tiers, their LaTeX sources and bibliographies, the
+  journal-only figures, the figure builders, and the four guards that check the
+  two tiers against each other on every build.
 
 ## Data
 

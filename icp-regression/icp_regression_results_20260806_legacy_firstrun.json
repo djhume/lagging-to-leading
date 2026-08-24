@@ -1,0 +1,34 @@
+{
+ "n_clean_joined": 83,
+ "n_all_joined": 113,
+ "M0_null": {
+  "aic": 222.1
+ },
+ "M1": {
+  "slope_var_per_icp": 252.8,
+  "ci95_var_per_icp": [
+   191.8,
+   291.4
+  ],
+  "intercept_mvar": -0.05,
+  "r2": 0.769,
+  "aic": 102.5
+ },
+ "M1_theilsen_var_per_icp": 263.5,
+ "M1_through_origin_var_per_icp": 251.0,
+ "M2": {
+  "a_var_per_icp": 245.7,
+  "b_var_per_new_icp": 37.8,
+  "r2": 0.769,
+  "aic": 104.3,
+  "corr_Nbar_dN": 0.72
+ },
+ "prediction_band_var_per_icp": [
+  50,
+  400
+ ],
+ "central_prediction_var_per_household": [
+  100,
+  200
+ ]
+}
