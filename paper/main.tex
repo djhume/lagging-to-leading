@@ -186,8 +186,8 @@ reactive power while operating; and it lives behind the connections, the
 2013--2025 deepening being proportional to the number served with no detectable
 connection-independent residual, at about 210~VAr per connection (Section~V);
 split by the registry's consumer classes, the residential connections---which
-hold no power-factor-correction plant---carry a rate inside the bottom-up
-estimate. We
+hold no power-factor-correction plant---carry the smaller coefficient of
+the two. We
 advance the mandated electromagnetic-compatibility filter capacitance as its
 candidate device layer (a labelled hypothesis) and identify the decisive
 low-voltage measurement that would settle it.
@@ -358,7 +358,7 @@ a measured property of the system, not an artefact of how it was metered.
 
 The trend could also be carried by a few grid exit points whose meters do not see
 a clean distribution offtake (Section~II-E), so we test it by removing them:
-the six \emph{decoupled} points (the \emph{clean} cohort), and more strictly the
+the six \emph{decoupled} points, leaving the \emph{clean} cohort, and more strictly the
 steady-generation and net-export points too (\emph{clean-strict}). The absolute
 total and the MVAr/yr slope \emph{shrink}---the 2025 total from $-451$ to about
 $-300$~MVAr, the slope from $-31.1$ to $-23.4$~MVAr/yr---because two removed nodes
@@ -691,8 +691,7 @@ number of connections served, with nothing left at zero connections.
 The first prediction is met at the order-of-magnitude grade the estimate carries.
 Summed across the same 114 grid exit points, the median overnight reactive power
 moved from $+188$~MVAr (net absorbing) in 2013 to $-182$~MVAr in 2025. Those exit
-points serve about 1.5~million connections---two-thirds of the national fleet the
-bottom-up estimate counts---so the 369~MVAr rise normalises to about
+points serve about 1.5~million connections---two-thirds of the national connection count---so the 369~MVAr rise normalises to about
 210--280~VAr per connection~\cite{hume_extended}---above the estimate's
 100--200~VAr per household centre rather than inside it, because a connection is not a household:
 Section~V-C separates the consumer classes and puts the residential rate back
@@ -756,7 +755,7 @@ consumer class.}
 
 Read honestly, the slope is the whole connection-scaling shunt class, not
 the device fleet alone: each connection also brings its share of medium-voltage
-cable---about 190~VAr on Section~IV-C's physics, low-voltage cable being
+cable---a standing 190~VAr on Section~IV-C's physics, low-voltage cable being
 negligible since charging scales with $V^2$---and commercial premises hold the
 one rival standing capacitance at
 scale---power-factor-correction banks left in service overnight wherever the
@@ -770,7 +769,7 @@ connection brings. That is a twelve-year \emph{change}, not the standing
 $-310$~VAr per residential connection in 2025, \emph{above} the 100--200~VAr band
 because it carries that cable share as well as its devices. The commercial-industrial coefficient is $-915$, larger per
 connection as commercial device fleets and shared cable predict, and the two
-classes carry about half the panel's deepening each despite the six-to-one
+classes carry about half the panel's deepening each on the point estimates, despite the six-to-one
 difference in their numbers. That commercial-industrial term stays composite: commercial device fleets, any stranded correction, and
 shared medium-voltage cable all sit inside it, and because the two counts are
 collinear across units the coefficients are bounds rather than a sharp
@@ -870,7 +869,7 @@ loop's sign turns on the power factor of what comes off (Section~VI-A), a sheddi
 or load-rejection study calibrated on lagging demand carries an unexamined sign at
 light load. The gap is calibration rather than structure: the standard composite load model does carry a distribution-side shunt term, but back-solves it from the power-flow~$Q$~\cite{wecc_cmpldw}, so at light load it reproduces whatever archetype the case was built on. Shedding whole feeders takes that capacitance with them, but shedding is a late event; at initiation the demand contributes a standing level, not a trip. Overvoltage protection, automatic shunt switching and the QV curve's upper limb each address part of the question, and the 2026 mechanisms review proposes containment countermeasures---but none is a routine margin quantity~\cite{vournas2026review}.
 
-The measurement gives that correction a concrete, portable form: a net standing shunt term, capacitive by about 210~VAr per connection over 2013--2025 (Section~V-C), alongside whatever power-factor archetype represents the operating draw. It arrives behind existing connections rather than with demand growth, and archetypes calibrated even a decade ago predate it entirely.
+The measurement gives that correction a concrete, portable form: a net standing shunt term, capacitive by about 210~VAr per connection over 2013--2025 (Section~V-C), alongside whatever power-factor archetype represents the operating draw. It arrives behind existing connections rather than with demand growth---which alone would leave Fig.~\ref{fig:icp}B's coefficient flat---and archetypes calibrated even a decade ago predate it entirely.
 
 % ======================================================================
 \section{Conclusion}

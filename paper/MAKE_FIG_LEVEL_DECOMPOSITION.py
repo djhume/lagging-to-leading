@@ -45,10 +45,13 @@ ax.plot(yr, -nat.charge_c, "-s", color=repro.RED, lw=1.3, ms=3.0,
 ax.plot(yr, nat.organic_c, "-^", color=repro.GREEN, lw=1.3, ms=3.0,
         label="organic (demand)", zorder=4)
 
-# the crossing: where demand stops masking and starts adding
+# the crossing: where demand stops masking and starts adding.
+# No year is printed and no rule is drawn -- the +-35% band plotted here leaves
+# the crossing year unresolved from ~2021 to past the end of the record, and
+# facing text (journal SIV-D) carries the crossing qualitatively by decision.
+# Cold read 25 Aug 2026, F5.
 cross = nat[nat.organic_c < 0].year.min()
-ax.axvline(cross, color=repro.GREEN, lw=0.8, ls=":", zorder=1)
-ax.annotate(f"{int(cross)}: demand crosses\ninto leading", xy=(cross - 0.18, 490),
+ax.annotate("demand crosses\ninto leading", xy=(cross - 0.18, 490),
             fontsize=6.2, color=repro.GREEN, linespacing=1.2, va="top", ha="right")
 ax.annotate("charging: near-flat\nthe whole time", xy=(2016.2, -250), fontsize=6.2,
             color=repro.RED, ha="left", va="top", linespacing=1.2)
