@@ -5,10 +5,10 @@
 %%  connection scaling -> labelled EMC-filter hypothesis -> implications.)
 %%
 %% D. J. Hume, Electricity Authority (EA hat; descriptive, not policy advocacy).
-%% Target venue: IEEE Transactions on Power Systems (TPWRS).
-%% (Re-pointed 17 Aug 2026 from OAJPE: TPWRS traditional route is US$0 and the
-%%  companion paper submits to the same venue. Hard cap 10 pp incl. references
-%%  at initial submission -- IEEEtran two-column, the class already in use.)
+%% Self-published under CC0 1.0 as a Zenodo record with a DOI. Venue decision
+%% 26 Aug 2026 (SELF_PUBLISH_PLAN_20260826.md): no journal, no submission, no
+%% page cap. This file is the SHORT VERSION; the extended version is the
+%% complete record. IEEEtran is retained as the typeset class only.
 %%
 %% Single source of truth for every number and figure: ../replication/ .
 %% If a figure or number changes, change it in the replication notebooks first,
@@ -52,7 +52,7 @@ contamination screens, each method's robustness batteries and sensitivities, and
 the dated regulatory arc. It is cited below at each point its material is used,
 and not described again.}}
 
-\markboth{Draft to be submitted to the IEEE Transactions on Power Systems}%
+\markboth{From Lagging to Leading --- short version}%
 {Hume: The Measured Emergence of Standing Capacitance Behind Consumer Connections}
 
 \maketitle
@@ -66,7 +66,7 @@ power crossed from lagging to leading in 2016, nearly a decade before the 2025
 events, and a first-principles charging calculation puts the demand-side share
 of that drift in the physical band 75--88\%. That term behaves as a net standing shunt
 element---present around the clock, scaling with the connections served, and
-moving capacitive by about 210~VAr per connection over 2013--2025 and roughly
+moving capacitive by about 230~VAr per connection over 2013--2025 and roughly
 20~VAr a year at the close. It drives the drift rather than the level: the
 distribution network's own cable and line charging remains the larger part of
 the standing leading reactive power, and what changed is that a demand once
@@ -184,7 +184,7 @@ at the flat evening peak as overnight---so it behaves as a standing shunt
 element, permanently energised, rather than as a change in how the load draws
 reactive power while operating; and it lives behind the connections, the
 2013--2025 deepening being proportional to the number served with no detectable
-connection-independent residual, at about 210~VAr per connection (Section~V);
+connection-independent residual, at about 230~VAr per connection (Section~V);
 split by the registry's consumer classes, the residential connections---which
 hold no power-factor-correction plant---carry the smaller coefficient of
 the two. We
@@ -246,7 +246,25 @@ to demand networks leaves 123 GXPs; the 132-point and 123-point figures are
 reported distinctly and kept labelled throughout.
 The residual bias is signed: the demand grid exit points excluded from the panel
 are by 2025 on average \emph{more} leading than it and drift faster, so the
-balanced panel, if anything, understates the national drift~\cite{hume_extended}.
+balanced panel, if anything, understates the national drift~\cite{hume_extended}. Five national totals follow, each on the sample its method requires, and Table~\ref{tab:panels} sets them side by side. They differ by sample, window and summary statistic rather than by measurement; a reader wanting one figure for New Zealand should take the first row.
+
+\begin{table}[!t]
+\caption{The National Overnight Totals, and the Sample Each Comes From}
+\label{tab:panels}
+\centering
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.31\columnwidth}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}p{0.37\columnwidth}@{}}
+\toprule
+\textbf{Sample} & \textbf{Window} & \textbf{Overnight reactive power} \\
+\midrule
+Balanced demand panel, 123 GXPs \emph{(the headline)} & 1997--2025 & $+466 \rightarrow -451$~MVAr \\
+Balanced full panel, 132 GXPs & 1997--2025 & $+673 \rightarrow -296$~MVAr \\
+Clean and clean-strict cohorts, 119 and 92 GXPs & 1997--2025 & about $-300$~MVAr in 2025 \\
+Charging footprint, 29 networks & 2013--2025 & $-541$~MVAr in 2025, drifting $-49.9$~MVAr/yr \\
+Connection-scaling panel, 114 GXPs & 2013--2025 & $+188 \rightarrow -182$~MVAr (medians) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Metering provenance and accuracy}
 The active and reactive power at each grid exit point is settlement-grade revenue
@@ -258,7 +276,7 @@ error that does not average down---a phase displacement $\beta$ in the
 instrument-transformer chain, injecting a spurious term of about $P\sin\beta$
 that matters most in exactly the light-load window this paper measures---is bounded,
 under a common-mode half-degree assumption, at some fifty times smaller than the
-swing---and, since a static bias drifts only as the load grows, at $\Delta P\sin\beta$ for any $\beta$: $\Delta P=280$~MW, three times short of the swing. The stronger defence: it is largest in the loaded window while the
+swing. That bound does not rest on the half degree. A \emph{static} displacement generates apparent drift only through the growth of the load it multiplies, so the most it can produce across the whole record is $\Delta P\sin\beta$; overnight panel load grew by $\Delta P=280$~MW and $\sin\beta\leq1$, so a static displacement of any size---$90^\circ$ on every transformer set included---falls three times short of the swing. The stronger defence: it is largest in the loaded window while the
 deepening is near-equal in both (Section~V-A). The full measurement-error analysis is in~\cite{hume_extended}; we therefore treat the multi-decade \emph{drift} as
 robust while regarding the standing reactive \emph{level} on any single night as
 carrying a bounded measurement uncertainty.
@@ -869,7 +887,7 @@ loop's sign turns on the power factor of what comes off (Section~VI-A), a sheddi
 or load-rejection study calibrated on lagging demand carries an unexamined sign at
 light load. The gap is calibration rather than structure: the standard composite load model does carry a distribution-side shunt term, but back-solves it from the power-flow~$Q$~\cite{wecc_cmpldw}, so at light load it reproduces whatever archetype the case was built on. Shedding whole feeders takes that capacitance with them, but shedding is a late event; at initiation the demand contributes a standing level, not a trip. Overvoltage protection, automatic shunt switching and the QV curve's upper limb each address part of the question, and the 2026 mechanisms review proposes containment countermeasures---but none is a routine margin quantity~\cite{vournas2026review}.
 
-The measurement gives that correction a concrete, portable form: a net standing shunt term, capacitive by about 210~VAr per connection over 2013--2025 (Section~V-C), alongside whatever power-factor archetype represents the operating draw. It arrives behind existing connections rather than with demand growth---which alone would leave Fig.~\ref{fig:icp}B's coefficient flat---and archetypes calibrated even a decade ago predate it entirely.
+The measurement gives that correction a concrete, portable form: a net standing shunt term, capacitive by about 230~VAr per connection over 2013--2025 (Section~V-C), alongside whatever power-factor archetype represents the operating draw. It arrives behind existing connections rather than with demand growth---which alone would leave Fig.~\ref{fig:icp}B's coefficient flat---and archetypes calibrated even a decade ago predate it entirely.
 
 % ======================================================================
 \section{Conclusion}
@@ -917,7 +935,7 @@ metering and Commerce Commission information disclosures) in an accompanying set
 of analysis notebooks. Both input sets are public under CC~BY~4.0---grid metering
 on the Electricity Authority's Electricity Market Information platform, network
 parameters in the Commerce Commission's information disclosures---and ship with the
-archived package~\cite{hume_extended}.
+archived package~\cite{hume_archive}.
 
 \section*{Acknowledgment}
 The author thanks colleagues at the Electricity Authority and Transpower for
@@ -940,7 +958,7 @@ all content.
 %\IEEEtriggeratref{30}
 \bibliographystyle{IEEEtran}
 % refs_journal.bib is GENERATED from refs.bib by make_journal_bib.py: the same
-% entries with bibliographic note fields stripped, to fit the TPWRS 10-page cap.
+% entries with bibliographic note fields stripped, to keep the short version short.
 % The extended tier builds against refs.bib and keeps every note. Re-run the
 % generator after any refs.bib change.
 \bibliography{refs_journal}

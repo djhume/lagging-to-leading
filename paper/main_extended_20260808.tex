@@ -5,9 +5,9 @@
 %%  connection scaling -> labelled EMC-filter hypothesis -> implications.)
 %%
 %% D. J. Hume, Electricity Authority (EA hat; descriptive, not policy advocacy).
-%% Target venue of the condensed tier: IEEE Transactions on Power Systems
-%% (TPWRS; re-pointed 17 Aug 2026 from OAJPE). This extended tier is the
-%% complete record; it is not submitted, it accompanies the Zenodo package.
+%% Self-published under CC0 1.0 as a Zenodo record with a DOI. Venue decision
+%% 26 Aug 2026 (SELF_PUBLISH_PLAN_20260826.md): no journal, no submission.
+%% This extended tier is the complete record; the short version accompanies it.
 %%
 %% Single source of truth for every number and figure: ../replication/ .
 %% If a figure or number changes, change it in the replication notebooks first,
@@ -48,10 +48,9 @@ reactive-power pricing policy question (Section~VI-D).}%
 number and figure in this paper from public data) accompanies the work.}%
 \thanks{This is the \emph{extended version}, including the complete
 measurement-error analysis (Appendix~A), the mains-filter appendix, and
-supporting exhibits; a condensed version is prepared for submission to the
-IEEE Transactions on Power Systems.}}
+supporting exhibits; a short version accompanies it in the same record.}}
 
-\markboth{Extended version --- a condensed version is prepared for submission to the IEEE Transactions on Power Systems}%
+\markboth{From Lagging to Leading --- extended version}%
 {Hume: The Measured Emergence of Standing Capacitance Behind Consumer Connections}
 
 \maketitle
@@ -65,7 +64,7 @@ power crossed from lagging to leading in 2016, nearly a decade before the 2025
 events, and a first-principles charging calculation puts the demand-side share
 of that drift in the physical band 75--88\%. That term behaves as a net standing shunt
 element---present around the clock, scaling with the connections served, and
-moving capacitive by about 210~VAr per connection over 2013--2025 and roughly
+moving capacitive by about 230~VAr per connection over 2013--2025 and roughly
 20~VAr a year at the close. It drives the drift rather than the level: the
 distribution network's own cable and line charging remains the larger part of
 the standing leading reactive power, and what changed is that a demand once
@@ -337,7 +336,25 @@ at the same rate (Section~III). The residual churn bias is signed: the demand gr
 exit points excluded from the balanced panel (post-1997 entrants and exits) are by
 2025 on average \emph{more} leading than the panel (median $-0.28$ against
 $-0.18$~MVAr/MW) and drift faster ($-0.020$ against $-0.018$~MVAr/MW/yr), so the
-balanced panel, if anything, understates the national drift.
+balanced panel, if anything, understates the national drift. Five national totals follow, each on the sample its method requires, and Table~\ref{tab:panels} sets them side by side. They differ by sample, window and summary statistic rather than by measurement; a reader wanting one figure for New Zealand should take the first row.
+
+\begin{table}[!t]
+\caption{The National Overnight Totals, and the Sample Each Comes From}
+\label{tab:panels}
+\centering
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.31\columnwidth}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}p{0.37\columnwidth}@{}}
+\toprule
+\textbf{Sample} & \textbf{Window} & \textbf{Overnight reactive power} \\
+\midrule
+Balanced demand panel, 123 GXPs \emph{(the headline)} & 1997--2025 & $+466 \rightarrow -451$~MVAr \\
+Balanced full panel, 132 GXPs & 1997--2025 & $+673 \rightarrow -296$~MVAr \\
+Clean and clean-strict cohorts, 119 and 92 GXPs & 1997--2025 & about $-300$~MVAr in 2025 \\
+Charging footprint, 29 networks & 2013--2025 & $-541$~MVAr in 2025, drifting $-49.9$~MVAr/yr \\
+Connection-scaling panel, 114 GXPs & 2013--2025 & $+188 \rightarrow -182$~MVAr (medians) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Metering provenance and accuracy}
 The active and reactive power at each grid exit point is settlement-grade revenue
@@ -1868,7 +1885,7 @@ past the archetype: by the sign argument above (Section~VI-A), a shedding or loa
 
 The measurement gives the load-model correction a concrete, portable form. The
 light-load fleet needs a net standing shunt term that scales with
-connections served---on the New Zealand panel, about 210~VAr per connection
+connections served---on the New Zealand panel, about 230~VAr per connection
 accumulated over 2013--2025 (Section~V-C; a boundary-level figure that carries
 each connection's share of network cable with it)---alongside
 whatever power-factor archetype represents the operating draw. A
@@ -2006,7 +2023,7 @@ coefficient puts the organic share at about 80\% (physical band 75--88\%) over
 the 2013--2025 asset-disclosure window, with the two statistical methods
 corroborating the direction over the full record but not pinning the split.
 And the connection-scaling test identifies what the demand side is physically
-doing: at about 210~VAr per connection added over 2013--2025, with no detectable
+doing: at about 230~VAr per connection added over 2013--2025, with no detectable
 connection-independent residual, from a term that sat on the inductive side of
 zero into the 2010s and has accumulated faster over the second half of the
 window than the first, the load fleet is not merely drawing fewer lagging vars

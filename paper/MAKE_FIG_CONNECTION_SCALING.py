@@ -28,6 +28,12 @@ THREE DEFECTS FIXED, all found by rendering the page and looking (Pass B, B-15):
      raster, where no `.tex` number guard can see it. This is the whole argument for
      the vector conversion and `AUDIT_FIG_ANNOTATIONS.py`.
 
+     FOURTH DEFECT, same title, found by the 25-Aug cold read and fixed on 26 Aug
+     (W3/F11): the replacement title said "deepening capacitive every YEAR since",
+     and the series it draws rises from about +41 (2009) to +52 (2010) before
+     turning. Section III-A hedges the same claim correctly as a "near-monotonic"
+     drift, so the title now reads "deepening capacitive ever since".
+
 DATA. The canonical source is the notebook, so its code cells are executed here up to
 (not including) its own figure cell, exactly as the other `MAKE_FIG_*` scripts
 `runpy` their `src/` script. Nothing is recomputed; the numbers printed at the end are
@@ -153,7 +159,7 @@ def main() -> int:
     # No crossing DATE in the title: Section V-C reports the yearly intervals as
     # straddling zero either side of the crossing, so the ramp is the finding.
     axB.set_title("B. The coefficient's history: inductive early in the record,\n"
-                  "deepening capacitive every year since", loc="left")
+                  "deepening capacitive ever since", loc="left")
     axB.annotate(f"accumulation rate\n2013-19 $\\approx$ {r2_h:.0f}, "
                  f"2019-25 $\\approx$ {r3:.0f}\nVAr per connection per year",
                  xy=(0.03, 0.06), xycoords="axes fraction", va="bottom",

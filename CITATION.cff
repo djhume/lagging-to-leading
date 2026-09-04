@@ -1,23 +1,34 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below."
+message: "If you use this work, please cite the paper record below."
 title: >-
   From Lagging to Leading: The Measured Emergence of Standing Capacitance
-  Behind Consumer Connections, 1997-2025 (extended version and
-  reproducibility package)
+  Behind Consumer Connections, 1997-2025
 authors:
   - family-names: Hume
     given-names: David
     orcid: "https://orcid.org/0009-0006-6920-0598"
-version: 0.16.0
-date-released: "2026-08-25"
-doi: 10.5281/zenodo.21927098
+version: 1.0.0
+date-released: "2026-09-06"
+license: CC0-1.0
+doi: 10.5281/zenodo.22238685
 repository-code: "https://github.com/djhume/lagging-to-leading"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22238685
+    description: >-
+      The paper record: the short version (11 pp) and the extended version
+      (28 pp). Cite this.
+  - type: doi
+    value: 10.5281/zenodo.21927098
+    description: >-
+      The data and code archive: the replication notebooks, the redistributed
+      public inputs, and the manifest and timestamp proofs.
 abstract: >-
   Twenty-nine years of regulatory half-hourly metering at New Zealand grid
   exit points measure a national power system's reactive character crossing
   from lagging to leading overnight, attribute the drift dominantly to the
   demand side, and identify a standing distributed-capacitance term
-  accumulating behind consumer connections at about 220 VAr per connection
+  accumulating behind consumer connections at about 230 VAr per connection
   over 2013-2025, with no detectable connection-independent residual, from a
   coefficient that crossed zero early in the 2010s. Includes both tiers of the
   paper with their LaTeX sources, and the full replication notebook suite
@@ -30,6 +41,9 @@ keywords:
   - load modelling
   - power systems
 notes: >-
-  A condensed journal version (10 pp) is being prepared for submission; the
-  extended version (28 pp) is the complete record. Both, with the
-  reproducibility archive, are deposited at DOI 10.5281/zenodo.21927098.
+  Two records. The paper (short version 11 pp, extended version 28 pp) is
+  DOI 10.5281/zenodo.22238685 and is the one to cite. The data and code
+  archive is DOI 10.5281/zenodo.21927098. Everything the author wrote is
+  released under CC0 1.0; redistributed custodian data (Electricity Authority
+  grid metering, Commerce Commission information disclosures) remains under
+  its own CC BY 4.0.

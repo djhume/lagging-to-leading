@@ -150,6 +150,12 @@ DROP_ADDRESS_EXTRA = ("transpower_ssf2022", "transpower_ssf2024n1",
                       "eipc_part10", "wecc_cmpldw", "ross_meier2000")
 
 SHORT_NOTES = {
+    # The two Zenodo records: IEEEtran.bst does not emit the `doi` field, so the
+    # persistent identifier only reaches the printed page through the note. It is
+    # the whole point of the record architecture (W4, 2 Sep 2026) and must survive
+    # the journal tier's note stripping.
+    "hume_extended": "doi: 10.5281/zenodo.22238685",
+    "hume_archive":  "doi: 10.5281/zenodo.21927098",
     "eipc_sch126": "Part~12, Schedule~12.6, Schedule~8 (Connection Code), "
                    "cl~4.4; consolidation as at 1~July 2026",
     "eipc_part8":  "cl~8.67(4)(a); consolidation as at 1~July 2026",

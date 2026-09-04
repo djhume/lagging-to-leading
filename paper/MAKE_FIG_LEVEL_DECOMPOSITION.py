@@ -10,7 +10,8 @@ This is panel (A) of the extended tier's `03_physical_charging.png`, extracted a
 IEEE single-column size for the journal, which carries no Method 3 figure at all.
 Its job is not to report Method 3's result -- that is a number -- but to draw the
 boundary between the drift claim the paper makes and the level claim it refuses.
-Hence Section IV-D, beside Table I ("Three Decompositions of the DRIFT").
+Hence Section IV-D, beside the "Three Decompositions of the DRIFT" table
+(Table II since the panel-reconciliation table entered Section II-B, 26 Aug).
 
 Keep the uncertainty bands: the organic band is huge and straddles zero for much
 of the record, which is the visual proof of "we quote no precise share".

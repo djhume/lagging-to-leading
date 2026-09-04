@@ -19,6 +19,14 @@
 #                         dropped with the VI-D compression that PAID for the
 #                         F1/F3/F7 + gloss restorations (Dave's "less NZ data"
 #                         steer). Verified still cited in the extended tier.
+#        25 -> 26          2 Sep, W4 record architecture. An ADDITION, not a cut:
+#                         hume_extended was re-pointed to Record B
+#                         (10.5281/zenodo.22238685, the two paper PDFs) and a new
+#                         hume_archive added for Record A (10.5281/zenodo.21927098,
+#                         the data and code archive). 28 of the 29 \cite{hume_extended}
+#                         stay; the one Reproducibility cite moves to hume_archive.
+#                         References renumber, which is exactly what this check is
+#                         for -- the L4 proof was re-run and TPWRS_CUT_DIFF is GREEN.
 #        44 -> 40         18 Aug, TPWRS venue cut, tranche 1 + prime candidates:
 #                         aemo_tcpf (I-B AEMO para), egr_partf_r11 + ec_cds2004
 #                         (II-B provenance para), eu_emc1989 (V-B mandate-history
@@ -130,16 +138,16 @@ OVERFULL=$(grep -c 'Overfull' main.log || true)
 UNDEF=$(grep -c 'Warning.*undefined' main.log || true)
 BIB=$(grep -c '\\bibitem' main.bbl || true)
 
-# TPWRS hard cap is 10 pages INCLUDING references (venue re-pointed 17 Aug 2026,
-# OAJPE -> TPWRS; see TPWRS_CUT_KICKOFF_20260817.md). Reported loudly but NOT a
-# hard fail: the tier is legitimately over during the cut pass itself. The <=10pp
-# assertion is acceptance check #2 at the end of that pass, not a per-build gate.
-TPWRS_CAP=10
-if [[ "$PAGES" -gt "$TPWRS_CAP" ]]; then
-  printf 'pages      %s   >>> OVER the TPWRS cap of %s by %s pp <<<\n' \
-         "$PAGES" "$TPWRS_CAP" "$((PAGES - TPWRS_CAP))"
+# NO page cap: self-published (SELF_PUBLISH_PLAN_20260826.md, 26 Aug 2026). The
+# 10 pp figure is retained as a SOFT reference point only -- Dave's own read is
+# that the cap was useful discipline against the report extending too much, so
+# drift past it is worth noticing. Never a hard fail; never sets RED.
+SHORT_REF=10
+if [[ "$PAGES" -gt "$SHORT_REF" ]]; then
+  printf 'pages      %s   (%s pp over the %s pp reference point -- soft, not a cap)\n' \
+         "$PAGES" "$((PAGES - SHORT_REF))" "$SHORT_REF"
 else
-  printf 'pages      %s   (within the TPWRS cap of %s)\n' "$PAGES" "$TPWRS_CAP"
+  printf 'pages      %s   (at or under the %s pp reference point)\n' "$PAGES" "$SHORT_REF"
 fi
 
 # ---- 2/3. box + reference hygiene ---------------------------------------
@@ -149,7 +157,7 @@ if [[ "$UNDEF" -ne 0 ]];    then echo "RED  undefined refs/cites: $UNDEF (must b
 else echo "ok   undefined 0"; fi
 
 # ---- 4. bibliography count ----------------------------------------------
-BIB_BASELINE=25   # see the header ledger before changing this (27 -> 25, 23 Aug)
+BIB_BASELINE=26   # see the header ledger before changing this (25 -> 26, 2 Sep, W4)
 if [[ "$BIB" -ne "$BIB_BASELINE" ]]; then
   echo "RED  bibliography $BIB entries (baseline $BIB_BASELINE) — a cut dropped a unique \\cite;"
   echo "     every later reference has renumbered and the L4 proof is void."

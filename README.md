@@ -9,7 +9,7 @@ crossing from lagging to leading overnight (2016), attributes the drift
 dominantly to the demand side (about 80%, physical band 75–88%, by a
 first-principles charging calculation with no fitted cable coefficient), and
 identifies what the demand side is physically doing: accumulating **standing
-distributed capacitance** — about 220 VAr per connection added over 2013–2025,
+distributed capacitance** — about 230 VAr per connection added over 2013–2025,
 with no detectable connection-independent residual, from a per-connection term
 that sat on the inductive side of zero in 2009, crossed zero early in the
 2010s, and accumulated faster over the second half of that window than the first. The
@@ -19,17 +19,18 @@ decisive low-voltage measurement identified. Both inputs to the scaling test —
 settlement metering and connection counts — are records any system operator
 already holds, so the measurement is portable to any system.
 
-## The two versions
+## The versions
 
 | Version | File | What it is |
 |---|---|---|
 | **Extended version** (28 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, a Future Work section, and the supporting cohort/method exhibits |
-| **Journal version — draft** (10 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | Reduced for journal submission (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. **Draft of 24 Aug 2026, not yet submitted.** |
+| **Short version** (11 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | The reading form (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. |
+| **Web version** | [`web/lagging-to-leading.html`](web/lagging-to-leading.html) | The short version as a page, with the figures live rather than printed: hover or arrow-key any chart for its values, open the table behind it, and drag the capacitance assumption in Fig. 3. The words are the short version's, unchanged — `paper/VERIFY_PAGE_TEXT.py` diffs the two at token level in both directions and is green. One file, no libraries and no network requests: fonts, figures and photographs are all embedded, so it renders from a folder with no connection. |
 
-Both are builds of 24 Aug 2026. The journal tier is the reduced form: it
-was cut from 18 pp to 15 pp on 14–15 Aug 2026, and to 10 pp on 22 Aug 2026
-(the IEEE Transactions on Power Systems first-submission page cap), by moving depth to
-extended-version pointers, with no claim, printed number, or hedge changed (a
+The short version is the reduced form: it
+was cut from 18 pp to 15 pp on 14–15 Aug 2026, and to 10 pp on 22 Aug 2026,
+then restored to 11 pp on 26 Aug 2026 when four deferred items were put back,
+by moving depth to extended-version pointers, with no claim, printed number, or hedge changed (a
 numeric-token diff against the 18-pp build verifies every surviving number
 byte-identical and every removed number present in the extended version).
 On 16 Aug 2026 a bounded wording correction was applied to both versions
@@ -59,7 +60,7 @@ tier reads `paper/refs_journal.bib`, which is **generated** from it by
 `paper/make_journal_bib.py` (do not hand-edit it). IEEEtran class files, the
 journal-only figures (`paper/figures/`) and the figure builders
 (`paper/MAKE_FIG_*.py`) are included, so `pdflatex` + `bibtex` reproduce both
-tiers from a clone — verified 24 Aug 2026 at 10 pp and 28 pp, zero undefined
+tiers from a clone — verified 2 Sep 2026 at 11 pp and 28 pp, zero undefined
 references and zero overfull boxes from a clean copy of this repository.
 
 The connection-scaling test runs on the
@@ -126,24 +127,42 @@ The suite expects the per-year data archives at `data/processed/` and
 
 ## Citing
 
-Until the journal version is published, cite the extended version and this
-repository:
+Nothing here obliges you to. The CC0 dedication below carries no attribution
+condition, so you are free to copy, adapt and republish any of this without
+crediting anyone.
+
+Citing it anyway helps the next reader. A number or a figure quoted with the
+DOI beside it can be traced back to the notebook that computed it, the sample
+it was drawn from, and the uncertainty around it. Quoted on its own, it cannot.
 
 > D. Hume, *From Lagging to Leading: The Measured Emergence of Standing
-> Capacitance Behind Consumer Connections, 1997–2025* (extended version and
-> reproducibility package), 2026. GitHub: djhume/lagging-to-leading.
+> Capacitance Behind Consumer Connections, 1997–2025*, 2026.
+> DOI: [10.5281/zenodo.22238685](https://doi.org/10.5281/zenodo.22238685).
+
+…and where the data or the notebooks are what is being used:
+
+> D. Hume, *From Lagging to Leading — data and code archive*, 2026.
+> GitHub: djhume/lagging-to-leading.
 > DOI: [10.5281/zenodo.21927098](https://doi.org/10.5281/zenodo.21927098).
+
+**Two records.** The paper (both versions) is `…22238685`; the data and code
+archive is `…21927098`. Both DOIs are reserved and resolve once the records are
+published — until then a resolver returns *not registered*, which is expected.
 
 A `CITATION.cff` is included (GitHub's "Cite this repository" button uses it).
 
 ## Status and licence
 
-- **Status:** private pre-release. The journal version is being prepared for
-  submission.
-- **Licence:** to be finalised before public release (intended: open licence
-  for code and notebooks; data redistributed under the custodians' CC BY 4.0
-  terms with attribution to the Electricity Authority and the Commerce
-  Commission; the paper PDF © the author).
+- **Status:** private pre-release until publication. Self-published: no journal
+  submission (decision of 26 Aug 2026).
+- **Licence:** everything authored by D. Hume — both paper PDFs, the
+  notebooks, the code, the judgment tables and the figures — is released
+  under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/),
+  a public domain dedication: no permission needed, no attribution required,
+  any purpose including commercial. Redistributed data stays under its
+  custodians' CC BY 4.0 terms, which are not the author's to change, with
+  attribution to the Electricity Authority and the Commerce Commission as
+  those terms require.
 - The views expressed are the author's. The analysis is descriptive: it
   informs, but does not advocate on, a live reactive-power pricing policy
   question.
