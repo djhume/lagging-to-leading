@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From Lagging to Leading</title>
+<meta name="description" content="The measured emergence of standing capacitance behind consumer connections — New Zealand, 1997–2025. Paper, extended version, web version, data and code.">
+<meta name="author" content="D. J. Hume">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* This is the front door, not the artefact. The paper page in web/ is sealed inside the
+   Zenodo archive and therefore makes no network request of any kind; this one is an
+   ordinary web page and may load fonts normally. Same type and palette, so clicking
+   through does not feel like leaving. */
+:root{
+  --paper:#fcfcfd; --paper-2:#f4f6f9; --ink:#14181f; --ink-2:#4a5261; --ink-3:#767e8c;
+  --rule:#dfe3ea; --rule-2:#eef1f5; --s1:#1f5aa6;
+  --serif:"Literata",Charter,Georgia,serif;
+  --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12151a; --paper-2:#191d24; --ink:#e6e9ef; --ink-2:#a8b0be; --ink-3:#7a8494;
+    --rule:#262c36; --rule-2:#1d222a; --s1:#6ea3de;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12151a; --paper-2:#191d24; --ink:#e6e9ef; --ink-2:#a8b0be; --ink-3:#7a8494;
+  --rule:#262c36; --rule-2:#1d222a; --s1:#6ea3de;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--serif);
+  font-size:17px; line-height:1.62; margin:0; padding:0 1.5rem 5rem;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:41rem; margin:0 auto}
+:focus-visible{outline:2px solid var(--s1); outline-offset:3px; border-radius:2px}
+
+header{padding:3.2rem 0 2rem; border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:var(--sans); font-size:.7rem; font-weight:600; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 .9rem;
+}
+h1{
+  font-family:var(--serif); font-weight:600; font-size:clamp(1.7rem,4.4vw,2.35rem);
+  line-height:1.17; letter-spacing:-.012em; margin:0 0 .6rem; max-width:24ch;
+  text-wrap:balance;
+}
+.byline{font-family:var(--sans); font-size:.92rem; color:var(--ink-2); margin:.9rem 0 0}
+.byline a{color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule)}
+.byline a:hover{color:var(--s1); border-bottom-color:var(--s1)}
+
+p.lede{margin:1.9rem 0 1.15rem}
+p{margin:0 0 1.15rem}
+h2{
+  font-family:var(--sans); font-size:.72rem; font-weight:600; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3); margin:2.9rem 0 1rem;
+}
+
+/* the three reading forms */
+.forms{display:grid; gap:.7rem; margin:0 0 1.6rem; padding:0; list-style:none}
+.forms a{
+  display:block; text-decoration:none; color:inherit;
+  border:1px solid var(--rule); border-radius:5px; background:var(--paper-2);
+  padding:.95rem 1.1rem; transition:border-color .12s linear;
+}
+.forms a:hover{border-color:var(--s1)}
+.forms .name{
+  font-family:var(--sans); font-size:.95rem; font-weight:600; color:var(--ink);
+  display:flex; gap:.6rem; align-items:baseline; flex-wrap:wrap;
+}
+.forms .tag{
+  font-size:.66rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--s1);
+}
+.forms .what{
+  font-family:var(--sans); font-size:.82rem; line-height:1.5; color:var(--ink-3);
+  margin:.32rem 0 0;
+}
+
+dl.rec{margin:0; font-family:var(--sans); font-size:.85rem}
+dl.rec div{
+  display:grid; grid-template-columns:9.5rem minmax(0,1fr); gap:.4rem;
+  padding:.55rem 0; border-bottom:1px solid var(--rule-2);
+}
+dl.rec dt{color:var(--ink-3)}
+dl.rec dd{margin:0; color:var(--ink-2); overflow-wrap:anywhere}
+dl.rec a{color:var(--s1); text-decoration:none; border-bottom:1px solid var(--rule)}
+dl.rec a:hover{border-bottom-color:var(--s1)}
+
+.note{
+  font-family:var(--sans); font-size:.8rem; line-height:1.6; color:var(--ink-3);
+  border-left:2px solid var(--rule); padding-left:.9rem; margin:1.5rem 0;
+}
+footer{
+  margin-top:3.4rem; padding-top:1.2rem; border-top:1px solid var(--rule);
+  font-family:var(--sans); font-size:.76rem; line-height:1.6; color:var(--ink-3);
+}
+footer a{color:var(--ink-3)}
+@media (max-width:34rem){ dl.rec div{grid-template-columns:minmax(0,1fr); gap:.1rem} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">New Zealand · 1997&ndash;2025</p>
+  <h1>From Lagging to Leading</h1>
+  <p style="font-family:var(--sans);font-size:1rem;color:var(--ink-2);margin:0;max-width:44ch">
+    The measured emergence of standing capacitance behind consumer connections.</p>
+  <p class="byline">D.&nbsp;J.&nbsp;Hume, Electricity Authority, Wellington, New Zealand<br>
+    <a href="https://orcid.org/0009-0006-6920-0598">ORCID&nbsp;0009-0006-6920-0598</a></p>
+</header>
+
+<p class="lede">Both ENTSO-E Final Reports on the 2025 Iberian and North Macedonian blackouts
+read the excess capacitive reactive power as a network term. The Iberian report asks for what
+was missing: information on load composition. This work builds that record from 29 years of
+regulatory half-hourly metering at New Zealand&rsquo;s transmission&ndash;distribution boundary,
+and finds a second source &mdash; the demand behind the customer&rsquo;s connection has itself
+moved capacitive.</p>
+
+<p>Overnight reactive power crossed from lagging to leading in 2016, nearly a decade before the
+2025 events. A first-principles charging calculation puts the demand-side share of that drift in
+the physical band 75&ndash;88%, and the term behaves as a net standing shunt element: present
+around the clock, scaling with the connections served, moving capacitive by about
+230&nbsp;VAr per connection over 2013&ndash;2025. The mandated electromagnetic-compatibility
+filter in nearly every mains-connected product is advanced as the candidate device layer, as a
+labelled hypothesis, with the decisive low-voltage measurement identified.</p>
+
+<h2>Three reading forms, the same words</h2>
+
+<ul class="forms">
+  <li><a href="web/lagging-to-leading.html">
+    <span class="name">Web version <span class="tag">read here</span></span>
+    <p class="what">The paper as a page: the hedges in the margin, the figures live rather than
+    printed &mdash; hover or arrow-key any chart for its values, open the table behind it, and
+    drag the capacitance assumption in Fig.&nbsp;3.</p></a></li>
+  <li><a href="paper/journal-version-draft.pdf">
+    <span class="name">Short version <span class="tag">PDF · 11 pp</span></span>
+    <p class="what">Every claim, its supporting evidence and every hedge in-paper; robustness
+    depth and derivations cited out to the extended version.</p></a></li>
+  <li><a href="paper/extended-version.pdf">
+    <span class="name">Extended version <span class="tag">PDF · 28 pp</span></span>
+    <p class="what">The complete record: the full measurement-error analysis, the churn,
+    correspondence and contamination screens, each method&rsquo;s robustness batteries, and the
+    dated regulatory arc.</p></a></li>
+</ul>
+
+<p class="note">The web version carries the short version&rsquo;s words <em>verbatim</em>. A guard
+in this repository, <code>paper/VERIFY_PAGE_TEXT.py</code>, diffs the page against the LaTeX
+source at token level in both directions, over every section, and fails if a single word drifts.</p>
+
+<h2>Permanent records</h2>
+
+<dl class="rec">
+  <div><dt>The paper</dt>
+    <dd><a href="https://doi.org/10.5281/zenodo.22238685">10.5281/zenodo.22238685</a>
+    &mdash; both PDFs and the web version, CC0</dd></div>
+  <div><dt>Data and code</dt>
+    <dd><a href="https://doi.org/10.5281/zenodo.21927098">10.5281/zenodo.21927098</a>
+    &mdash; the replication archive: notebooks, guards, pinned environment, derived tables, and
+    the raw public inputs as consumed</dd></div>
+  <div><dt>Provenance</dt>
+    <dd>A SHA-256 manifest over the whole archive is anchored two ways &mdash; RFC&nbsp;3161
+    (FreeTSA) and OpenTimestamps, into the Bitcoin blockchain. The archive&rsquo;s
+    <code>PROVENANCE.md</code> states what that proves and what it does not.</dd></div>
+</dl>
+
+<h2>Reproducing it</h2>
+
+<p style="font-family:var(--sans);font-size:.88rem;color:var(--ink-2)">Every number and figure in
+both versions is computed from public data &mdash; Electricity Authority grid metering and
+Commerce Commission information disclosures, both CC&nbsp;BY&nbsp;4.0 &mdash; by the notebooks in
+<code>replication/</code>. Both tiers are verified to build from a clean copy of this repository.</p>
+
+<p class="note">This is descriptive analysis of public regulatory metering and
+information-disclosure data. The views expressed are the author&rsquo;s. No external funding was
+received. The analysis informs, but does not advocate, a live reactive-power pricing policy
+question.</p>
+
+<footer>
+  <p>Released under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0&nbsp;1.0</a>
+  &mdash; no permission needed to copy, adapt or build on any of it, for any purpose, and no
+  attribution required. The redistributed metering and disclosure data stays under its
+  custodians&rsquo; own CC&nbsp;BY&nbsp;4.0 terms, and the two typefaces embedded in the web
+  version are used under the SIL Open Font License 1.1.</p>
+  <p><a href="https://github.com/djhume/lagging-to-leading">github.com/djhume/lagging-to-leading</a></p>
+</footer>
+
+</div>
+</body>
+</html>
