@@ -5,6 +5,8 @@ Companion notebooks that reproduce, from public data, every headline number in
 > **"From Lagging to Leading: The Measured Emergence of Standing Capacitance
 > Behind Consumer Connections, 1997–2025"** (D. Hume, 2026)
 
+[Read the paper in the browser](https://djhume.github.io/lagging-to-leading/).
+
 The paper ships in **two tiers with identical section numbering (I–IX)**:
 
 - **Journal version** (`../ieee-pf-trajectory-paper/main.tex`, 18 pp, build of

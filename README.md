@@ -3,6 +3,8 @@
 **The measured emergence of standing capacitance behind consumer connections —
 New Zealand, 1997–2025.**
 
+**[Read it in the browser](https://djhume.github.io/lagging-to-leading/)** — the web version, rendered, alongside both PDFs.
+
 Using 29 years of regulatory half-hourly metering at New Zealand grid exit
 points, this work measures a national power system's reactive character
 crossing from lagging to leading overnight (2016), attributes the drift
@@ -25,7 +27,7 @@ already holds, so the measurement is portable to any system.
 |---|---|---|
 | **Extended version** (28 pp) | [`paper/extended-version.pdf`](paper/extended-version.pdf) | The complete record: adds Appendix A (the full measurement-error analysis and the system-wide re-base/"splice" test), Appendix B (the mains input filter at 50 Hz), the two-loop cascade taxonomy, a Future Work section, and the supporting cohort/method exhibits |
 | **Short version** (11 pp) | [`paper/journal-version-draft.pdf`](paper/journal-version-draft.pdf) | The reading form (sections I–VIII): every claim, its supporting evidence, and every hedge stay in-paper; robustness depth, derivations, censuses, and worked exhibits are cited out to the extended version. |
-| **Web version** | [`web/lagging-to-leading.html`](web/lagging-to-leading.html) | The short version as a page, with the figures live rather than printed: hover or arrow-key any chart for its values, open the table behind it, and drag the capacitance assumption in Fig. 3. The words are the short version's, unchanged — `paper/VERIFY_PAGE_TEXT.py` diffs the two at token level in both directions and is green. One file, no libraries and no network requests: fonts, figures and photographs are all embedded, so it renders from a folder with no connection. |
+| **Web version** | **[read it rendered](https://djhume.github.io/lagging-to-leading/web/lagging-to-leading.html)** · source [`web/lagging-to-leading.html`](web/lagging-to-leading.html) | The short version as a page, with the figures live rather than printed: hover or arrow-key any chart for its values, open the table behind it, and drag the capacitance assumption in Fig. 3. The words are the short version's, unchanged — `paper/VERIFY_PAGE_TEXT.py` diffs the two at token level in both directions and is green. One file, no libraries and no network requests: fonts, figures and photographs are all embedded, so it renders from a folder with no connection. |
 
 The short version is the reduced form: it
 was cut from 18 pp to 15 pp on 14–15 Aug 2026, and to 10 pp on 22 Aug 2026,
