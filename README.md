@@ -147,6 +147,13 @@ it was drawn from, and the uncertainty around it. Quoted on its own, it cannot.
 > GitHub: djhume/lagging-to-leading.
 > DOI: [10.5281/zenodo.21927098](https://doi.org/10.5281/zenodo.21927098).
 
+Each record also has a **concept DOI** that follows its latest version —
+[`10.5281/zenodo.22238684`](https://doi.org/10.5281/zenodo.22238684) for the paper and
+[`10.5281/zenodo.21927097`](https://doi.org/10.5281/zenodo.21927097) for the archive. Cite the
+**version** DOIs above when citing a number: the records are provenance-stamped, and a version
+DOI resolves to exactly the files the timestamp attests to, where a concept DOI would follow any
+later revision away from them.
+
 **Two records.** The paper (both versions) is `…22238685`; the data and code
 archive is `…21927098`. Both DOIs are reserved and resolve once the records are
 published — until then a resolver returns *not registered*, which is expected.

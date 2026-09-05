@@ -8,7 +8,7 @@ authors:
     given-names: David
     orcid: "https://orcid.org/0009-0006-6920-0598"
 version: 1.0.0
-date-released: "2026-09-06"
+date-released: "2026-09-05"
 license: CC0-1.0
 doi: 10.5281/zenodo.22238685
 repository-code: "https://github.com/djhume/lagging-to-leading"
@@ -23,6 +23,17 @@ identifiers:
     description: >-
       The data and code archive: the replication notebooks, the redistributed
       public inputs, and the manifest and timestamp proofs.
+  - type: doi
+    value: 10.5281/zenodo.22238684
+    description: >-
+      The paper's concept DOI, which always resolves to the latest version.
+      Prefer the version DOI above when citing a specific number: the record is
+      provenance-stamped, and the version DOI resolves to exactly the files the
+      timestamp attests to.
+  - type: doi
+    value: 10.5281/zenodo.21927097
+    description: >-
+      The archive's concept DOI, resolving to its latest version.
 abstract: >-
   Twenty-nine years of regulatory half-hourly metering at New Zealand grid
   exit points measure a national power system's reactive character crossing
