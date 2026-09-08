@@ -202,5 +202,13 @@ question.</p>
 </footer>
 
 </div>
+
+<!-- Reach: a private page counter on the author's own server (gridlytics.co.nz). No cookies, no
+     third-party script, no raw IP address kept; it records the page, the referrer and a daily
+     visitor hash. -->
+<script>
+(function(){try{var q=new URLSearchParams(location.search);new Image().src="https://gridlytics.co.nz/m/i.gif?p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(document.referrer)+"&s="+encodeURIComponent(q.get("src")||"")+"&_="+Date.now();}catch(e){}})();
+</script>
+<noscript><img src="https://gridlytics.co.nz/m/i.gif?p=/lagging-to-leading/&nojs=1" alt="" width="1" height="1"></noscript>
 </body>
 </html>
