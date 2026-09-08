@@ -154,6 +154,18 @@ Each record also has a **concept DOI** that follows its latest version —
 DOI resolves to exactly the files the timestamp attests to, where a concept DOI would follow any
 later revision away from them.
 
+**Mirrors.** Both Zenodo records are mirrored byte for byte at the Internet Archive —
+[the paper](https://archive.org/details/lagging-to-leading-paper) and
+[the data and code archive](https://archive.org/details/lagging-to-leading-archive). This
+repository is archived at Software Heritage under the permanent identifier
+[`swh:1:snp:ccc51bbf01e6bb1cead9a96425acfbdad33fe75e`](https://archive.softwareheritage.org/swh:1:snp:ccc51bbf01e6bb1cead9a96425acfbdad33fe75e),
+and the Zenodo record pages as published are captured in the Wayback Machine
+([paper](https://web.archive.org/web/20260906015005/https://zenodo.org/records/22238685),
+[archive](https://web.archive.org/web/20260906015031/https://zenodo.org/records/21927098)).
+The DOIs are the citation; the mirrors are a second place to fetch from when Zenodo is
+unreachable, and each file's MD5 can be checked against the Zenodo record and its SHA-256 against
+the timestamped manifest.
+
 **Two records.** The paper (both versions) is `…22238685`; the data and code
 archive is `…21927098`. Both DOIs are reserved and resolve once the records are
 published — until then a resolver returns *not registered*, which is expected.
